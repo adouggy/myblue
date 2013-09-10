@@ -1,7 +1,7 @@
 package net.synergyinfosys.android.myblue;
 
+import net.synergyinfosys.android.myblue.adao.SMSADao;
 import net.synergyinfosys.android.myblue.adapter.SMSListAdapter;
-import net.synergyinfosys.android.myblue.util.SMSUtil;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -13,7 +13,7 @@ import android.widget.TextView;
 public class SMSActivity extends Activity {
 	
 	private TextView mTxtHello;
-	private ListView mList;
+	private static ListView mList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +22,10 @@ public class SMSActivity extends Activity {
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_sms);
 		
+		
 		mTxtHello = (TextView) findViewById(R.id.txt_sms_hello);
 		mList = (ListView) findViewById(R.id.list_sms);
-		mList.setAdapter(new SMSListAdapter(this.getApplicationContext(), SMSUtil.INSTANCE.getHiddenSMS()));
+		mList.setAdapter(new SMSListAdapter(this.getApplicationContext(), SMSADao.INSTANCE.getHiddenSMS()));
 		
 		if( HomeActivity.isLock ){
 			mTxtHello.setText("Locked status");
@@ -34,9 +35,9 @@ public class SMSActivity extends Activity {
 		}else{
 			mTxtHello.setText("unlocked status");
 		}
-		
 	}
-
+	
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

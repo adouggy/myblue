@@ -1,6 +1,6 @@
 package net.synergyinfosys.android.myblue.command;
 
-import net.synergyinfosys.android.myblue.util.SMSUtil;
+import net.synergyinfosys.android.myblue.adao.SMSADao;
 
 public class HideSMSCommand implements ICommand {
 
@@ -14,7 +14,7 @@ public class HideSMSCommand implements ICommand {
 
 	@Override
 	public void execute() {
-		SMSUtil.INSTANCE.hideSMS(isHide, number);
+		SMSADao.INSTANCE.hideSMS(isHide, number);
 	}
 
 }

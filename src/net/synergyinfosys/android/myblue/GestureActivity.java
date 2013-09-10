@@ -1,6 +1,6 @@
 package net.synergyinfosys.android.myblue;
 
-import net.synergyinfosys.android.myblue.util.GestureUtil;
+import net.synergyinfosys.android.myblue.adao.GestureADao;
 import android.app.Activity;
 import android.gesture.Gesture;
 import android.gesture.GestureOverlayView;
@@ -30,7 +30,7 @@ public class GestureActivity extends Activity implements OnGestureListener {
 		mGestureView.setGestureStrokeType(GestureOverlayView.GESTURE_STROKE_TYPE_MULTIPLE);
 
 		mGestureView.addOnGestureListener(this);
-		GestureUtil.INSTACE.initial();
+		GestureADao.INSTACE.initial();
 	}
 
 	@Override
@@ -57,12 +57,12 @@ public class GestureActivity extends Activity implements OnGestureListener {
 			// (强调：如果一开始设置手势笔画类型是单一笔画，那你这里始终得到的只是1！)
 			if (event.getAction() == MotionEvent.ACTION_UP) {// 判定第两笔划离开屏幕
 				Log.i(TAG, "准备处理手势...");
-				Object[] gestureNames = GestureUtil.INSTACE.getGesturesNames();
+				Object[] gestureNames = GestureADao.INSTACE.getGesturesNames();
 				int index = gestureNames.length;
-				GestureUtil.INSTACE.addMyGesture("No." + index, mGesture, this.mGestureView);
+				GestureADao.INSTACE.addMyGesture("No." + index, mGesture, this.mGestureView);
 
 				if (gestureNames.length >= 9) {
-					GestureUtil.INSTACE.deleteGesture();
+					GestureADao.INSTACE.deleteGesture();
 				}
 			}
 		} else {

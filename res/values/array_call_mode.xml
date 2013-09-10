@@ -1,0 +1,11 @@
+<resources>
+
+    <string-array name="call_mode">
+        <item>正常接听</item>
+        <item>立即挂断</item>
+        <item>立即挂断并回复短信</item>
+        <item>来电静音</item>
+        <item>来电静音并关闭屏幕</item>
+    </string-array>
+
+</resources>

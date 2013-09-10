@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".HomeActivity"
-    android:weightSum="15" >
+    android:weightSum="16" >
     
     <Button
         android:id="@+id/button_test"
@@ -35,10 +35,24 @@
         android:layout_weight="1" />
    
    <Button
+        android:id="@+id/button_call_record"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:text="@string/btn_home_call_record"
+        android:layout_weight="1" />
+   
+   <Button
         android:id="@+id/button_contact"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:text="@string/btn_home_contact"
+        android:layout_weight="1" />
+   
+   <Button
+        android:id="@+id/button_img"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:text="@string/btn_home_img"
         android:layout_weight="1" />
    
    <Button

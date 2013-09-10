@@ -1,0 +1,26 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="5"
+    tools:context=".ContactActivity" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:drawableLeft="@drawable/add_contact"
+        android:gravity="center_vertical"
+        android:maxHeight="90dp"
+        android:text="@string/txt_contact_add_contact"
+        android:textSize="20sp"
+        android:id="@+id/txt_contact_add"/>
+
+    <ListView
+        android:id="@+id/list_contact_hidden"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4" />
+
+</LinearLayout>

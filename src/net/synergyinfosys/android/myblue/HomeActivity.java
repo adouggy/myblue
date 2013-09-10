@@ -1,7 +1,7 @@
 package net.synergyinfosys.android.myblue;
 
-import net.synergyinfosys.android.myblue.util.GestureUtil;
-import net.synergyinfosys.android.myblue.util.SMSUtil;
+import net.synergyinfosys.android.myblue.adao.GestureADao;
+import net.synergyinfosys.android.myblue.adao.SMSADao;
 import net.synergyinfosys.android.service.LongLiveService;
 import android.app.Activity;
 import android.content.ComponentName;
@@ -24,6 +24,8 @@ public class HomeActivity extends Activity implements OnClickListener, OnGesture
 	private Button mBtnGesture = null;
 	private Button mBtnSMS = null;
 	private Button mBtnTest = null;
+	private Button mBtnContact = null;
+	private Button mBtnCallRecord = null;
 	
 	private GestureOverlayView mGestureView;// 创建一个手写绘图区
 	private Gesture mGesture;// 手写实例
@@ -49,6 +51,12 @@ public class HomeActivity extends Activity implements OnClickListener, OnGesture
 		
 		this.mBtnTest = (Button) findViewById(R.id.button_test);
 		this.mBtnTest.setOnClickListener(this);
+		
+		this.mBtnContact = (Button) findViewById(R.id.button_contact);
+		this.mBtnContact.setOnClickListener(this);
+		
+		this.mBtnCallRecord = (Button) findViewById(R.id.button_call_record);
+		this.mBtnCallRecord.setOnClickListener(this);
 		
 		mGestureView = (GestureOverlayView) findViewById(R.id.view_password_gesture);
 		mGestureView.setGestureStrokeType(GestureOverlayView.GESTURE_STROKE_TYPE_MULTIPLE);
@@ -90,8 +98,20 @@ public class HomeActivity extends Activity implements OnClickListener, OnGesture
 			intent3.setComponent(cn3);
 			this.startActivity(intent3);
 			break;
+		case R.id.button_contact:
+			Intent contactIntent= new Intent();
+			ComponentName contactCN = new ComponentName(this.getApplicationContext(), ContactActivity.class);
+			contactIntent.setComponent(contactCN);
+			this.startActivity(contactIntent);
+			break;
+		case R.id.button_call_record:
+			Intent callRecordIntent= new Intent();
+			ComponentName callRecordCN = new ComponentName(this.getApplicationContext(), CallRecordActivity.class);
+			callRecordIntent.setComponent(callRecordCN);
+			this.startActivity(callRecordIntent);
+			break;
 		case R.id.button_test:
-			SMSUtil.INSTANCE.testSMS();
+			SMSADao.INSTANCE.testSMS();
 			break;
 		}
 	}
@@ -109,23 +129,25 @@ public class HomeActivity extends Activity implements OnClickListener, OnGesture
 		mGesture = overlay.getGesture();
 		if (mGesture.getStrokesCount() == 2) {
 			if (event.getAction() == MotionEvent.ACTION_UP) {
-				String guestureName = GestureUtil.INSTACE.matchGesture(mGesture);
+				String guestureName = GestureADao.INSTACE.matchGesture(mGesture);
 				if( guestureName.compareTo( "No.0" ) == 0 ){
 					if( isLock ){
 						isLock = false;
 						isFake = false;
 						
-						SMSUtil.INSTANCE.hideSMS(false, "10086");
+						SMSADao.INSTANCE.hideSMS(false, "10086");
 					}
 				}else if( guestureName.compareTo( "No.1" ) == 0 ){
-					isLock = true;
-					isFake = true;
+					if( !isFake ){
+						isLock = true;
+						isFake = true;
+					}
 				}else if( guestureName.compareTo( "No.2" ) == 0 ){
 					if( !isLock ){
 						isLock = true;
 						isFake = false;
 						
-						SMSUtil.INSTANCE.hideSMS(true, "10086");
+						SMSADao.INSTANCE.hideSMS(true, "10086");
 					}
 				}
 			}

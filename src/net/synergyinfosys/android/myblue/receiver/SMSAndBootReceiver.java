@@ -2,8 +2,6 @@ package net.synergyinfosys.android.myblue.receiver;
 
 import java.util.Date;
 
-import net.synergyinfosys.android.myblue.bean.SMS;
-import net.synergyinfosys.android.myblue.util.SMSUtil;
 import net.synergyinfosys.android.service.LongLiveService;
 
 import android.content.BroadcastReceiver;

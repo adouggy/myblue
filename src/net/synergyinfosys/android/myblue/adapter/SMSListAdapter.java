@@ -1,5 +1,8 @@
 package net.synergyinfosys.android.myblue.adapter;
 
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import net.synergyinfosys.android.myblue.R;
@@ -19,6 +22,8 @@ public class SMSListAdapter extends BaseAdapter {
 	
 	private ArrayList<SMS> mSMSList = null;
 	private LayoutInflater mInflater = null;
+	DateFormat formatter = SimpleDateFormat.getDateTimeInstance();
+	
 	
 	public SMSListAdapter(Context ctx, ArrayList<SMS> list){
 		mInflater = LayoutInflater.from(ctx);
@@ -60,7 +65,7 @@ public class SMSListAdapter extends BaseAdapter {
 		holder.from.setText( sms.getAddress() );
 		holder.summary.setText( StringUtil.INSTACE.shorten( sms.getBody(), 40 ) );
 		Log.i(TAG, holder.summary.getText().toString());
-//		holder.count.setText("(1)");
+		holder.count.setText( "     " + formatter.format( new Date(sms.getDate()) ) );
 		
 		return convertView;
 	}

@@ -1,0 +1,73 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:weightSum="7"
+    tools:context=".ContactAddActivity" >
+
+    <EditText
+        android:id="@+id/txt_contact_add_number"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:hint="@string/txt_contact_add_number_hint"
+        android:inputType="phone"
+        android:maxEms="20"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/txt_contact_add_name"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:hint="@string/txt_contact_add_name_hint"
+        android:inputType="text"
+        android:maxEms="20"
+        android:singleLine="true" />
+
+    <CheckBox
+        android:id="@+id/chk_contact_add_hidden_mode_phone"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:hint="@string/chk_contact_add_hidden_mode_phone_hint" />
+
+    <CheckBox
+        android:id="@+id/chk_contact_add_hidden_mode_sms"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:hint="@string/chk_contact_add_hidden_mode_phone_hint" />
+
+    <Spinner
+        android:id="@+id/spin_contact_add_call_mode"
+        android:contentDescription="@string/default_description"
+        android:spinnerMode="dialog"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:entries="@array/call_mode"
+        android:prompt="@string/spin_contact_add_hidden_mode_call_prompt" />
+
+    <Button
+        android:id="@+id/btn_contact_add_save"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="@string/btn_contact_add_save" />
+    
+    <Button
+        android:id="@+id/btn_contact_add_delete"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textColor="#ff0000"
+        android:text="@string/btn_contact_add_delete" />
+
+</LinearLayout>

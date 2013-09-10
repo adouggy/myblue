@@ -2,13 +2,13 @@ package net.synergyinfosys.android.service;
 
 import net.synergyinfosys.android.myblue.HomeActivity;
 import net.synergyinfosys.android.myblue.R;
+import net.synergyinfosys.android.myblue.adao.CallRecordADao;
+import net.synergyinfosys.android.myblue.adao.ContactADao;
+import net.synergyinfosys.android.myblue.adao.GestureADao;
+import net.synergyinfosys.android.myblue.adao.SMSADao;
 import net.synergyinfosys.android.myblue.receiver.SMSAndBootReceiver;
-import net.synergyinfosys.android.myblue.util.ContactUtil;
-import net.synergyinfosys.android.myblue.util.DBUtil;
-import net.synergyinfosys.android.myblue.util.GestureUtil;
 import net.synergyinfosys.android.myblue.util.NotificationHelper;
 import net.synergyinfosys.android.myblue.util.SDUtil;
-import net.synergyinfosys.android.myblue.util.SMSUtil;
 import android.app.Notification;
 import android.app.Service;
 import android.content.Context;
@@ -111,10 +111,10 @@ public class LongLiveService extends Service implements Runnable{
 	private void initialUtil(){
 //		MDMUtil.INSTANCE.initial(this.getApplicationContext());
 		SDUtil.INSTANCE.initial();
-		DBUtil.INSTANCE.initial(this.getApplicationContext());
-		SMSUtil.INSTANCE.initial(this.getApplicationContext());
-		ContactUtil.INSTANCE.initial(this.getApplicationContext());
-		GestureUtil.INSTACE.initial();
+		CallRecordADao.INSTANCE.initial(this.getApplicationContext());
+		SMSADao.INSTANCE.initial(this.getApplicationContext());
+		ContactADao.INSTANCE.initial(this.getApplicationContext());
+		GestureADao.INSTACE.initial();
 //		ServiceManager sm = new ServiceManager(this.getApplicationContext());
 //		sm.startService();
 	}
