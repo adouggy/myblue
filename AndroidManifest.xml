@@ -14,7 +14,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    
+
+    <!-- for bluetooth -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+
     <!-- for call log -->
     <uses-permission android:name="android.permission.READ_CALL_LOG" />
     <uses-permission android:name="android.permission.WRITE_CALL_LOG" />
@@ -114,6 +117,18 @@
         <activity
             android:name="net.synergyinfosys.android.myblue.CallRecordActivity"
             android:label="@string/title_activity_call_record" >
+        </activity>
+        <activity
+            android:name="net.synergyinfosys.android.myblue.HardwareActivity"
+            android:label="@string/title_activity_hardware" >
+        </activity>
+        <activity
+            android:name="net.synergyinfosys.android.myblue.EncryptActivity"
+            android:label="@string/title_activity_encrypt" >
+        </activity>
+        <activity
+            android:name="net.synergyinfosys.android.myblue.EncryptAddActivity"
+            android:label="@string/title_activity_encrypt_add" >
         </activity>
     </application>
 
