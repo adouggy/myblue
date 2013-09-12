@@ -13,6 +13,7 @@ public class Constants {
 			"body varchar(300), " +
 			"read integer, " +
 			"date integer," +
+			"androidId integer," +
 			"isDelete integer " +
 			")";
 	
@@ -25,6 +26,7 @@ public class Constants {
 			"hideSMS integer, " +
 			"hideCallRecord integer, " +
 			"callMode varchar(10)," +
+			"androidId integer," +
 			"isDelete integer " +
 			")";
 	
@@ -38,5 +40,14 @@ public class Constants {
 			"status varchar(50), " +
 			"androidId integer, " +
 			"isDelete integer " +
+			")";
+	
+	public static final String DB_TABLE_ENCRYPT_NAME = "encrypt";
+	public static final String DB_TABLE_ENCRYPT_SQL = 
+			"create table if not exists encrypt(" +
+			"id integer primary key autoincrement, " +
+			"name varchar(50), " +
+			"password varchar(50), " +
+			"comment varchar(500) " +
 			")";
 }

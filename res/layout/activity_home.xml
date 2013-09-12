@@ -4,7 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".HomeActivity"
-    android:weightSum="16" >
+    android:weightSum="18" >
+    
+    <TextView
+        android:id="@+id/txt_sms_hello"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_sms_hello" />
     
     <Button
         android:id="@+id/button_test"
@@ -28,7 +34,14 @@
         android:layout_weight="1" />
    
    <Button
-        android:id="@+id/button_password"
+        android:id="@+id/button_hardware"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:text="@string/btn_home_hardware"
+        android:layout_weight="1" />
+   
+   <Button
+        android:id="@+id/button_encrypt"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:text="@string/btn_home_password"

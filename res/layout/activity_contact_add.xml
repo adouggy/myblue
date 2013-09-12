@@ -43,7 +43,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:hint="@string/chk_contact_add_hidden_mode_phone_hint" />
+        android:hint="@string/chk_contact_add_hidden_mode_sms_hint" />
 
     <Spinner
         android:id="@+id/spin_contact_add_call_mode"

@@ -2,11 +2,9 @@ package net.synergyinfosys.android.myblue.adapter;
 
 import java.util.ArrayList;
 
-import net.synergyinfosys.android.myblue.CallRecordActivity;
 import net.synergyinfosys.android.myblue.ContactActivity;
 import net.synergyinfosys.android.myblue.R;
 import net.synergyinfosys.android.myblue.bean.Contact;
-import net.synergyinfosys.android.myblue.service.CallRecordService;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,9 +61,6 @@ public class ContactListAdapter extends BaseAdapter {
 				public void onClick(View v) {
 					Contact c = (Contact) v.getTag();
 					ContactActivity.editContact(c);
-					
-					CallRecordService.INSTANCE.hideCallRecord(c.getNumber());
-					CallRecordActivity.refreshContact();
 				}
 			});
 			convertView.setTag(holder);

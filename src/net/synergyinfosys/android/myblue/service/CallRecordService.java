@@ -11,8 +11,12 @@ public enum CallRecordService {
 	
 	CallRecordService(){}
 	
-	public void hideCallRecord(String number){
-		ArrayList<CallRecord> list = CallRecordADao.INSTANCE.getCallRecord(number);
-		CallRecordDao.getInstance().insert(list);
+	public void hideCallRecord(boolean hide, String number){
+		if( hide ){
+			ArrayList<CallRecord> list = CallRecordADao.INSTANCE.getCallRecord(number);
+			CallRecordDao.getInstance().insert(list);
+		}else{
+			CallRecordDao.getInstance().removeAll();
+		}
 	}
 }

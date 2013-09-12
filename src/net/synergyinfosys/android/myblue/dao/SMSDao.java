@@ -35,41 +35,34 @@ public class SMSDao extends AbstractDBDao{
 			Log.i(TAG, "db == null");
 		}
 	}
-
-	public long insertSMS(String address, String body, int read, long date) {
-		Log.i(TAG, "insertSMS");
+	
+	public long insertSMS( SMS sms ){
 		ContentValues cv = new ContentValues();
-		cv.put("address", address);
-		cv.put("body", body);
-		cv.put("read", read);
-		cv.put("date", date);
+		cv.put("address", sms.getAddress());
+		cv.put("body", sms.getBody());
+		cv.put("read", sms.getRead());
+		cv.put("date", sms.getDate());
+		cv.put("androidId", sms.getAndroidId());
+		cv.put("isDelete", sms.isDelete());
 		return mDBInstance.insert(Constants.DB_TABLE_SMS_NAME, null, cv);
-	}
-
-	public void printSMSAll() {
-		Log.i(TAG, "printSMSAll");
-
-		Cursor cursor = mDBInstance.rawQuery("select * from sms", null);
-		while (cursor.moveToNext()) {
-			Log.d(TAG, cursor.getInt(0) + " \t " + cursor.getString(1) + "\t" + cursor.getString(2) + "\t" + cursor.getInt(3));
-		}
 	}
 	
 	public ArrayList<SMS> getSMSAll(){
 		Log.i(TAG, "getSMSAll");
 		
 		ArrayList<SMS> list = new ArrayList<SMS>();
-		
-		final String sql = "select id, address, body, read, date from sms";
+		final String sql = "select * from " + Constants.DB_TABLE_SMS_NAME;
 		try {
 			Cursor cursor = mDBInstance.rawQuery( sql, null );
 			while( cursor.moveToNext() ){
 				SMS sms = new SMS();
-				sms.setId( cursor.getInt(0) );
-				sms.setAddress( cursor.getString(1) );
-				sms.setBody( cursor.getString(2) );
-				sms.setRead( cursor.getInt(3) );
-				sms.setDate( cursor.getLong(4) );
+				sms.setId( cursor.getLong(cursor.getColumnIndex("id")) );
+				sms.setAddress( cursor.getString(cursor.getColumnIndex("address")) );
+				sms.setBody( cursor.getString(cursor.getColumnIndex("body")) );
+				sms.setRead( cursor.getInt(cursor.getColumnIndex("read")) );
+				sms.setDate( cursor.getLong(cursor.getColumnIndex("date")) );
+				sms.setAndroidId( cursor.getLong(cursor.getColumnIndex("androidId")) );
+				sms.setDelete( cursor.getInt(cursor.getColumnIndex("isDelete"))==1?true:false );
 				list.add(sms);
 			}
 		} catch (SQLException e) {
@@ -77,13 +70,14 @@ public class SMSDao extends AbstractDBDao{
 		}
 		
 		Log.i( TAG, list.size() + " sms returned");
+		Log.i( TAG, list.toString() );
 		return list;
 	}
 	
 	public void removeSMSAll(){
 		Log.i(TAG, "removeSMSAll");	
 		try {
-			mDBInstance.delete("sms", null, null);
+			mDBInstance.delete(Constants.DB_TABLE_SMS_NAME, null, null);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

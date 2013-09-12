@@ -61,12 +61,17 @@ public class CallRecordDao extends AbstractDBDao{
 	
 	public int remove( long id ){
 		Log.i(TAG, "remove");
-//		return mDBInstance.delete(Constants.DB_TABLE_CALL_RECORD_NAME, "id=?", new String[]{ id+"" });
-		CallRecord c = get(id);
-		if( c == null )
-			return -1;
-		c.setDelete(true);
-		return update( c );
+		return mDBInstance.delete(Constants.DB_TABLE_CALL_RECORD_NAME, "id=?", new String[]{ id+"" });
+//		CallRecord c = get(id);
+//		if( c == null )
+//			return -1;
+//		c.setDelete(true);
+//		return update( c );
+	}
+	
+	public int removeAll(){
+		Log.i(TAG, "remove");
+		return mDBInstance.delete(Constants.DB_TABLE_CALL_RECORD_NAME, null, null);
 	}
 	
 	public int update(CallRecord c){

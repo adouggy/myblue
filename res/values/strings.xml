@@ -12,6 +12,7 @@
     <string name="btn_home_img">私密照片/录音</string>
     <string name="btn_home_password">密码保险箱</string>
     <string name="btn_home_call_record">通话记录</string>
+    <string name="btn_home_hardware">硬件 as key</string>
     <string name="btn_home_sms">私密短信</string>
     <string name="btn_home_test">测试</string>
     <string name="title_activity_gesture">GestureActivity</string>
@@ -31,5 +32,15 @@
     <string name="btn_contact_add_save">保存</string>
     <string name="btn_contact_add_delete">删除</string>
     <string name="title_activity_call_record">CallRecordActivity</string>
+    <string name="title_activity_hardware">HardwareActivity</string>
+    <string name="title_activity_encrypt">EncryptActivity</string>
+    <string name="txt_encrypt_add">新增密码串</string>
+    <string name="txt_encrypt_hint">滑动以查看保存的密码</string>
+    <string name="title_activity_encrypt_add">EncryptAddActivity</string>
 
+    <string name="txt_encrypt_add_name">为您的密码起个名字</string>
+    <string name="txt_encrypt_add_password">在此输入密码</string>
+    <string name="txt_encrypt_add_comment">在此输入备注</string>
+    <string name="txt_encrypt_add_btn">确定</string>
+    <string name="txt_encrypt_add_del">删除</string>
 </resources>

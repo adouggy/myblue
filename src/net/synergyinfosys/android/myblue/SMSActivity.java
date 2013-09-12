@@ -1,18 +1,17 @@
 package net.synergyinfosys.android.myblue;
 
-import net.synergyinfosys.android.myblue.adao.SMSADao;
 import net.synergyinfosys.android.myblue.adapter.SMSListAdapter;
+import net.synergyinfosys.android.myblue.dao.SMSDao;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public class SMSActivity extends Activity {
 	
-	private TextView mTxtHello;
+	
 	private static ListView mList;
 
 	@Override
@@ -22,19 +21,9 @@ public class SMSActivity extends Activity {
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_sms);
 		
-		
-		mTxtHello = (TextView) findViewById(R.id.txt_sms_hello);
 		mList = (ListView) findViewById(R.id.list_sms);
-		mList.setAdapter(new SMSListAdapter(this.getApplicationContext(), SMSADao.INSTANCE.getHiddenSMS()));
+		mList.setAdapter(new SMSListAdapter(this.getApplicationContext(), SMSDao.getInstance().getSMSAll()));
 		
-		if( HomeActivity.isLock ){
-			mTxtHello.setText("Locked status");
-			if( HomeActivity.isFake ){
-				mTxtHello.setText("Fake status");
-			}
-		}else{
-			mTxtHello.setText("unlocked status");
-		}
 	}
 	
 	

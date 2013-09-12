@@ -11,7 +11,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:drawableLeft="@drawable/add_contact"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:maxHeight="90dp"
         android:text="@string/txt_contact_add_contact"
         android:textSize="20sp"
