@@ -113,7 +113,7 @@ public class HomeActivity extends Activity implements OnClickListener, OnGesture
 			break;
 		case R.id.button_hardware:
 			Intent intentHD = new Intent();
-			ComponentName cnHD = new ComponentName(this.getApplicationContext(), HardwareActivity.class);
+			ComponentName cnHD = new ComponentName(this.getApplicationContext(), WifiActivity.class);
 			intentHD.setComponent(cnHD);
 			this.startActivity(intentHD);
 			break;

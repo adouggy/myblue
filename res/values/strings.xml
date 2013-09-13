@@ -37,10 +37,14 @@
     <string name="txt_encrypt_add">新增密码串</string>
     <string name="txt_encrypt_hint">滑动以查看保存的密码</string>
     <string name="title_activity_encrypt_add">EncryptAddActivity</string>
-
     <string name="txt_encrypt_add_name">为您的密码起个名字</string>
     <string name="txt_encrypt_add_password">在此输入密码</string>
     <string name="txt_encrypt_add_comment">在此输入备注</string>
     <string name="txt_encrypt_add_btn">确定</string>
     <string name="txt_encrypt_add_del">删除</string>
+    <string name="title_activity_wifi">WifiActivity</string>
+	<string name="txt_wifi_alllist">可选wifi</string>
+	<string name="txt_wifi_default_count">(0)</string>
+	<string name="txt_wifi_blacklist">黑名单</string>
+	<string name="btn_wifi_scan">扫描附近的Wifi</string>
 </resources>

@@ -9,6 +9,7 @@ import net.synergyinfosys.android.myblue.adao.SMSADao;
 import net.synergyinfosys.android.myblue.receiver.SMSAndBootReceiver;
 import net.synergyinfosys.android.myblue.util.NotificationHelper;
 import net.synergyinfosys.android.myblue.util.SDUtil;
+import net.synergyinfosys.android.myblue.util.WifiUtil;
 import android.app.Notification;
 import android.app.Service;
 import android.content.Context;
@@ -110,6 +111,7 @@ public class LongLiveService extends Service implements Runnable{
 	
 	private void initialUtil(){
 //		MDMUtil.INSTANCE.initial(this.getApplicationContext());
+		WifiUtil.INSTANCE.initial(this.getApplicationContext());
 		SDUtil.INSTANCE.initial();
 		CallRecordADao.INSTANCE.initial(this.getApplicationContext());
 		SMSADao.INSTANCE.initial(this.getApplicationContext());

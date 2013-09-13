@@ -50,4 +50,13 @@ public class Constants {
 			"password varchar(50), " +
 			"comment varchar(500) " +
 			")";
+	
+	public static final String DB_TABLE_WIFI_NAME = "wifi";
+	public static final String DB_TABLE_WIFI_SQL = 
+			"create table if not exists wifi(" +
+			"id integer primary key autoincrement, " +
+			"ssid varchar(50), " +
+			"bssid varchar(50), " +
+			"checked integer " +
+			")";
 }
