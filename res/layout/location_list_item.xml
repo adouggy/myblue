@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:orientation="horizontal"
+    android:weightSum="6" >
+
+    <ImageView
+        android:id="@+id/img_location_detail"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_weight="1"
+        android:contentDescription="@string/default_description"
+        android:focusable="true"
+        android:src="@drawable/location" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="5"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/txt_location_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/default_description"
+            android:textColor="#0000ee"
+            android:textSize="15sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            <TextView
+                android:id="@+id/txt_location_latitude"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/default_description"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/txt_location_longtitude"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/default_description"
+                android:textSize="12sp"
+                android:layout_toRightOf="@+id/txt_location_latitude" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/txt_location_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/default_description"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</LinearLayout>

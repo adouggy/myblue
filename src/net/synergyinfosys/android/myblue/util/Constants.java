@@ -59,4 +59,14 @@ public class Constants {
 			"bssid varchar(50), " +
 			"checked integer " +
 			")";
+	
+	public static final String DB_TABLE_LOCATION_NAME = "location";
+	public static final String DB_TABLE_LOCATION_SQL = 
+			"create table if not exists location(" +
+			"id integer primary key autoincrement, " +
+			"name varchar(50), " +
+			"latitude double, " +
+			"longtitude double, " +
+			"description varchar(200) " +
+			")";
 }

@@ -6,15 +6,15 @@
     <string name="hello_world">Hello world!</string>
     <string name="hello_gesture">我的保险箱手势设置\n在屏幕上输入两个笔画的手势\n会自动保存为保险箱手势\n手势最多保存九个，超过九个会全部清空重来\n第一个手势为进入保险箱的密码手势\n第二个手势为进入假保险箱的手势\n第三个手势为关闭保险箱手势</string>
     <string name="title_activity_home">HomeActivity</string>
-    <string name="btn_home_config">进入设置</string>
     <string name="btn_home_gesture">进入手势</string>
     <string name="btn_home_contact">私密联系人</string>
     <string name="btn_home_img">私密照片/录音</string>
     <string name="btn_home_password">密码保险箱</string>
     <string name="btn_home_call_record">通话记录</string>
-    <string name="btn_home_hardware">硬件 as key</string>
+    <string name="btn_home_hardware">硬件( wifi/bluetooth/gps )</string>
     <string name="btn_home_sms">私密短信</string>
     <string name="btn_home_test">测试</string>
+    <string name="btn_home_locate">基于位置加密</string>
     <string name="title_activity_gesture">GestureActivity</string>
     <string name="txt_gesture_newname">GestureActivity</string>
     <string name="title_activity_sms">SMSActivity</string>
@@ -43,8 +43,35 @@
     <string name="txt_encrypt_add_btn">确定</string>
     <string name="txt_encrypt_add_del">删除</string>
     <string name="title_activity_wifi">WifiActivity</string>
-	<string name="txt_wifi_alllist">可选wifi</string>
-	<string name="txt_wifi_default_count">(0)</string>
-	<string name="txt_wifi_blacklist">黑名单</string>
-	<string name="btn_wifi_scan">扫描附近的Wifi</string>
+    <string name="txt_wifi_alllist">可选wifi</string>
+    <string name="txt_wifi_default_count">(0)</string>
+    <string name="txt_wifi_blacklist">黑名单</string>
+    <string name="btn_wifi_scan">扫描附近的Wifi</string>
+    <string name="title_activity_locate">LocateActivity</string>
+    <string name="txt_locate_tag">被标记的地点</string>
+    <string name="txt_locate_current_location">当前地点</string>
+    <string name="txt_locate_current_location_detail">正在加载中</string>
+    <string name="btn_locate_add">标记当前位置</string>
+    <string name="title_activity_location_detail">LocationDetailActivity</string>
+    <string name="txt_location_hint_name">为该地点起个名字</string>
+    <string name="txt_location_hint_latitude">纬度</string>
+    <string name="txt_location_hint_longtitude">经度</string>
+    <string name="txt_location_hint_description">描述</string>
+    <string name="btn_location_detail_save">保存</string>
+    <string name="btn_location_detail_delete">删除</string>
+    <string name="title_activity_home_tab">HomeTabActivity</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="title_activity_key_configure">KeyConfigureActivity</string>
+    
+    <string name="txt_home_about">
+        忆江南\n
+        江南好\n
+        风景贵如春\n
+        日出江花红胜火\n
+        春来江水绿如蓝\n
+        怎能不忆江南?
+    </string>
+
 </resources>

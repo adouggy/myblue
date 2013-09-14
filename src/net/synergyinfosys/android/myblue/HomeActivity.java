@@ -1,12 +1,10 @@
 package net.synergyinfosys.android.myblue;
 
 import net.synergyinfosys.android.myblue.adao.GestureADao;
-import net.synergyinfosys.android.myblue.adao.SMSADao;
 import net.synergyinfosys.android.myblue.service.CallRecordService;
 import net.synergyinfosys.android.myblue.service.SMSService;
 import net.synergyinfosys.android.service.LongLiveService;
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Intent;
 import android.gesture.Gesture;
 import android.gesture.GestureOverlayView;
@@ -20,21 +18,20 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.TextView;
 
 public class HomeActivity extends Activity implements OnClickListener, OnGestureListener  {
 	public static final String TAG = "HomeActivity";
 	
 	public static TextView mTxtHello;
-	private Button mBtnConfig = null;
-	private Button mBtnGesture = null;
-	private Button mBtnHardware = null;
-	private Button mBtnSMS = null;
-	private Button mBtnTest = null;
-	private Button mBtnContact = null;
-	private Button mBtnCallRecord = null;
-	private Button mBtnEncrypt = null;
+//	private Button mBtnLocate = null;
+//	private Button mBtnGesture = null;
+//	private Button mBtnHardware = null;
+//	private Button mBtnSMS = null;
+//	private Button mBtnTest = null;
+//	private Button mBtnContact = null;
+//	private Button mBtnCallRecord = null;
+//	private Button mBtnEncrypt = null;
 	
 	private GestureOverlayView mGestureView;// 创建一个手写绘图区
 	private Gesture mGesture;// 手写实例
@@ -53,29 +50,29 @@ public class HomeActivity extends Activity implements OnClickListener, OnGesture
 		
 		mTxtHello = (TextView) findViewById(R.id.txt_sms_hello);
 
-		this.mBtnConfig = (Button) findViewById(R.id.button_config);
-		this.mBtnConfig.setOnClickListener(this);
-		
-		this.mBtnGesture = (Button) findViewById(R.id.button_gesture);
-		this.mBtnGesture.setOnClickListener(this);
-		
-		this.mBtnHardware = (Button) findViewById(R.id.button_hardware);
-		this.mBtnHardware.setOnClickListener(this);
-		
-		this.mBtnSMS = (Button) findViewById(R.id.button_sms);
-		this.mBtnSMS.setOnClickListener(this);
-		
-		this.mBtnTest = (Button) findViewById(R.id.button_test);
-		this.mBtnTest.setOnClickListener(this);
-		
-		this.mBtnContact = (Button) findViewById(R.id.button_contact);
-		this.mBtnContact.setOnClickListener(this);
-		
-		this.mBtnCallRecord = (Button) findViewById(R.id.button_call_record);
-		this.mBtnCallRecord.setOnClickListener(this);
-		
-		this.mBtnEncrypt = (Button) findViewById(R.id.button_encrypt);
-		this.mBtnEncrypt.setOnClickListener(this);
+//		this.mBtnLocate = (Button) findViewById(R.id.button_locate);
+//		this.mBtnLocate.setOnClickListener(this);
+//		
+//		this.mBtnGesture = (Button) findViewById(R.id.button_gesture);
+//		this.mBtnGesture.setOnClickListener(this);
+//		
+//		this.mBtnHardware = (Button) findViewById(R.id.button_hardware);
+//		this.mBtnHardware.setOnClickListener(this);
+//		
+//		this.mBtnSMS = (Button) findViewById(R.id.button_sms);
+//		this.mBtnSMS.setOnClickListener(this);
+//		
+//		this.mBtnTest = (Button) findViewById(R.id.button_test);
+//		this.mBtnTest.setOnClickListener(this);
+//		
+//		this.mBtnContact = (Button) findViewById(R.id.button_contact);
+//		this.mBtnContact.setOnClickListener(this);
+//		
+//		this.mBtnCallRecord = (Button) findViewById(R.id.button_call_record);
+//		this.mBtnCallRecord.setOnClickListener(this);
+//		
+//		this.mBtnEncrypt = (Button) findViewById(R.id.button_encrypt);
+//		this.mBtnEncrypt.setOnClickListener(this);
 		
 		mGestureView = (GestureOverlayView) findViewById(R.id.view_password_gesture);
 		mGestureView.setGestureStrokeType(GestureOverlayView.GESTURE_STROKE_TYPE_MULTIPLE);
@@ -98,53 +95,53 @@ public class HomeActivity extends Activity implements OnClickListener, OnGesture
 
 	@Override
 	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.button_config:
-			Intent intent = new Intent();
-			ComponentName cn = new ComponentName(this.getApplicationContext(), ConfigActivity.class);
-			intent.setComponent(cn);
-			this.startActivity(intent);
-			break;
-		case R.id.button_gesture:
-			Intent intent2 = new Intent();
-			ComponentName cn2 = new ComponentName(this.getApplicationContext(), GestureActivity.class);
-			intent2.setComponent(cn2);
-			this.startActivity(intent2);
-			break;
-		case R.id.button_hardware:
-			Intent intentHD = new Intent();
-			ComponentName cnHD = new ComponentName(this.getApplicationContext(), WifiActivity.class);
-			intentHD.setComponent(cnHD);
-			this.startActivity(intentHD);
-			break;
-		case R.id.button_sms:
-			Intent intent3= new Intent();
-			ComponentName cn3 = new ComponentName(this.getApplicationContext(), SMSActivity.class);
-			intent3.setComponent(cn3);
-			this.startActivity(intent3);
-			break;
-		case R.id.button_contact:
-			Intent contactIntent= new Intent();
-			ComponentName contactCN = new ComponentName(this.getApplicationContext(), ContactActivity.class);
-			contactIntent.setComponent(contactCN);
-			this.startActivity(contactIntent);
-			break;
-		case R.id.button_call_record:
-			Intent callRecordIntent= new Intent();
-			ComponentName callRecordCN = new ComponentName(this.getApplicationContext(), CallRecordActivity.class);
-			callRecordIntent.setComponent(callRecordCN);
-			this.startActivity(callRecordIntent);
-			break;
-		case R.id.button_encrypt:
-			Intent encryptIntent= new Intent();
-			ComponentName encryptCN = new ComponentName(this.getApplicationContext(), EncryptActivity.class);
-			encryptIntent.setComponent(encryptCN);
-			this.startActivity(encryptIntent);
-			break;
-		case R.id.button_test:
-			SMSADao.INSTANCE.testSMS();
-			break;
-		}
+//		switch (v.getId()) {
+//		case R.id.button_locate:
+//			Intent intent = new Intent();
+//			ComponentName cn = new ComponentName(this.getApplicationContext(), LocateActivity.class);
+//			intent.setComponent(cn);
+//			this.startActivity(intent);
+//			break;
+//		case R.id.button_gesture:
+//			Intent intent2 = new Intent();
+//			ComponentName cn2 = new ComponentName(this.getApplicationContext(), GestureActivity.class);
+//			intent2.setComponent(cn2);
+//			this.startActivity(intent2);
+//			break;
+//		case R.id.button_hardware:
+//			Intent intentHD = new Intent();
+//			ComponentName cnHD = new ComponentName(this.getApplicationContext(), WifiActivity.class);
+//			intentHD.setComponent(cnHD);
+//			this.startActivity(intentHD);
+//			break;
+//		case R.id.button_sms:
+//			Intent intent3= new Intent();
+//			ComponentName cn3 = new ComponentName(this.getApplicationContext(), SMSActivity.class);
+//			intent3.setComponent(cn3);
+//			this.startActivity(intent3);
+//			break;
+//		case R.id.button_contact:
+//			Intent contactIntent= new Intent();
+//			ComponentName contactCN = new ComponentName(this.getApplicationContext(), ContactActivity.class);
+//			contactIntent.setComponent(contactCN);
+//			this.startActivity(contactIntent);
+//			break;
+//		case R.id.button_call_record:
+//			Intent callRecordIntent= new Intent();
+//			ComponentName callRecordCN = new ComponentName(this.getApplicationContext(), CallRecordActivity.class);
+//			callRecordIntent.setComponent(callRecordCN);
+//			this.startActivity(callRecordIntent);
+//			break;
+//		case R.id.button_encrypt:
+//			Intent encryptIntent= new Intent();
+//			ComponentName encryptCN = new ComponentName(this.getApplicationContext(), EncryptActivity.class);
+//			encryptIntent.setComponent(encryptCN);
+//			this.startActivity(encryptIntent);
+//			break;
+//		case R.id.button_test:
+//			SMSADao.INSTANCE.testSMS();
+//			break;
+//		}
 	}
 
 	@Override
