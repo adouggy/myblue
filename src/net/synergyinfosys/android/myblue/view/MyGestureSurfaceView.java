@@ -149,7 +149,8 @@ public class MyGestureSurfaceView extends SurfaceView implements Callback, Runna
 		}else{
 			mUnitWidth = mUnitHeight;
 		}
-		mThread.start();
+		if( mThread!= null && !mThread.isAlive() )
+			mThread.start();
 	}
 
 	@Override

@@ -19,7 +19,7 @@
     <string name="txt_gesture_newname">GestureActivity</string>
     <string name="title_activity_sms">SMSActivity</string>
     <string name="txt_sms_hello">hello</string>
-    <string name="txt_sms_description">当程序锁定时受保护的短信会出现在这里并从系统短信中消除\n当解除锁定时相关短信会恢复至系统短信\n还有一种Fake模式，你懂的</string>
+    <string name="txt_sms_description">当程序锁定时未读短信显示在这里\n解除锁定时未读短信恢复\nFake模式，你懂的</string>
     <string name="default_description">image</string>
     <string name="title_activity_contact">Contact</string>
     <string name="txt_contact_add_contact">添加隐私联系人</string>
@@ -46,7 +46,7 @@
     <string name="txt_wifi_alllist">可选wifi</string>
     <string name="txt_wifi_default_count">(0)</string>
     <string name="txt_wifi_blacklist">黑名单</string>
-    <string name="btn_wifi_scan">扫描附近的Wifi</string>
+    <string name="btn_wifi_scan">重新扫描附近的Wifi</string>
     <string name="title_activity_locate">LocateActivity</string>
     <string name="txt_locate_tag">被标记的地点</string>
     <string name="txt_locate_current_location">当前地点</string>
@@ -64,6 +64,12 @@
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
     <string name="title_activity_key_configure">KeyConfigureActivity</string>
+    
+    <string name="txt_bluetooth_whitelist">白名单</string>
+    <string name="txt_bluetooth_whitelist_count">()</string>
+    <string name="txt_bluetooth_alllist">附近的蓝牙设备</string>
+     <string name="txt_bluetooth_alllist_count">()</string>
+     <string name="btn_bluetooth_scan">重新扫描附近的蓝牙设备</string>
     
     <string name="txt_home_about">
         忆江南\n

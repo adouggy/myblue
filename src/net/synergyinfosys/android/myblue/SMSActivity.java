@@ -10,9 +10,9 @@ import android.view.WindowManager;
 import android.widget.ListView;
 
 public class SMSActivity extends Activity {
-	
-	
+
 	private static ListView mList;
+	private static SMSListAdapter mAdapter = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +22,14 @@ public class SMSActivity extends Activity {
 		setContentView(R.layout.activity_sms);
 		
 		mList = (ListView) findViewById(R.id.list_sms);
-		mList.setAdapter(new SMSListAdapter(this.getApplicationContext(), SMSDao.getInstance().getSMSAll()));
-		
+		mAdapter  = new SMSListAdapter(this.getApplicationContext(), SMSDao.getInstance().getSMSAll());
+		mList.setAdapter( mAdapter );
 	}
-	
-	
+
+	public static void refresh() {
+		SMSListAdapter.setData(SMSDao.getInstance().getSMSAll());
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

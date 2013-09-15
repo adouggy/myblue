@@ -51,7 +51,7 @@ public class SMSDao extends AbstractDBDao{
 		Log.i(TAG, "getSMSAll");
 		
 		ArrayList<SMS> list = new ArrayList<SMS>();
-		final String sql = "select * from " + Constants.DB_TABLE_SMS_NAME;
+		final String sql = "select * from " + Constants.DB_TABLE_SMS_NAME + " order by date desc";
 		try {
 			Cursor cursor = mDBInstance.rawQuery( sql, null );
 			while( cursor.moveToNext() ){

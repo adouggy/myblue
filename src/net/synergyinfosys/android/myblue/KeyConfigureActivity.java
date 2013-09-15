@@ -19,7 +19,7 @@ public class KeyConfigureActivity extends TabActivity {
 		TabHost mTabHost = getTabHost();
 
 		mTabHost.addTab(mTabHost.newTabSpec("first").setIndicator("手势").setContent(new Intent(this, GestureActivity.class)));
-		mTabHost.addTab(mTabHost.newTabSpec("second").setIndicator("蓝牙").setContent(new Intent(this, HardwareActivity.class)));
+		mTabHost.addTab(mTabHost.newTabSpec("second").setIndicator("蓝牙").setContent(new Intent(this, BluetoothActivity.class)));
 		mTabHost.addTab(mTabHost.newTabSpec("third").setIndicator("Wifi").setContent(new Intent(this, WifiActivity.class)));
 		mTabHost.addTab(mTabHost.newTabSpec("fourth").setIndicator("GPS").setContent(new Intent(this, LocateActivity.class)));
 		mTabHost.setCurrentTab(0);

@@ -69,4 +69,20 @@ public class Constants {
 			"longtitude double, " +
 			"description varchar(200) " +
 			")";
+	
+	public static final String DB_TABLE_GESTURE_NAME = "gesture";
+	public static final String DB_TABLE_GESTURE_SQL = 
+			"create table if not exists gesture(" +
+			"id integer primary key autoincrement, " +
+			"action varchar(20), " +
+			"timestamp integer " +
+			")";
+	
+	public static final String DB_TABLE_BLUETOOTH_NAME = "bluetooth";
+	public static final String DB_TABLE_BLUETOOTH_SQL = 
+			"create table if not exists bluetooth(" +
+			"id integer primary key autoincrement, " +
+			"name varchar(50), " +
+			"mac varchar(50) " +
+			")";
 }

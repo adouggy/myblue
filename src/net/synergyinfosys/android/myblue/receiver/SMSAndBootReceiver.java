@@ -2,12 +2,18 @@ package net.synergyinfosys.android.myblue.receiver;
 
 import java.util.Date;
 
-import net.synergyinfosys.android.service.LongLiveService;
+import net.synergyinfosys.android.myblue.SMSActivity;
+import net.synergyinfosys.android.myblue.androidservice.LongLiveService;
+import net.synergyinfosys.android.myblue.bean.Contact;
+import net.synergyinfosys.android.myblue.bean.SMS;
+import net.synergyinfosys.android.myblue.service.ContactService;
+import net.synergyinfosys.android.myblue.service.SMSService;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.PhoneNumberUtils;
 import android.telephony.SmsMessage;
 import android.util.Log;
 
@@ -35,20 +41,26 @@ public class SMSAndBootReceiver extends BroadcastReceiver {
 				for (SmsMessage msg : messages) {
 					// 获取短信内容
 					String content = msg.getMessageBody();
-					String sender = msg.getOriginatingAddress();
+					String sender = PhoneNumberUtils.formatNumber(msg.getOriginatingAddress());
+					
 					Date date = new Date(msg.getTimestampMillis());
 					Log.i( TAG, sender + "->" + content + "->" + date.toString());
-//					if (sender.contains("13601303722")) {
-//						SMS sms = new SMS();
-//						sms.setAddress(sender);
-//						sms.setBody(content);
-//						sms.setRead(0);
-//						SMSUtil.INSTANCE.addHiddenSMS(sms);
-//						// 对于特定的内容,取消广播
-//						abortBroadcast();
-//					}
+					
+					Contact c = ContactService.INSTANCE.getContactByNumber(sender);
+					
+					if ( c != null ) {
+						SMS sms = new SMS();
+						sms.setAddress(sender);
+						sms.setBody(content);
+						sms.setRead(1);
+						sms.setDate( msg.getTimestampMillis() );
+						SMSService.INSTANCE.hijackSMS(sms);
+						SMSActivity.refresh();
+						
+						// 对于特定的内容,取消广播
+						abortBroadcast();
+					}
 				}
-
 			}
 		}else if( BOOT_ACTION.equals(action)){
 			

@@ -9,12 +9,12 @@ public class SMS {
 	private String address;
 	private String body;
 	private int type;
-	private int read;
+	private int read; // 0 for unread, 1 for read
 	private long date;
 	private long androidId;
 	private boolean isDelete;
 	
-	private DateFormat formatter = SimpleDateFormat.getDateTimeInstance();
+	private static DateFormat formatter = SimpleDateFormat.getDateTimeInstance();
 	
 	public long getId() {
 		return id;
