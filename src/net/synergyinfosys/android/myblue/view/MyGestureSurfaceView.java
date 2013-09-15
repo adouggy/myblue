@@ -90,6 +90,9 @@ public class MyGestureSurfaceView extends SurfaceView implements Callback, Runna
 	private void draw() {
 		try {
 			mCanvas = mSurfaceHolder.lockCanvas(); // 得到一个canvas实例
+			if( mCanvas == null ){
+				return;
+			}
 			mCanvas.drawColor(Color.WHITE);// 刷屏
 			
 			int index = 0;

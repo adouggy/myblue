@@ -41,6 +41,7 @@ public enum SMSService {
 	public void resumeSMS(  ){
 		ArrayList<SMS> list = SMSDao.getInstance().getSMSAll();
 		for (SMS sms : list) {
+			sms.setRead(0);
 			SMSADao.INSTANCE.addSMS(sms);
 		}
 		SMSDao.getInstance().removeSMSAll();

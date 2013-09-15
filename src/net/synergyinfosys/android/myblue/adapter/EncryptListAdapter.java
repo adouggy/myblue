@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import net.synergyinfosys.android.myblue.EncryptAddActivity;
 import net.synergyinfosys.android.myblue.R;
 import net.synergyinfosys.android.myblue.bean.Encrypt;
+import net.synergyinfosys.android.myblue.service.LockStatusService;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -81,7 +82,11 @@ public class EncryptListAdapter extends BaseAdapter {
 
 		final Encrypt e = mEncryptList.get(position);
 		holder.name.setText(e.getName());
-		holder.password.setText(e.getPassword());
+		if( LockStatusService.INSTANCE.isLock().toString().contains("UNLOCK") ){
+			holder.password.setText(e.getPassword());
+		}else{
+			holder.password.setText("就不告诉你");
+		}
 		holder.comment.setText(e.getComment());
 
 		holder.img.setOnClickListener(new OnClickListener() {

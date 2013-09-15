@@ -26,9 +26,10 @@ public class CallRecordActivity extends Activity {
 		mCallRecordList.setAdapter( mCallRecordListAdapter );
 	}
 	
-	public static void refreshContact() {
+	public static void refresh() {
 		CallRecordListAdapter.setData(CallRecordDao.getInstance().getAll());
-		mCallRecordListAdapter.notifyDataSetChanged();
+		if( mCallRecordListAdapter!=null )
+			mCallRecordListAdapter.notifyDataSetChanged();
 	}
 
 	@Override

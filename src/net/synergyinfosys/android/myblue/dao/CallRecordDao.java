@@ -105,7 +105,7 @@ public class CallRecordDao extends AbstractDBDao{
 	public ArrayList<CallRecord> getAll(){
 		Log.i(TAG, "getAll");
 		ArrayList<CallRecord> list = new ArrayList<CallRecord>();
-		Cursor cursor = mDBInstance.rawQuery("select * from " + Constants.DB_TABLE_CALL_RECORD_NAME, null);
+		Cursor cursor = mDBInstance.rawQuery("select * from " + Constants.DB_TABLE_CALL_RECORD_NAME + " order by recordTime desc", null);
 		while (cursor.moveToNext()) {
 			CallRecord c= new CallRecord();
 			c.setId( cursor.getLong( cursor.getColumnIndex("id") ) );

@@ -45,6 +45,7 @@ public class LongLiveService extends Service implements Runnable {
 		this.mThread = new Thread(this);
 		notification = NotificationHelper.genNotification(this.mContext, 0, R.drawable.ic_launcher, "后台安全监控正在运行...", 0, "后台安全监控正在运行...", "新能聚信出品", HomeTabActivity.class,
 				Notification.FLAG_FOREGROUND_SERVICE);
+
 	}
 
 	@Override
@@ -91,7 +92,8 @@ public class LongLiveService extends Service implements Runnable {
 	}
 
 	private void doSth() {
-		HomeActivity.mLockStatusHandler.sendEmptyMessage(0);
+		if( HomeActivity.mLockStatusHandler!=null )
+			HomeActivity.mLockStatusHandler.sendEmptyMessage(0);
 	}
 
 	@Override

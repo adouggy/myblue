@@ -25,4 +25,8 @@ public enum ContactService {
 		return null;
 	}
 	
+	
+	public ArrayList<Contact> getAllSecretContacts(){
+		return  ContactDao.getInstance().getContactAll();
+	}
 }

@@ -78,6 +78,7 @@ public enum WifiService {
 		}
 		
 		for( Wifi blackWifi : blackList ){
+			if( wifi.getBSSID() != null )
 			if( wifi.getBSSID().compareTo( blackWifi.getBssid() ) == 0 ){
 				return true;
 			}

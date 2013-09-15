@@ -99,6 +99,9 @@ public class HomeActivity extends Activity implements OnClickListener, OnGesture
 		@Override
 		public void handleMessage(Message msg) {
 			LockStatus status = LockStatusService.INSTANCE.isLock();
+			
+			LockStatusService.INSTANCE.doSth(status);
+			
 			if( status == LockStatus.GESTURE_UNLOCK ){
 				mTxtHello.setText("Gesture Unlocked (" + GestureLockStatusService.INSTANCE.lockTimeRemainingInSeconds() + ")");
 			}else if( status == LockStatus.BLUETOOTH_UNLOCK ){
@@ -107,8 +110,10 @@ public class HomeActivity extends Activity implements OnClickListener, OnGesture
 				mTxtHello.setText("Wifi Locked");
 			}else if( status == LockStatus.LOCATION_LOCK ){
 				mTxtHello.setText("Location Locked");
-			}else{
+			}else if( status == LockStatus.GESTURE_LOCK ){
 				mTxtHello.setText("Gesture Locked");
+			}else {
+				mTxtHello.setText("闹鬼了！");
 			}
 		}
 	};

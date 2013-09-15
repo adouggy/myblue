@@ -46,7 +46,8 @@ public class ContactActivity extends Activity implements OnClickListener {
 
 	public static void refreshContact() {
 		ContactListAdapter.setData(ContactDao.getInstance().getContactAll());
-		mContactAdapter.notifyDataSetChanged();
+		if( mContactAdapter!=null )
+			mContactAdapter.notifyDataSetChanged();
 	}
 
 	@Override

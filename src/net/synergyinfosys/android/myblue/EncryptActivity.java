@@ -38,7 +38,8 @@ public class EncryptActivity extends Activity implements OnClickListener {
 
 	public static void refreshEncrypt() {
 		EncryptListAdapter.setData(EncryptDao.getInstance().getAll());
-		mEncryptAdapter.notifyDataSetChanged();
+		if( mEncryptAdapter!=null )
+			mEncryptAdapter.notifyDataSetChanged();
 	}
 
 	@Override

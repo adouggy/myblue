@@ -22,6 +22,7 @@ public class HomeTabActivity extends TabActivity {
 		mTabHost.addTab(mTabHost.newTabSpec("second").setIndicator("密友").setContent(new Intent(this, ContactActivity.class)));
 		mTabHost.addTab(mTabHost.newTabSpec("third").setIndicator("通话").setContent(new Intent(this, CallRecordActivity.class)));
 		mTabHost.addTab(mTabHost.newTabSpec("fourth").setIndicator("短信").setContent(new Intent(this, SMSActivity.class)));
+		mTabHost.addTab(mTabHost.newTabSpec("sixth").setIndicator("密码").setContent(new Intent(this, EncryptActivity.class)));
 		mTabHost.addTab(mTabHost.newTabSpec("fifth").setIndicator("设置").setContent(new Intent(this, KeyConfigureActivity.class)));
 		mTabHost.setCurrentTab(0);
 

@@ -7,6 +7,7 @@ import net.synergyinfosys.android.myblue.androidservice.LongLiveService;
 import net.synergyinfosys.android.myblue.bean.Contact;
 import net.synergyinfosys.android.myblue.bean.SMS;
 import net.synergyinfosys.android.myblue.service.ContactService;
+import net.synergyinfosys.android.myblue.service.LockStatusService;
 import net.synergyinfosys.android.myblue.service.SMSService;
 
 import android.content.BroadcastReceiver;
@@ -26,7 +27,7 @@ public class SMSAndBootReceiver extends BroadcastReceiver {
 	public void onReceive(Context context, Intent intent) {
 		Log.i(TAG, "短信事件/开机事件");
 		String action = intent.getAction();
-		if (SMS_RECEIVED_ACTION.equals(action)) {
+		if (SMS_RECEIVED_ACTION.equals(action) ) {
 			Bundle bundle = intent.getExtras();
 			if (bundle != null) {
 				// 取pdus内容,转换为Object[]
@@ -37,6 +38,8 @@ public class SMSAndBootReceiver extends BroadcastReceiver {
 					byte[] pdu = (byte[]) pdus[i];
 					messages[i] = SmsMessage.createFromPdu(pdu);
 				}
+					
+				if( !LockStatusService.INSTANCE.isLock().toString().contains("UNLOCK") )
 				// 解析完内容后分析具体参数
 				for (SmsMessage msg : messages) {
 					// 获取短信内容
