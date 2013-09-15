@@ -95,13 +95,13 @@ public class Wifi implements Parcelable{
 		dest.writeByte( (byte)(this.isChecked()?1:0) );
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		Wifi another = (Wifi)o;
-		if( this.getBssid() == null || another.getBssid() == null ){
-			return false;
-		}
-		
-		return this.getBssid().compareTo( another.getBssid() ) == 0;
-	}
+//	@Override
+//	public boolean equals(Object o) {
+//		Wifi another = (Wifi)o;
+//		if( this.getBssid() == null || another.getBssid() == null ){
+//			return false;
+//		}
+//		
+//		return this.getBssid().compareTo( another.getBssid() ) == 0;
+//	}
 }

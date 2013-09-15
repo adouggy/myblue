@@ -73,14 +73,14 @@ public class LocationDetailActivity extends Activity implements OnClickListener 
 			if (mLocation.isValid()) {
 				LocationService.INSTANCE.updateLocation(mLocation);
 			}
-			LocateActivity.refresh();
+			LocationActivity.refresh();
 			this.finish();
 			break;
 		case R.id.btn_location_detail_delete:
 			if (mLocation != null)
 				LocationService.INSTANCE.delLocation(mLocation.getId());
 			
-			LocateActivity.refresh();
+			LocationActivity.refresh();
 			this.finish();
 			break;
 		default:

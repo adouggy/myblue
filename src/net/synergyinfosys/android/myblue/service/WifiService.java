@@ -7,6 +7,7 @@ import net.synergyinfosys.android.myblue.bean.Wifi;
 import net.synergyinfosys.android.myblue.dao.WifiDao;
 import net.synergyinfosys.android.myblue.util.WifiUtil;
 import android.net.wifi.ScanResult;
+import android.net.wifi.WifiInfo;
 
 public enum WifiService {
 	INSTANCE;
@@ -67,6 +68,22 @@ public enum WifiService {
 	
 	public int removeBlackList( String bssid ){
 		return WifiDao.getInstance().remove( bssid );
+	}
+	
+	public boolean isLock(){
+		ArrayList<Wifi> blackList = WifiDao.getInstance().getAll();
+		WifiInfo wifi = WifiUtil.INSTANCE.getConnectedWifi();
+		if( wifi == null ){
+			return false;
+		}
+		
+		for( Wifi blackWifi : blackList ){
+			if( wifi.getBSSID().compareTo( blackWifi.getBssid() ) == 0 ){
+				return true;
+			}
+		}
+		
+		return false;
 	}
 }
  

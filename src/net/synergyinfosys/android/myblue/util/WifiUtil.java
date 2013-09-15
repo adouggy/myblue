@@ -110,6 +110,10 @@ public enum WifiUtil {
 		}
 		return sb;
 	}
+	
+	public WifiInfo getConnectedWifi(){
+		return mWifiInfo;
+	}
 
 	public String getMacAddress() {
 		return (mWifiInfo == null) ? "NULL" : mWifiInfo.getMacAddress();

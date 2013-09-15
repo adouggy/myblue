@@ -175,7 +175,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="net.synergyinfosys.android.myblue.LocateActivity"
+            android:name="net.synergyinfosys.android.myblue.LocationActivity"
             android:label="@string/title_activity_locate"
             android:screenOrientation="portrait" >
         </activity>

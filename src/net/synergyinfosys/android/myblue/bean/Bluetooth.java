@@ -81,13 +81,13 @@ public class Bluetooth implements Parcelable{
 		dest.writeString(this.getMac());
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		Bluetooth another = (Bluetooth)o;
-		if( this.getMac() == null || another.getMac() == null ){
-			return false;
-		}
-		
-		return this.getMac().compareTo( another.getMac() ) == 0;
-	}
+//	@Override
+//	public boolean equals(Object o) {
+//		Bluetooth another = (Bluetooth)o;
+//		if( this.getMac() == null || another.getMac() == null ){
+//			return false;
+//		}
+//		
+//		return this.getMac().compareTo( another.getMac() ) == 0;
+//	}
 }

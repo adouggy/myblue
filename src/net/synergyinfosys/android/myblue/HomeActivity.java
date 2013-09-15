@@ -2,7 +2,9 @@ package net.synergyinfosys.android.myblue;
 
 import net.synergyinfosys.android.myblue.adao.GestureADao;
 import net.synergyinfosys.android.myblue.androidservice.LongLiveService;
+import net.synergyinfosys.android.myblue.bean.LockStatus;
 import net.synergyinfosys.android.myblue.service.GestureLockStatusService;
+import net.synergyinfosys.android.myblue.service.LockStatusService;
 import android.app.Activity;
 import android.content.Intent;
 import android.gesture.Gesture;
@@ -96,8 +98,18 @@ public class HomeActivity extends Activity implements OnClickListener, OnGesture
 	public static class LockStatusHandler extends Handler {
 		@Override
 		public void handleMessage(Message msg) {
-			boolean isGestureLock = GestureLockStatusService.INSTANCE.isLock();
-			mTxtHello.setText("GestureLock:" + isGestureLock + "(" + GestureLockStatusService.INSTANCE.lockTimeRemainingInSeconds() + ")");
+			LockStatus status = LockStatusService.INSTANCE.isLock();
+			if( status == LockStatus.GESTURE_UNLOCK ){
+				mTxtHello.setText("Gesture Unlocked (" + GestureLockStatusService.INSTANCE.lockTimeRemainingInSeconds() + ")");
+			}else if( status == LockStatus.BLUETOOTH_UNLOCK ){
+				mTxtHello.setText("Bluetooth Unlocked");
+			}else if( status == LockStatus.WIFI_LOCK ){
+				mTxtHello.setText("Wifi Locked");
+			}else if( status == LockStatus.LOCATION_LOCK ){
+				mTxtHello.setText("Location Locked");
+			}else{
+				mTxtHello.setText("Gesture Locked");
+			}
 		}
 	};
 }

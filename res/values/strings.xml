@@ -69,7 +69,7 @@
     <string name="txt_bluetooth_whitelist_count">()</string>
     <string name="txt_bluetooth_alllist">附近的蓝牙设备</string>
      <string name="txt_bluetooth_alllist_count">()</string>
-     <string name="btn_bluetooth_scan">重新扫描附近的蓝牙设备</string>
+     <string name="btn_bluetooth_scan">重新扫描附近的蓝牙设备(约12秒)</string>
     
     <string name="txt_home_about">
         忆江南\n

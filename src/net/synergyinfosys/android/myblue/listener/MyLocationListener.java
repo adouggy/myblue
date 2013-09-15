@@ -1,6 +1,6 @@
 package net.synergyinfosys.android.myblue.listener;
 
-import net.synergyinfosys.android.myblue.LocateActivity;
+import net.synergyinfosys.android.myblue.LocationActivity;
 import net.synergyinfosys.android.myblue.bean.Location;
 
 import com.baidu.location.BDLocation;
@@ -35,14 +35,14 @@ public class MyLocationListener implements BDLocationListener {
 		sb.append(location.getRadius());
 		System.out.println(sb.toString());
 		
-		LocateActivity.refreshCurrentLocation(sb.toString());
+		LocationActivity.refreshCurrentLocation(sb.toString());
 		
 		Location loc = new Location();
 		loc.setLatitude( location.getLatitude() );
 		loc.setLongitude( location.getLongitude() );
 		loc.setDescription( sb.toString() );
 		
-		LocateActivity.setCurrentLocation(loc);
+		LocationActivity.setCurrentLocation(loc);
 	}
 
 	@Override
