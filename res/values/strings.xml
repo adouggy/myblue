@@ -64,20 +64,19 @@
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
     <string name="title_activity_key_configure">KeyConfigureActivity</string>
-    
     <string name="txt_bluetooth_whitelist">白名单</string>
     <string name="txt_bluetooth_whitelist_count">()</string>
     <string name="txt_bluetooth_alllist">附近的蓝牙设备</string>
-     <string name="txt_bluetooth_alllist_count">()</string>
-     <string name="btn_bluetooth_scan">重新扫描附近的蓝牙设备(约12秒)</string>
-    
-    <string name="txt_home_about">
-        忆江南\n
+    <string name="txt_bluetooth_alllist_count">()</string>
+    <string name="btn_bluetooth_scan">重新扫描附近的蓝牙设备(约12秒)</string>
+    <string name="txt_home_about">        忆江南\n
         江南好\n
         风景旧曾谙\n
         日出江花红胜火\n
         春来江水绿如蓝\n
-        能不忆江南?
-    </string>
+        能不忆江南?</string>
+    <string name="title_activity_home_flow">HomeFlowActivity</string>
+    <string name="title_main">蓝牙锁</string>
+    <string name="title_activity_home_slide">HomeSlideActivity</string>
 
 </resources>
