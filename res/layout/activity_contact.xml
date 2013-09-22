@@ -7,6 +7,7 @@
     tools:context=".ContactActivity" >
 
     <TextView
+        android:id="@+id/txt_contact_add"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -14,13 +15,19 @@
         android:gravity="center"
         android:maxHeight="90dp"
         android:text="@string/txt_contact_add_contact"
-        android:textSize="20sp"
-        android:id="@+id/txt_contact_add"/>
+        android:textSize="20sp" />
 
-    <ListView
+    <!--
+         <ListView
         android:id="@+id/list_contact_hidden"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="4" />
+    -->
+
+    <com.fima.cardsui.views.CardUI
+        android:id="@+id/cardsview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

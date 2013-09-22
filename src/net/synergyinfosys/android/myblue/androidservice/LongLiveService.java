@@ -1,6 +1,6 @@
 package net.synergyinfosys.android.myblue.androidservice;
 
-import net.synergyinfosys.android.myblue.HomeTabActivity;
+import net.synergyinfosys.android.myblue.HomeSlideActivity;
 import net.synergyinfosys.android.myblue.R;
 import net.synergyinfosys.android.myblue.adao.CallRecordADao;
 import net.synergyinfosys.android.myblue.adao.ContactADao;
@@ -42,7 +42,7 @@ public class LongLiveService extends Service implements Runnable {
 		Log.i(TAG, "onCreate");
 		mContext = this.getApplicationContext();
 		this.mThread = new Thread(this);
-		notification = NotificationHelper.genNotification(this.mContext, 0, R.drawable.ic_launcher, "后台安全监控正在运行...", 0, "后台安全监控正在运行...", "新能聚信出品", HomeTabActivity.class,
+		notification = NotificationHelper.genNotification(this.mContext, 0, R.drawable.ic_launcher, "正在启动蓝牙锁", 0, "蓝牙锁正在运行", "来自新能聚信", HomeSlideActivity.class,
 				Notification.FLAG_FOREGROUND_SERVICE);
 
 	}
@@ -91,8 +91,8 @@ public class LongLiveService extends Service implements Runnable {
 	}
 
 	private void doSth() {
-//		if( HomeActivity.mLockStatusHandler!=null )
-//			HomeActivity.mLockStatusHandler.sendEmptyMessage(0);
+		// if( HomeActivity.mLockStatusHandler!=null )
+		// HomeActivity.mLockStatusHandler.sendEmptyMessage(0);
 	}
 
 	@Override

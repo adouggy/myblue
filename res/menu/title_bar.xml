@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/menu_home_page"
+        android:icon="@drawable/home"
+        android:showAsAction="always"
+        android:title="blah"
+        android:titleCondensed="blahblah"
+        android:visible="true">
+    </item>
+    <item
+        android:id="@+id/about"
+        android:orderInCategory="1"
+        android:showAsAction="never"
+        android:title="about">
+    </item>
+
+</menu>

@@ -2,7 +2,10 @@ package net.synergyinfosys.android.myblue;
 
 import net.synergyinfosys.android.myblue.androidservice.LongLiveService;
 import net.synergyinfosys.android.myblue.fragment.MenuFragment;
+import net.synergyinfosys.android.myblue.util.WebUtil;
 
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
@@ -14,15 +17,14 @@ import android.support.v4.app.ListFragment;
 
 public class HomeSlideActivity extends SlidingFragmentActivity {
 	protected ListFragment mFrag;
-	private Fragment mContent;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home_slide);
 		setTitle(R.string.title_main);
-
 		setBehindContentView(R.layout.menu_frame);
+		
 		if (savedInstanceState == null) {
 			FragmentTransaction t = this.getSupportFragmentManager().beginTransaction();
 			mFrag = new MenuFragment();
@@ -41,15 +43,32 @@ public class HomeSlideActivity extends SlidingFragmentActivity {
 		sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		
 		setSlidingActionBarEnabled(false);
 		
 		this.startService(new Intent(this, LongLiveService.class));
 	}
 
 	public void switchContent(Fragment fragment) {
-		mContent = fragment;
 		getSupportFragmentManager().beginTransaction().replace(R.id.home_slide_behind, fragment).commit();
 		getSlidingMenu().showContent();
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getSupportMenuInflater().inflate(R.menu.title_bar, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			toggle();
+			return true;
+		case R.id.menu_home_page:
+			WebUtil.goToHomePage(this);
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 }

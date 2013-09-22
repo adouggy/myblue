@@ -93,7 +93,7 @@ public class ContactAddActivity extends Activity implements OnClickListener {
 				c.setCallMode(CallMode.values()[this.mSpnCallMode.getSelectedItemPosition()]);
 				long id = ContactDao.getInstance().insertContact(c);
 				Log.i(TAG, "new contact id=" + id);
-				ContactActivity.refreshContact();
+//				ContactActivity.refreshContact();
 				this.finish();
 			} else {
 				this.mUpdateContact.setNumber(this.mEdtNumber.getText().toString());
@@ -106,14 +106,14 @@ public class ContactAddActivity extends Activity implements OnClickListener {
 //				this.setResult(RESULT_OK, this.getIntent().putExtras(bundle));
 				int count = ContactDao.getInstance().updateContact(this.mUpdateContact);
 				Log.i( TAG, "updated " + count );
-				ContactActivity.refreshContact();
+//				ContactActivity.refreshContact();
 				this.finish();
 			}
 			break;
 		case R.id.btn_contact_add_delete:
 			int count = ContactDao.getInstance().removeContact( this.mUpdateContact.getId() );
 			Log.i( TAG, "deleted " + count );
-			ContactActivity.refreshContact();
+//			ContactActivity.refreshContact();
 			this.finish();
 			break;
 		}

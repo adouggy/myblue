@@ -22,9 +22,9 @@ public class ContactActivity extends Activity implements OnClickListener {
 	public static final String TAG = "ContactActivity";
 
 	private TextView mButtonAdd = null;
-	private static ListView mListContact = null;
-	private static ContactListAdapter mContactAdapter = null;
-	private static OpenEditHandler mOpenEditHandler = new OpenEditHandler();
+//	private static ListView mListContact = null;
+//	private static ContactListAdapter mContactAdapter = null;
+//	private static OpenEditHandler mOpenEditHandler = new OpenEditHandler();
 	private static Context mContext;
 
 	@Override
@@ -39,16 +39,16 @@ public class ContactActivity extends Activity implements OnClickListener {
 		mButtonAdd = (TextView) findViewById(R.id.txt_contact_add);
 		mButtonAdd.setOnClickListener(this);
 
-		mListContact = (ListView) findViewById(R.id.list_contact_hidden);
-		mContactAdapter = new ContactListAdapter(this.getApplicationContext(), ContactDao.getInstance().getContactAll());
-		mListContact.setAdapter(mContactAdapter);
+//		mListContact = (ListView) findViewById(R.id.list_contact_hidden);
+//		mContactAdapter = new ContactListAdapter(this.getApplicationContext(), ContactDao.getInstance().getContactAll());
+//		mListContact.setAdapter(mContactAdapter);
 	}
 
-	public static void refreshContact() {
-		ContactListAdapter.setData(ContactDao.getInstance().getContactAll());
-		if( mContactAdapter!=null )
-			mContactAdapter.notifyDataSetChanged();
-	}
+//	public static void refreshContact() {
+//		ContactListAdapter.setData(ContactDao.getInstance().getContactAll());
+//		if( mContactAdapter!=null )
+//			mContactAdapter.notifyDataSetChanged();
+//	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -68,26 +68,26 @@ public class ContactActivity extends Activity implements OnClickListener {
 		}
 	}
 	
-	public static void editContact(Contact c){
-		Message msg = new Message();
-		Bundle bundle = new Bundle();
-		bundle.putParcelable("contact", c);
-		msg.setData(bundle);
-		mOpenEditHandler.sendMessage(msg);
-	}
+//	public static void editContact(Contact c){
+//		Message msg = new Message();
+//		Bundle bundle = new Bundle();
+//		bundle.putParcelable("contact", c);
+//		msg.setData(bundle);
+//		mOpenEditHandler.sendMessage(msg);
+//	}
 
-	static class OpenEditHandler extends Handler {
-		@Override
-		public void handleMessage(Message msg) {
-			Contact c = (Contact) msg.getData().get("contact");
-			
-			Intent addContactIntent = new Intent();
-			ComponentName addContactCN = new ComponentName(mContext, ContactAddActivity.class);
-			addContactIntent.putExtra("contact", c);
-			addContactIntent.setComponent(addContactCN);
-			addContactIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			mContext.startActivity(addContactIntent);
-		}
-	};
+//	static class OpenEditHandler extends Handler {
+//		@Override
+//		public void handleMessage(Message msg) {
+//			Contact c = (Contact) msg.getData().get("contact");
+//			
+//			Intent addContactIntent = new Intent();
+//			ComponentName addContactCN = new ComponentName(mContext, ContactAddActivity.class);
+//			addContactIntent.putExtra("contact", c);
+//			addContactIntent.setComponent(addContactCN);
+//			addContactIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//			mContext.startActivity(addContactIntent);
+//		}
+//	};
 
 }

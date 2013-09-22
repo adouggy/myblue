@@ -26,8 +26,10 @@ public class MenuFragment extends ListFragment {
 //		for (int i = 0; i < 20; i++) {
 //			adapter.add(new SampleItem("Sample List", android.R.drawable.ic_menu_search));
 //		}
+		adapter.add(new SampleItem("教程", R.drawable.tutorial));
 		adapter.add(new SampleItem("联系人", R.drawable.add_contact));
 		adapter.add(new SampleItem("蓝牙", R.drawable.bluetooth));
+		adapter.add(new SampleItem("Pin Code", R.drawable.pin));
 		adapter.add(new SampleItem("通话记录", R.drawable.call));
 		adapter.add(new SampleItem("短信", R.drawable.sms));
 		setListAdapter(adapter);
@@ -41,12 +43,18 @@ public class MenuFragment extends ListFragment {
 			newContent = new ContactFragment();
 			break;
 		case 1:
-			newContent = new BluetoothFragment();
+			newContent = new ContactFragment();
 			break;
 		case 2:
-			newContent = new CallRecordFragment();
+			newContent = new BluetoothFragment();
 			break;
 		case 3:
+			newContent = new CallRecordFragment();
+			break;
+		case 4:
+			newContent = new CallRecordFragment();
+			break;
+		case 5:
 			newContent = new SMSFragment();
 			break;
 		}

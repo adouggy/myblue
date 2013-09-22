@@ -60,7 +60,7 @@ public class ContactListAdapter extends BaseAdapter {
 				@Override
 				public void onClick(View v) {
 					Contact c = (Contact) v.getTag();
-					ContactActivity.editContact(c);
+//					ContactActivity.editContact(c);
 				}
 			});
 			convertView.setTag(holder);
