@@ -51,6 +51,7 @@ public enum BluetoothUtil {
 	public void startSearch(){
 		if (!mAdapter.isEnabled()) {
 			Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			mContext.startActivity(intent);
 		}
 		mAdapter.startDiscovery(); // take 12 seconds.

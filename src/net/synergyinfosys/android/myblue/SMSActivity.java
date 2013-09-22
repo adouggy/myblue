@@ -10,7 +10,6 @@ import android.view.WindowManager;
 import android.widget.ListView;
 
 public class SMSActivity extends Activity {
-
 	private static ListView mList;
 	private static SMSListAdapter mAdapter = null;
 

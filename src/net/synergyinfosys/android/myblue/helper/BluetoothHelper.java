@@ -1,7 +1,9 @@
-package net.synergyinfosys.android.myblue;
+package net.synergyinfosys.android.myblue.helper;
 
 import java.util.ArrayList;
 
+import net.synergyinfosys.android.myblue.BluetoothActivity;
+import net.synergyinfosys.android.myblue.R;
 import net.synergyinfosys.android.myblue.adapter.BluetoothNearListAdapter;
 import net.synergyinfosys.android.myblue.adapter.BluetoothWhiteListAdapter;
 import net.synergyinfosys.android.myblue.bean.Bluetooth;
@@ -9,18 +11,15 @@ import net.synergyinfosys.android.myblue.service.BluetoothService;
 import net.synergyinfosys.android.myblue.util.BluetoothUtil;
 import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
-import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class BluetoothActivity extends Activity implements OnClickListener {
-	public static final String TAG = "BluetoothActivity";
-
+public class BluetoothHelper extends MyHelper implements OnClickListener{
+	public static final String TAG = "BluetoothHelper";
+	
 	private static TextView mTxtWihitelistCount = null;
 	private static TextView mTxtAlllistCount = null;
 	private Button mBtnScan = null;
@@ -28,29 +27,43 @@ public class BluetoothActivity extends Activity implements OnClickListener {
 	private ListView mListAll = null;
 	private static BluetoothNearListAdapter mNearAdapter = null;
 	private static BluetoothWhiteListAdapter mWhiteAdapter = null;
-
+	
+	public BluetoothHelper(Activity act){
+		super( act );
+	}
+	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.activity_bluetooth);
-
-		mTxtWihitelistCount = (TextView) findViewById(R.id.txt_bluetooth_whitelist_count);
-		mTxtAlllistCount = (TextView) findViewById(R.id.txt_bluetooth_alllist_count);
-		mBtnScan = (Button) findViewById(R.id.btn_bluetooth_scan);
+	public void onCreate(int layoutId){
+		super.onCreate( layoutId );
+	}
+	
+	@Override
+	public void onPostCreate(){
+		super.onPostCreate();
+		
+		mTxtWihitelistCount = (TextView) mView.findViewById(R.id.txt_bluetooth_whitelist_count);
+		mTxtAlllistCount = (TextView) mView.findViewById(R.id.txt_bluetooth_alllist_count);
+		mBtnScan = (Button) mView.findViewById(R.id.btn_bluetooth_scan);
 		mBtnScan.setOnClickListener(this);
 
-		mListWhite = (ListView) findViewById(R.id.list_bluetooth_whitelist);
-		mListAll = (ListView) findViewById(R.id.list_bluetooth_all);
+		mListWhite = (ListView) mView.findViewById(R.id.list_bluetooth_whitelist);
+		mListAll = (ListView) mView.findViewById(R.id.list_bluetooth_all);
 
-		mNearAdapter = new BluetoothNearListAdapter(this.getApplicationContext());
+		mNearAdapter = new BluetoothNearListAdapter( this.mActivity.getApplicationContext() );
 		mListAll.setAdapter(mNearAdapter);
 
-		mWhiteAdapter = new BluetoothWhiteListAdapter(this.getApplicationContext(), BluetoothService.INSTANCE.getWhiteList());
+		mWhiteAdapter = new BluetoothWhiteListAdapter(this.mActivity.getApplicationContext(), BluetoothService.INSTANCE.getWhiteList());
 		mListWhite.setAdapter(mWhiteAdapter);
 		
 		BluetoothUtil.INSTANCE.startSearch();
+	}
+	
+	@Override
+	public View getView(){
+		if( this.mView == null ){
+			throw new IllegalStateException("call onCreate before this method.");
+		}
+		return this.mView;
 	}
 	
 	public static void setWhiteListCount(int count){
@@ -88,7 +101,6 @@ public class BluetoothActivity extends Activity implements OnClickListener {
 			BluetoothActivity.setNearListCount( 0 );
 			BluetoothUtil.INSTANCE.startSearch();
 			break;
-		}
+		}		
 	}
-
 }

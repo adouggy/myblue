@@ -1,6 +1,5 @@
 package net.synergyinfosys.android.myblue.androidservice;
 
-import net.synergyinfosys.android.myblue.HomeActivity;
 import net.synergyinfosys.android.myblue.HomeTabActivity;
 import net.synergyinfosys.android.myblue.R;
 import net.synergyinfosys.android.myblue.adao.CallRecordADao;
@@ -92,8 +91,8 @@ public class LongLiveService extends Service implements Runnable {
 	}
 
 	private void doSth() {
-		if( HomeActivity.mLockStatusHandler!=null )
-			HomeActivity.mLockStatusHandler.sendEmptyMessage(0);
+//		if( HomeActivity.mLockStatusHandler!=null )
+//			HomeActivity.mLockStatusHandler.sendEmptyMessage(0);
 	}
 
 	@Override
