@@ -85,4 +85,12 @@ public class Constants {
 			"name varchar(50), " +
 			"mac varchar(50) " +
 			")";
+	
+	public static final String DB_TABLE_SECRET_CODE_NAME = "secretcode";
+	public static final String DB_TABLE_SECRET_CODE_SQL = 
+			"create table if not exists secretcode(" +
+			"id integer primary key autoincrement, " +
+			"code varchar(50), " +
+			"timestamp integer " +
+			")";
 }

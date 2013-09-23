@@ -77,6 +77,9 @@
         能不忆江南?</string>
     <string name="title_activity_home_flow">HomeFlowActivity</string>
     <string name="title_main">蓝牙锁</string>
-    <string name="title_activity_home_slide">HomeSlideActivity</string>
+    <string name="title_activity_home_slide">蓝牙锁</string>
+    
+    <string name="txt_secret_code_title">当前秘钥</string>
+    <string name="btn_secret_code_update">更新</string>
 
 </resources>

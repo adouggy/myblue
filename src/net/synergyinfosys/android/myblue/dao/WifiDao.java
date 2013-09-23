@@ -70,6 +70,7 @@ public class WifiDao extends AbstractDBDao{
 		Cursor cursor = mDBInstance.rawQuery("select * from " + Constants.DB_TABLE_WIFI_NAME + " where id='" + id + "'", null);
 		while (cursor.moveToNext()) {
 			Wifi wifi = new Wifi();
+			wifi.setId( cursor.getInt( cursor.getColumnIndex("id")) );
 			wifi.setSsid( cursor.getString( cursor.getColumnIndex("ssid") ) );
 			wifi.setBssid( cursor.getString( cursor.getColumnIndex("bssid") ) );
 			wifi.setChecked( cursor.getInt( cursor.getColumnIndex("checked") )==1?true:false );

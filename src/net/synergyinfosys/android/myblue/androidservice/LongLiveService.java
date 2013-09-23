@@ -6,8 +6,12 @@ import net.synergyinfosys.android.myblue.adao.CallRecordADao;
 import net.synergyinfosys.android.myblue.adao.ContactADao;
 import net.synergyinfosys.android.myblue.adao.GestureADao;
 import net.synergyinfosys.android.myblue.adao.SMSADao;
+import net.synergyinfosys.android.myblue.bean.LockStatus;
+import net.synergyinfosys.android.myblue.fragment.AboutFragment;
 import net.synergyinfosys.android.myblue.receiver.BluetoothReceiver;
 import net.synergyinfosys.android.myblue.receiver.SMSAndBootReceiver;
+import net.synergyinfosys.android.myblue.service.GestureLockStatusService;
+import net.synergyinfosys.android.myblue.service.LockStatusService;
 import net.synergyinfosys.android.myblue.util.BluetoothUtil;
 import net.synergyinfosys.android.myblue.util.LocationUtil;
 import net.synergyinfosys.android.myblue.util.NotificationHelper;
@@ -23,6 +27,11 @@ import android.os.IBinder;
 import android.util.Log;
 
 public class LongLiveService extends Service implements Runnable {
+	static{
+		//loop 啥最烦了，现在这里初始化一下，否则那个handler都不能判断否为null
+		new AboutFragment(); 
+	}
+	
 	public static final String TAG = "LongLiveService";
 
 	public static final long threadInterval = 1000;
@@ -42,9 +51,7 @@ public class LongLiveService extends Service implements Runnable {
 		Log.i(TAG, "onCreate");
 		mContext = this.getApplicationContext();
 		this.mThread = new Thread(this);
-		notification = NotificationHelper.genNotification(this.mContext, 0, R.drawable.ic_launcher, "正在启动蓝牙锁", 0, "蓝牙锁正在运行", "来自新能聚信", HomeSlideActivity.class,
-				Notification.FLAG_FOREGROUND_SERVICE);
-
+		notification = NotificationHelper.genNotification(this.mContext, 0, R.drawable.ic_launcher, "正在启动蓝牙锁", 0, "蓝牙锁正在运行", "来自新能聚信", HomeSlideActivity.class, Notification.FLAG_FOREGROUND_SERVICE);
 	}
 
 	@Override
@@ -93,6 +100,10 @@ public class LongLiveService extends Service implements Runnable {
 	private void doSth() {
 		// if( HomeActivity.mLockStatusHandler!=null )
 		// HomeActivity.mLockStatusHandler.sendEmptyMessage(0);
+		
+		if( AboutFragment.mLockStatusHandler != null ){
+			AboutFragment.mLockStatusHandler.sendEmptyMessage(0);
+		}
 	}
 
 	@Override
