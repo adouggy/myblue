@@ -1,21 +1,15 @@
 package net.synergyinfosys.android.myblue;
 
-import net.synergyinfosys.android.myblue.adapter.ContactListAdapter;
-import net.synergyinfosys.android.myblue.bean.Contact;
-import net.synergyinfosys.android.myblue.dao.ContactDao;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ListView;
 import android.widget.TextView;
 
 public class ContactActivity extends Activity implements OnClickListener {

@@ -2,6 +2,7 @@ package net.synergyinfosys.android.myblue;
 
 import net.synergyinfosys.android.myblue.androidservice.LongLiveService;
 import net.synergyinfosys.android.myblue.fragment.MenuFragment;
+import net.synergyinfosys.android.myblue.helper.TutorialHelper;
 import net.synergyinfosys.android.myblue.util.WebUtil;
 
 import com.actionbarsherlock.view.Menu;
@@ -46,6 +47,8 @@ public class HomeSlideActivity extends SlidingFragmentActivity {
 		setSlidingActionBarEnabled(false);
 		
 		this.startService(new Intent(this, LongLiveService.class));
+		
+		TutorialHelper.setSlidingMenu(sm);
 	}
 
 	public void switchContent(Fragment fragment) {

@@ -2,7 +2,6 @@ package net.synergyinfosys.android.myblue.adapter;
 
 import java.util.ArrayList;
 
-import net.synergyinfosys.android.myblue.ContactActivity;
 import net.synergyinfosys.android.myblue.R;
 import net.synergyinfosys.android.myblue.bean.Contact;
 import android.content.Context;
@@ -59,7 +58,7 @@ public class ContactListAdapter extends BaseAdapter {
 			holder.edit.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Contact c = (Contact) v.getTag();
+//					Contact c = (Contact) v.getTag();
 //					ContactActivity.editContact(c);
 				}
 			});

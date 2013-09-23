@@ -40,7 +40,7 @@ public class MenuFragment extends ListFragment {
 		Fragment newContent = null;
 		switch (position) {
 		case 0:
-			newContent = new ContactFragment();
+			newContent = new TutorialFragment();
 			break;
 		case 1:
 			newContent = new ContactFragment();
