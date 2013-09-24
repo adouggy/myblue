@@ -8,10 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class ContactFragment extends Fragment {
+public class ContactFragment extends Fragment  implements ITitle{
 
 	public static final String TAG = "ContactFragment";
-	private ContactHelper mHelper = null;
+	private static ContactHelper mHelper = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -26,8 +26,17 @@ public class ContactFragment extends Fragment {
 		return mHelper.getView();
 	}
 	
+	public static void refresh(){
+		ContactHelper.refresh();
+	}
+	
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
+	}
+
+	@Override
+	public String getTitle() {
+		return "联系人";
 	}
 }

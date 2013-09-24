@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class SecretCodeFragment extends Fragment {
+public class SecretCodeFragment extends Fragment  implements ITitle{
 
 	public static final String TAG = "SecretCodeFragment";
 	private SecretCodeHelper mHelper = null;
@@ -29,5 +29,10 @@ public class SecretCodeFragment extends Fragment {
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
+	}
+
+	@Override
+	public String getTitle() {
+		return "Secret Code";
 	}
 }

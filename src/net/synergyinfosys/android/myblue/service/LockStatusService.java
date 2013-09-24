@@ -20,13 +20,13 @@ public enum LockStatusService {
 			return LockStatus.BLUETOOTH_UNLOCK;
 		}
 		
-		if( WifiService.INSTANCE.isLock() ){
-			return LockStatus.WIFI_LOCK;
-		}
-		
-		if( LocationService.INSTANCE.isLock() ){
-			return LockStatus.LOCATION_LOCK;
-		}
+//		if( WifiService.INSTANCE.isLock() ){
+//			return LockStatus.WIFI_LOCK;
+//		}
+//		
+//		if( LocationService.INSTANCE.isLock() ){
+//			return LockStatus.LOCATION_LOCK;
+//		}
 		
 		return LockStatus.GESTURE_LOCK;
 	}

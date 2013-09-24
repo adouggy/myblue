@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class CallRecordFragment extends Fragment {
+public class CallRecordFragment extends Fragment  implements ITitle{
 	
 	private CallRecordHelper mHelper = null;
 	
@@ -31,5 +31,10 @@ public class CallRecordFragment extends Fragment {
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
+	}
+
+	@Override
+	public String getTitle() {
+		return "通话记录";
 	}
 }

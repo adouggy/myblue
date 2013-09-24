@@ -3,6 +3,7 @@ package net.synergyinfosys.android.myblue;
 import net.synergyinfosys.android.myblue.bean.CallMode;
 import net.synergyinfosys.android.myblue.bean.Contact;
 import net.synergyinfosys.android.myblue.dao.ContactDao;
+import net.synergyinfosys.android.myblue.fragment.ContactFragment;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
@@ -91,9 +92,11 @@ public class ContactAddActivity extends Activity implements OnClickListener {
 				c.setHideCallRecord(this.mChkCallRecord.isChecked());
 				c.setHideSMS(this.mChkSMSRecord.isChecked());
 				c.setCallMode(CallMode.values()[this.mSpnCallMode.getSelectedItemPosition()]);
+				c.setSelected(true);
 				long id = ContactDao.getInstance().insertContact(c);
 				Log.i(TAG, "new contact id=" + id);
 //				ContactActivity.refreshContact();
+				ContactFragment.refresh();
 				this.finish();
 			} else {
 				this.mUpdateContact.setNumber(this.mEdtNumber.getText().toString());
@@ -107,6 +110,7 @@ public class ContactAddActivity extends Activity implements OnClickListener {
 				int count = ContactDao.getInstance().updateContact(this.mUpdateContact);
 				Log.i( TAG, "updated " + count );
 //				ContactActivity.refreshContact();
+				ContactFragment.refresh();
 				this.finish();
 			}
 			break;
@@ -114,6 +118,7 @@ public class ContactAddActivity extends Activity implements OnClickListener {
 			int count = ContactDao.getInstance().removeContact( this.mUpdateContact.getId() );
 			Log.i( TAG, "deleted " + count );
 //			ContactActivity.refreshContact();
+			ContactFragment.refresh();
 			this.finish();
 			break;
 		}

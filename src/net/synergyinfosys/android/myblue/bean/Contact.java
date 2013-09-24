@@ -10,6 +10,7 @@ public class Contact implements Parcelable{
 	private boolean hideSMS;
 	private boolean hideCallRecord;
 	private CallMode callMode;
+	private boolean isSelected = false;
 	
 	public long getId() {
 		return id;
@@ -59,6 +60,14 @@ public class Contact implements Parcelable{
 		this.callMode = callMode;
 	}
 
+	public boolean isSelected() {
+		return isSelected;
+	}
+
+	public void setSelected(boolean isSelected) {
+		this.isSelected = isSelected;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -81,6 +90,9 @@ public class Contact implements Parcelable{
 		sb.append("callmode->" + this.getCallMode() );
 		sb.append("\n");
 		
+		sb.append("isSelected->" + this.isSelected() );
+		sb.append("\n");
+		
 		return sb.toString();
 	}
 	
@@ -93,6 +105,7 @@ public class Contact implements Parcelable{
 			c.setHideSMS( in.readByte() == 1 );
 			c.setHideCallRecord( in.readByte() == 1 );
 			c.setCallMode( CallMode.valueOf( in.readString() ) );
+			c.setSelected( in.readByte() == 1 );
 			return c;
 		}
 
@@ -114,6 +127,7 @@ public class Contact implements Parcelable{
 		dest.writeByte((byte) (this.isHideSMS() ? 1 : 0));
 		dest.writeByte((byte) (this.isHideCallRecord() ? 1 : 0));
 		dest.writeString(this.getCallMode().toString());
+		dest.writeByte((byte)(this.isSelected()?1:0));
 	}
 
 }

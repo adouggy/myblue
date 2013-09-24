@@ -55,7 +55,7 @@ public class BluetoothHelper extends MyHelper implements OnClickListener{
 		mWhiteAdapter = new BluetoothWhiteListAdapter(this.mActivity.getApplicationContext(), BluetoothService.INSTANCE.getWhiteList());
 		mListWhite.setAdapter(mWhiteAdapter);
 		
-		BluetoothUtil.INSTANCE.startSearch();
+//		BluetoothUtil.INSTANCE.startSearch();
 	}
 	
 	@Override

@@ -1,6 +1,7 @@
 package net.synergyinfosys.android.myblue;
 
 import net.synergyinfosys.android.myblue.androidservice.LongLiveService;
+import net.synergyinfosys.android.myblue.fragment.ITitle;
 import net.synergyinfosys.android.myblue.fragment.MenuFragment;
 import net.synergyinfosys.android.myblue.helper.TutorialHelper;
 import net.synergyinfosys.android.myblue.util.WebUtil;
@@ -52,6 +53,9 @@ public class HomeSlideActivity extends SlidingFragmentActivity {
 	}
 
 	public void switchContent(Fragment fragment) {
+		if( fragment instanceof ITitle ){
+			setTitle( ((ITitle) fragment).getTitle() );
+		}
 		getSupportFragmentManager().beginTransaction().replace(R.id.home_slide_behind, fragment).commit();
 		getSlidingMenu().showContent();
 	}

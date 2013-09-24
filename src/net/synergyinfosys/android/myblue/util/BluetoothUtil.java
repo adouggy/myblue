@@ -31,9 +31,9 @@ public enum BluetoothUtil {
 			// 调用isEnabled()方法判断当前蓝牙设备是否可用
 			if (!mAdapter.isEnabled()) {
 				// 如果蓝牙设备不可用的话,创建一个intent对象,该对象用于启动一个Activity,提示用户启动蓝牙适配器
-				Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				mContext.startActivity(intent);
+//				Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+//				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//				mContext.startActivity(intent);
 			}
 			// 得到所有已经配对的蓝牙适配器对象
 			Set<?> devices = mAdapter.getBondedDevices();

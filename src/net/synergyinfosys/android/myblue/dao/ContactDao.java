@@ -45,6 +45,7 @@ public class ContactDao extends AbstractDBDao{
 		cv.put("hideSMS", contact.isHideSMS());
 		cv.put("hideCallRecord", contact.isHideCallRecord());
 		cv.put("callMode", contact.getCallMode().toString());
+		cv.put("isSelected", contact.isSelected());
 		return mDBInstance.insert(Constants.DB_TABLE_CONTACT_NAME, null, cv);
 	}
 	
@@ -61,6 +62,7 @@ public class ContactDao extends AbstractDBDao{
 		cv.put("hideSMS", contact.isHideSMS());
 		cv.put("hideCallRecord", contact.isHideCallRecord());
 		cv.put("callMode", contact.getCallMode().toString());
+		cv.put("isSelected", contact.isSelected());
 		return mDBInstance.update(Constants.DB_TABLE_CONTACT_NAME, cv, "id=?", new String[]{ contact.getId()+"" });
 	}
 	
@@ -76,6 +78,7 @@ public class ContactDao extends AbstractDBDao{
 			c.setHideCallRecord( cursor.getInt( cursor.getColumnIndex("hideCallRecord") )==1?true:false );
 			c.setHideSMS( cursor.getInt( cursor.getColumnIndex("hideSMS") )==1?true:false );
 			c.setCallMode( CallMode.valueOf( cursor.getString( cursor.getColumnIndex("callMode") ) ) );
+			c.setSelected( cursor.getInt( cursor.getColumnIndex("isSelected") )==1?true:false );
 			return c;
 		}
 		return null;
@@ -93,6 +96,7 @@ public class ContactDao extends AbstractDBDao{
 			c.setHideCallRecord( cursor.getInt( cursor.getColumnIndex("hideCallRecord") )==1?true:false );
 			c.setHideSMS( cursor.getInt( cursor.getColumnIndex("hideSMS") )==1?true:false );
 			c.setCallMode( CallMode.valueOf( cursor.getString( cursor.getColumnIndex("callMode") ) ) );
+			c.setSelected( cursor.getInt( cursor.getColumnIndex("isSelected") )==1?true:false );
 			return c;
 		}
 		return null;
@@ -101,7 +105,7 @@ public class ContactDao extends AbstractDBDao{
 	public ArrayList<Contact> getContactAll(){
 		Log.i(TAG, "getContactAll");
 		ArrayList<Contact> list = new ArrayList<Contact>();
-		Cursor cursor = mDBInstance.rawQuery("select * from " + Constants.DB_TABLE_CONTACT_NAME, null);
+		Cursor cursor = mDBInstance.rawQuery("select * from " + Constants.DB_TABLE_CONTACT_NAME + " order by id desc", null);
 		while (cursor.moveToNext()) {
 			Contact c= new Contact();
 			c.setId( cursor.getLong( cursor.getColumnIndex("id") ) );
@@ -110,6 +114,27 @@ public class ContactDao extends AbstractDBDao{
 			c.setHideCallRecord( cursor.getInt( cursor.getColumnIndex("hideCallRecord") )==1?true:false );
 			c.setHideSMS( cursor.getInt( cursor.getColumnIndex("hideSMS") )==1?true:false );
 			c.setCallMode( CallMode.valueOf( cursor.getString( cursor.getColumnIndex("callMode") ) ) );
+			c.setSelected( cursor.getInt( cursor.getColumnIndex("isSelected") )==1?true:false );
+			list.add( c );
+		}
+		Log.i( TAG, list.size() + " results returned" );
+		Log.d( TAG, list.toString() );
+		return list;
+	}
+	
+	public ArrayList<Contact> getContactSelected(){
+		Log.i(TAG, "getContactAll");
+		ArrayList<Contact> list = new ArrayList<Contact>();
+		Cursor cursor = mDBInstance.rawQuery("select * from " + Constants.DB_TABLE_CONTACT_NAME + " where isSelected='1'" +" order by id desc", null);
+		while (cursor.moveToNext()) {
+			Contact c= new Contact();
+			c.setId( cursor.getLong( cursor.getColumnIndex("id") ) );
+			c.setName( cursor.getString( cursor.getColumnIndex("name") ) );
+			c.setNumber( cursor.getString( cursor.getColumnIndex("number") ) );
+			c.setHideCallRecord( cursor.getInt( cursor.getColumnIndex("hideCallRecord") )==1?true:false );
+			c.setHideSMS( cursor.getInt( cursor.getColumnIndex("hideSMS") )==1?true:false );
+			c.setCallMode( CallMode.valueOf( cursor.getString( cursor.getColumnIndex("callMode") ) ) );
+			c.setSelected( cursor.getInt( cursor.getColumnIndex("isSelected") )==1?true:false );
 			list.add( c );
 		}
 		Log.i( TAG, list.size() + " results returned" );

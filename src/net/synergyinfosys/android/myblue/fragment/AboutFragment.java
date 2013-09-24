@@ -13,7 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class AboutFragment extends Fragment {
+public class AboutFragment extends Fragment  implements ITitle{
 
 	public static final String TAG = "TutorialFragment";
 	private static AboutHelper mHelper = null;
@@ -46,7 +46,7 @@ public class AboutFragment extends Fragment {
 			
 			if( mHelper != null ){
 				if( status == LockStatus.GESTURE_UNLOCK ){
-					mHelper.setStatus("Gesture Unlocked (" + GestureLockStatusService.INSTANCE.lockTimeRemainingInSeconds() + ")");
+					mHelper.setStatus("pin Unlocked (" + GestureLockStatusService.INSTANCE.lockTimeRemainingInSeconds() + ")");
 				}else if( status == LockStatus.BLUETOOTH_UNLOCK ){
 					mHelper.setStatus("Bluetooth Unlocked");
 				}else if( status == LockStatus.WIFI_LOCK ){
@@ -54,12 +54,17 @@ public class AboutFragment extends Fragment {
 				}else if( status == LockStatus.LOCATION_LOCK ){
 					mHelper.setStatus("Location Locked");
 				}else if( status == LockStatus.GESTURE_LOCK ){
-					mHelper.setStatus("Gesture Locked");
+					mHelper.setStatus("It's Locked");
 				}else {
 					mHelper.setStatus("闹鬼了！");
 				}
 			}
 			
 		}
+	}
+
+	@Override
+	public String getTitle() {
+		return "关于";
 	};
 }

@@ -23,9 +23,7 @@ public class MenuFragment extends ListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		SampleAdapter adapter = new SampleAdapter(getActivity());
-//		for (int i = 0; i < 20; i++) {
-//			adapter.add(new SampleItem("Sample List", android.R.drawable.ic_menu_search));
-//		}
+
 		adapter.add(new SampleItem("教程", R.drawable.tutorial));
 		adapter.add(new SampleItem("联系人", R.drawable.add_contact));
 		adapter.add(new SampleItem("蓝牙", R.drawable.bluetooth));

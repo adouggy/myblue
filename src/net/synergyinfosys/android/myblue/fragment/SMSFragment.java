@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class SMSFragment extends Fragment {
+public class SMSFragment extends Fragment  implements ITitle{
 	
 	private SMSHelper mHelper = null;
 	
@@ -31,5 +31,10 @@ public class SMSFragment extends Fragment {
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
+	}
+
+	@Override
+	public String getTitle() {
+		return "短信";
 	}
 }

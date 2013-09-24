@@ -6,12 +6,9 @@ import net.synergyinfosys.android.myblue.adao.CallRecordADao;
 import net.synergyinfosys.android.myblue.adao.ContactADao;
 import net.synergyinfosys.android.myblue.adao.GestureADao;
 import net.synergyinfosys.android.myblue.adao.SMSADao;
-import net.synergyinfosys.android.myblue.bean.LockStatus;
 import net.synergyinfosys.android.myblue.fragment.AboutFragment;
 import net.synergyinfosys.android.myblue.receiver.BluetoothReceiver;
 import net.synergyinfosys.android.myblue.receiver.SMSAndBootReceiver;
-import net.synergyinfosys.android.myblue.service.GestureLockStatusService;
-import net.synergyinfosys.android.myblue.service.LockStatusService;
 import net.synergyinfosys.android.myblue.util.BluetoothUtil;
 import net.synergyinfosys.android.myblue.util.LocationUtil;
 import net.synergyinfosys.android.myblue.util.NotificationHelper;
@@ -28,7 +25,7 @@ import android.util.Log;
 
 public class LongLiveService extends Service implements Runnable {
 	static{
-		//loop 啥最烦了，现在这里初始化一下，否则那个handler都不能判断否为null
+		//looper 啥最烦了，现在这里初始化一下，否则那个handler都不能判断否为null
 		new AboutFragment(); 
 	}
 	
@@ -125,8 +122,8 @@ public class LongLiveService extends Service implements Runnable {
 
 	private void initialUtil() {
 		// MDMUtil.INSTANCE.initial(this.getApplicationContext());
-		LocationUtil.INSTANCE.initial(this.getApplicationContext());
-		WifiUtil.INSTANCE.initial(this.getApplicationContext());
+//		LocationUtil.INSTANCE.initial(this.getApplicationContext());
+//		WifiUtil.INSTANCE.initial(this.getApplicationContext());
 		BluetoothUtil.INSTANCE.initial(this.getApplicationContext());
 		SDUtil.INSTANCE.initial();
 		CallRecordADao.INSTANCE.initial(this.getApplicationContext());

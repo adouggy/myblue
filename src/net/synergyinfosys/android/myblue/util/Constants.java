@@ -27,7 +27,8 @@ public class Constants {
 			"hideCallRecord integer, " +
 			"callMode varchar(10)," +
 			"androidId integer," +
-			"isDelete integer " +
+			"isDelete integer," +
+			"isSelected integer" +
 			")";
 	
 	public static final String DB_TABLE_CALL_RECORD_NAME = "callrecord";

@@ -1,12 +1,21 @@
 package net.synergyinfosys.android.myblue.adao;
 
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
+import net.synergyinfosys.android.myblue.util.StringUtil;
+
+import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.ContactsContract.PhoneLookup;
 import android.util.Base64;
 import android.util.Log;
 
@@ -14,7 +23,7 @@ public enum ContactADao {
 	INSTANCE;
 
 	public static final String TAG = "ContactUtil";
-	
+
 	ContactADao() {
 	}
 
@@ -24,7 +33,7 @@ public enum ContactADao {
 		this.mContext = ctx;
 
 	}
-	
+
 	/**
 	 * 这里的思路是根据姓名查找到联系人， 如果要隐藏，将姓名和手机号码base64，然后更新，这样就看不到联系人了
 	 * 目前先用base64作为映射，未来可以加密存储并删除联系人
@@ -128,4 +137,48 @@ public enum ContactADao {
 	// }
 	// }
 	// return vcardStr;
+
+	public Bitmap getContactPhotoByNumber(String number) {
+		Uri uriNumber2Contacts = Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI, Uri.encode(number));
+		Cursor cursorCantacts = mContext.getContentResolver().query(uriNumber2Contacts, null, null, null, null);
+		if (cursorCantacts.getCount() > 0) { // 若游标不为0则说明有头像,游标指向第一条记录
+			cursorCantacts.moveToFirst();
+			Long contactID = cursorCantacts.getLong(cursorCantacts.getColumnIndex("contact_id"));
+			Uri uri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactID);
+			InputStream input = ContactsContract.Contacts.openContactPhotoInputStream(mContext.getContentResolver(), uri);
+			Bitmap bmp = BitmapFactory.decodeStream(input);
+			return bmp;
+		} else {
+			return null;
+		}
+	}
+
+	public Bitmap getFacebookPhoto(String phoneNumber) {
+		if( !StringUtil.INSTACE.isNoneBlank(phoneNumber) ){
+			return null;
+		}
+		Uri phoneUri = Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber));
+		Uri photoUri = null;
+		ContentResolver cr = mContext.getContentResolver();
+		Cursor contact = cr.query(phoneUri, new String[] { ContactsContract.Contacts._ID }, null, null, null);
+
+		if (contact.moveToFirst()) {
+			long userId = contact.getLong(contact.getColumnIndex(ContactsContract.Contacts._ID));
+			photoUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, userId);
+		} else {
+			Bitmap defaultPhoto = BitmapFactory.decodeResource(mContext.getResources(), android.R.drawable.ic_menu_report_image);
+			return defaultPhoto;
+		}
+		if (photoUri != null) {
+			InputStream input = ContactsContract.Contacts.openContactPhotoInputStream(cr, photoUri);
+			if (input != null) {
+				return BitmapFactory.decodeStream(input);
+			}
+		} else {
+			Bitmap defaultPhoto = BitmapFactory.decodeResource(mContext.getResources(), android.R.drawable.ic_menu_report_image);
+			return defaultPhoto;
+		}
+		Bitmap defaultPhoto = BitmapFactory.decodeResource(mContext.getResources(), android.R.drawable.ic_menu_report_image);
+		return defaultPhoto;
+	}
 }

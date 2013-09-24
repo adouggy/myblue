@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class BluetoothFragment extends Fragment {
+public class BluetoothFragment extends Fragment  implements ITitle{
 	
 	public static final String TAG = "BluetoothFragment";
 	private BluetoothHelper mHelper = null;
@@ -30,5 +30,10 @@ public class BluetoothFragment extends Fragment {
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
+	}
+
+	@Override
+	public String getTitle() {
+		return "蓝牙";
 	}
 }
