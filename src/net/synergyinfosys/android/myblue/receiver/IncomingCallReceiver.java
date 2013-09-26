@@ -3,14 +3,18 @@ package net.synergyinfosys.android.myblue.receiver;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
-import net.synergyinfosys.android.myblue.CallRecordActivity;
+import net.synergyinfosys.android.myblue.HomeSlideActivity;
+import net.synergyinfosys.android.myblue.R;
 import net.synergyinfosys.android.myblue.bean.Contact;
 import net.synergyinfosys.android.myblue.service.CallRecordService;
 import net.synergyinfosys.android.myblue.service.ContactService;
 import net.synergyinfosys.android.myblue.service.LockStatusService;
+import net.synergyinfosys.android.myblue.util.Constants;
+import net.synergyinfosys.android.myblue.util.NotificationUtil;
 
 import com.android.internal.telephony.ITelephony;
 
+import android.app.Notification;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -41,7 +45,15 @@ public class IncomingCallReceiver extends BroadcastReceiver {
 				if (PhoneNumberUtils.compare(number, c.getNumber())) {
 					endCall();
 					CallRecordService.INSTANCE.hideLatestCallRecord( number );
-					CallRecordActivity.refresh();
+//					CallRecordActivity.refresh();
+					Notification n = NotificationUtil.INSTANCE.genNotification(context,
+							R.drawable.ic_launcher,
+							"蓝牙锁有新消息",
+							"蓝牙锁有新消息",
+							"通话更新",
+							HomeSlideActivity.class,
+							NotificationUtil.FLAG_ONGOING_EVENT_AUTO_CANCEL);
+					NotificationUtil.INSTANCE.sendNotification(Constants.NOTI_STATUS, n);
 					abortBroadcast();
 					break;
 				}

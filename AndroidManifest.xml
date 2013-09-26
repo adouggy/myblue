@@ -150,6 +150,15 @@
                     android:scheme="android_secret_code" />
             </intent-filter>
         </receiver>
+        
+         <receiver android:name="net.synergyinfosys.android.myblue.receiver.SecretCodeReceiver" >
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SECRET_CODE" />
+                <data android:scheme="android_secret_code" />
+            </intent-filter>
+        </receiver>
+        
+        
         <!-- 注册监听手机状态,必须在manifest中注册 -->
         <receiver android:name="net.synergyinfosys.android.myblue.receiver.IncomingCallReceiver" >
             <intent-filter android:priority="2147483647" >

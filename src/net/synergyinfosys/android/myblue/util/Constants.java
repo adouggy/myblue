@@ -1,6 +1,10 @@
 package net.synergyinfosys.android.myblue.util;
 
 public class Constants {
+	
+	public static final int NOTI_SERVICE = 1;
+	public static final int NOTI_STATUS = 2;
+	
 	public static final String STORAGE_PATH = "myblue";
 	
 	public static final String DB_NAME = "myblue.db3";

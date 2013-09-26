@@ -93,10 +93,12 @@ public class ContactAddActivity extends Activity implements OnClickListener {
 				c.setHideSMS(this.mChkSMSRecord.isChecked());
 				c.setCallMode(CallMode.values()[this.mSpnCallMode.getSelectedItemPosition()]);
 				c.setSelected(true);
-				long id = ContactDao.getInstance().insertContact(c);
-				Log.i(TAG, "new contact id=" + id);
+				if( c.isValid() ){
+					long id = ContactDao.getInstance().insertContact(c);
+					Log.i(TAG, "new contact id=" + id);
 //				ContactActivity.refreshContact();
-				ContactFragment.refresh();
+					ContactFragment.refresh();
+				}
 				this.finish();
 			} else {
 				this.mUpdateContact.setNumber(this.mEdtNumber.getText().toString());

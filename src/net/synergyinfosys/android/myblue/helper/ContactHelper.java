@@ -89,7 +89,7 @@ public class ContactHelper extends MyHelper implements OnClickListener {
 					mContext.startActivity(addContactIntent);
 				}
 			});
-			mCardView.addCard(c);
+			mCardView.addCardToLastStack(c);
 		}
 
 		mCardView.refresh();
