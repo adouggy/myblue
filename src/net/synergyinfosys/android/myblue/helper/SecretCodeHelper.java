@@ -29,9 +29,8 @@ public class SecretCodeHelper extends MyHelper implements OnClickListener {
 	@Override
 	public void onCreate(int layoutId) {
 		super.onCreate(layoutId);
-
 	}
-
+	
 	@Override
 	public void onPostCreate() {
 		super.onPostCreate();

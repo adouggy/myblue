@@ -7,8 +7,6 @@ import org.taptwo.android.widget.TitleFlowIndicator;
 import org.taptwo.android.widget.ViewFlow;
 import org.taptwo.android.widget.ViewFlow.ViewSwitchListener;
 
-import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-
 import android.app.Activity;
 import android.util.Log;
 import android.view.View;
@@ -17,14 +15,9 @@ public class TutorialHelper extends MyHelper{
 	
 	public static final String TAG = "TutorialHelper";
 	private ViewFlow viewFlow;
-	private static SlidingMenu sSlidingMenu = null;
 	
 	public TutorialHelper(Activity act){
 		super( act );
-	}
-	
-	public static void setSlidingMenu( SlidingMenu menu ){
-		sSlidingMenu = menu;
 	}
 	
 	@Override

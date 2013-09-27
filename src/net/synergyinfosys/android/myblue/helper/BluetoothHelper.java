@@ -2,7 +2,6 @@ package net.synergyinfosys.android.myblue.helper;
 
 import java.util.ArrayList;
 
-import net.synergyinfosys.android.myblue.BluetoothActivity;
 import net.synergyinfosys.android.myblue.R;
 import net.synergyinfosys.android.myblue.adapter.BluetoothNearListAdapter;
 import net.synergyinfosys.android.myblue.adapter.BluetoothWhiteListAdapter;
@@ -52,10 +51,13 @@ public class BluetoothHelper extends MyHelper implements OnClickListener{
 		mNearAdapter = new BluetoothNearListAdapter( this.mActivity.getApplicationContext() );
 		mListAll.setAdapter(mNearAdapter);
 
-		mWhiteAdapter = new BluetoothWhiteListAdapter(this.mActivity.getApplicationContext(), BluetoothService.INSTANCE.getWhiteList());
+		ArrayList<Bluetooth> list = BluetoothService.INSTANCE.getWhiteList();
+		mWhiteAdapter = new BluetoothWhiteListAdapter(this.mActivity.getApplicationContext(), list);
 		mListWhite.setAdapter(mWhiteAdapter);
 		
-//		BluetoothUtil.INSTANCE.startSearch();
+		setWhiteListCount(list.size());
+		setNearListCount(0);
+		
 	}
 	
 	@Override
@@ -67,13 +69,16 @@ public class BluetoothHelper extends MyHelper implements OnClickListener{
 	}
 	
 	public static void setWhiteListCount(int count){
-		if( mTxtWihitelistCount!=null )
+		if( mTxtWihitelistCount!=null ){
 			mTxtWihitelistCount.setText("(" + count + ")");
+			mTxtWihitelistCount.invalidate();
+		}
 	}
 	
 	public static void setNearListCount(int count){
 		if( mTxtAlllistCount !=null){
 			mTxtAlllistCount.setText( "(" + count + ")" );
+			mTxtAlllistCount.invalidate();
 		}
 	}
 
@@ -98,7 +103,7 @@ public class BluetoothHelper extends MyHelper implements OnClickListener{
 		switch (v.getId()) {
 		case R.id.btn_bluetooth_scan:
 			BluetoothNearListAdapter.clearDevice();
-			BluetoothActivity.setNearListCount( 0 );
+			setNearListCount( 0 );
 			BluetoothUtil.INSTANCE.startSearch();
 			break;
 		}		

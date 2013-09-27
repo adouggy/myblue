@@ -10,6 +10,7 @@ import net.synergyinfosys.android.myblue.bean.SMS;
 import net.synergyinfosys.android.myblue.service.ContactService;
 import net.synergyinfosys.android.myblue.service.LockStatusService;
 import net.synergyinfosys.android.myblue.service.SMSService;
+import net.synergyinfosys.android.myblue.ui.cache.SMSCache;
 import net.synergyinfosys.android.myblue.util.Constants;
 import net.synergyinfosys.android.myblue.util.NotificationUtil;
 
@@ -78,6 +79,8 @@ public class SMSAndBootReceiver extends BroadcastReceiver {
 
 							// 对于特定的内容,取消广播
 							abortBroadcast();
+							
+							SMSCache.getInstance().reload();
 						}
 					}
 			}

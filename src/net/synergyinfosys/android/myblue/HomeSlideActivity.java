@@ -48,8 +48,6 @@ public class HomeSlideActivity extends SlidingFragmentActivity {
 		setSlidingActionBarEnabled(false);
 		
 		this.startService(new Intent(this, LongLiveService.class));
-		
-		TutorialHelper.setSlidingMenu(sm);
 	}
 
 	public void switchContent(Fragment fragment) {

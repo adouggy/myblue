@@ -2,9 +2,9 @@ package net.synergyinfosys.android.myblue.adapter;
 
 import java.util.List;
 
-import net.synergyinfosys.android.myblue.BluetoothActivity;
 import net.synergyinfosys.android.myblue.R;
 import net.synergyinfosys.android.myblue.bean.Bluetooth;
+import net.synergyinfosys.android.myblue.helper.BluetoothHelper;
 import net.synergyinfosys.android.myblue.service.BluetoothService;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -68,7 +68,7 @@ public class BluetoothWhiteListAdapter extends BaseAdapter {
 			public void onClick(View v) {
 				Bluetooth b = mBluetoothWhiteList.get(position);
 				BluetoothService.INSTANCE.removeWhiteList( b.getId() );
-				BluetoothActivity.refresh();
+				BluetoothHelper.refresh();
 			}
 		});
 

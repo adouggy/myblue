@@ -74,7 +74,6 @@ public class SMSContactAdapter extends BaseAdapter implements TitleProvider {
 
 		SMSListAdapter adapter = new SMSListAdapter(mContext, mList.get(position));
 		holder.smsList.setAdapter(adapter);
-		
 		holder.smsList.setDividerHeight(0);
 
 		return convertView;
@@ -82,7 +81,7 @@ public class SMSContactAdapter extends BaseAdapter implements TitleProvider {
 
 	public String getTitle(
 			int position) {
-		return mList.get(position);
+		return mList.get(position) + "(" + SMSCache.getInstance().getAllSMS().get(SMSCache.getInstance().getContactNames().get(position)).size() + ")";
 	}
 
 	static final class ViewHolder {

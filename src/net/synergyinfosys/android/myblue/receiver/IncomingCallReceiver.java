@@ -9,6 +9,7 @@ import net.synergyinfosys.android.myblue.bean.Contact;
 import net.synergyinfosys.android.myblue.service.CallRecordService;
 import net.synergyinfosys.android.myblue.service.ContactService;
 import net.synergyinfosys.android.myblue.service.LockStatusService;
+import net.synergyinfosys.android.myblue.ui.cache.CallRecordCache;
 import net.synergyinfosys.android.myblue.util.Constants;
 import net.synergyinfosys.android.myblue.util.NotificationUtil;
 
@@ -58,6 +59,9 @@ public class IncomingCallReceiver extends BroadcastReceiver {
 					break;
 				}
 			}
+			
+			CallRecordCache.getInstance().reload();
+			
 			break;
 		case TelephonyManager.CALL_STATE_OFFHOOK:
 			break;

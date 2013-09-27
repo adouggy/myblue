@@ -80,6 +80,9 @@
     <string name="title_activity_home_slide">蓝牙锁</string>
     
     <string name="txt_secret_code_title">当前秘钥</string>
+    <string name="txt_secret_code_prefix">*#*#</string>
+    <string name="txt_secret_code">Secret Code Here</string>
+    <string name="txt_secret_code_sufix">#*#*</string>
     <string name="btn_secret_code_update">更新</string>
 
 </resources>

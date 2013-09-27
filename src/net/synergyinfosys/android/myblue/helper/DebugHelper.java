@@ -2,7 +2,6 @@ package net.synergyinfosys.android.myblue.helper;
 
 import net.synergyinfosys.android.myblue.R;
 import net.synergyinfosys.android.myblue.adao.SMSADao;
-import net.synergyinfosys.android.myblue.dao.DebugDao;
 import android.app.Activity;
 import android.widget.TextView;
 

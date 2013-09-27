@@ -3,9 +3,9 @@ package net.synergyinfosys.android.myblue.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.synergyinfosys.android.myblue.BluetoothActivity;
 import net.synergyinfosys.android.myblue.R;
 import net.synergyinfosys.android.myblue.bean.Bluetooth;
+import net.synergyinfosys.android.myblue.helper.BluetoothHelper;
 import net.synergyinfosys.android.myblue.service.BluetoothService;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
@@ -29,7 +29,7 @@ public class BluetoothNearListAdapter extends BaseAdapter {
 
 	public static void addDevice(BluetoothDevice device) {
 		mBluetoothList.add( device );
-		BluetoothActivity.setNearListCount( mBluetoothList.size() );
+		BluetoothHelper.setNearListCount( mBluetoothList.size() );
 	}
 	
 	public static void clearDevice() {
@@ -77,7 +77,7 @@ public class BluetoothNearListAdapter extends BaseAdapter {
 				b.setName( device.getName() );
 				b.setMac( device.getAddress() );
 				BluetoothService.INSTANCE.addWhiteist(b);
-				BluetoothActivity.refresh();
+				BluetoothHelper.refresh();
 			}
 		});
 

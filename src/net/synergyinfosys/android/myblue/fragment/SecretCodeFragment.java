@@ -8,26 +8,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class SecretCodeFragment extends Fragment  implements ITitle{
+public class SecretCodeFragment extends Fragment implements ITitle {
 
 	public static final String TAG = "SecretCodeFragment";
 	private SecretCodeHelper mHelper = null;
-	
+
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(
+			Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		mHelper = new SecretCodeHelper(getActivity());
-		mHelper.onCreate( R.layout.fragment_secret_code );
+		mHelper.onCreate(R.layout.fragment_secret_code);
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(
+			LayoutInflater inflater,
+			ViewGroup container,
+			Bundle savedInstanceState) {
 		mHelper.onPostCreate();
 		return mHelper.getView();
 	}
-	
+
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(
+			Bundle outState) {
 		super.onSaveInstanceState(outState);
 	}
 

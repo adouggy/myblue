@@ -4,4 +4,5 @@ import android.content.Context;
 
 public interface IUIDataCache {
 	public void initialData(Context ctx);
+	public void reload();
 }
