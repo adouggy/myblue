@@ -14,6 +14,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+@Deprecated
 public class EncryptActivity extends Activity implements OnClickListener {
 
 	private TextView mBtnAdd = null;

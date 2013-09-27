@@ -63,6 +63,7 @@ public enum CallRecordADao {
 		}
 		Log.i(TAG, list.size() + " call record gocha by number:" + number);
 		Log.i(TAG, list.toString());
+		cursor.close();
 		return list;
 	}
 

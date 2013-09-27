@@ -9,6 +9,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ListView;
 
+@Deprecated
 public class SMSActivity extends Activity {
 	private static ListView mList;
 	private static SMSListAdapter mAdapter = null;
@@ -21,12 +22,12 @@ public class SMSActivity extends Activity {
 		setContentView(R.layout.activity_sms);
 		
 		mList = (ListView) findViewById(R.id.list_sms);
-		mAdapter  = new SMSListAdapter(this.getApplicationContext(), SMSDao.getInstance().getSMSAll());
+		mAdapter  = new SMSListAdapter(this.getApplicationContext(), SMSDao.getInstance().getAll(), null, null);
 		mList.setAdapter( mAdapter );
 	}
 
 	public static void refresh() {
-		SMSListAdapter.setData(SMSDao.getInstance().getSMSAll());
+		SMSListAdapter.setData(SMSDao.getInstance().getAll());
 	}
 
 	@Override

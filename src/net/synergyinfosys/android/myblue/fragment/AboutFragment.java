@@ -42,7 +42,7 @@ public class AboutFragment extends Fragment  implements ITitle{
 		public void handleMessage(Message msg) {
 			LockStatus status = LockStatusService.INSTANCE.isLock();
 			
-//			LockStatusService.INSTANCE.doSth(status);
+			LockStatusService.INSTANCE.doSth(status);
 			
 			if( mHelper != null ){
 				if( status == LockStatus.GESTURE_UNLOCK ){

@@ -51,6 +51,7 @@ public class GestureActionDao extends AbstractDBDao {
 		while (cursor.moveToNext()) {
 			return cursor.getLong(cursor.getColumnIndex("timestamp"));
 		}
+		cursor.close();
 		return -1;
 	}
 }

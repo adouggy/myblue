@@ -73,6 +73,7 @@ public class BluetoothDao extends AbstractDBDao{
 			b.setMac( cursor.getString( cursor.getColumnIndex("mac") ) );
 			return b;
 		}
+		cursor.close();
 		return null;
 	}
 	
@@ -87,6 +88,7 @@ public class BluetoothDao extends AbstractDBDao{
 			b.setMac( cursor.getString( cursor.getColumnIndex("mac") ) );
 			return b;
 		}
+		cursor.close();
 		return null;
 	}
 	
@@ -103,6 +105,7 @@ public class BluetoothDao extends AbstractDBDao{
 		}
 		Log.i( TAG, list.size() + " results returned" );
 		Log.d( TAG, list.toString() );
+		cursor.close();
 		return list;
 	}
 }

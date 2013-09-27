@@ -8,8 +8,8 @@ public class SMS {
 	private long id;
 	private String address;
 	private String body;
-	private int type;
-	private int read; // 0 for unread, 1 for read
+	private int type = -1; // 1 for in box, 2 for out box
+	private int read = -1; // 0 for unread, 1 for read
 	private long date;
 	private long androidId;
 	private boolean isDelete;
@@ -75,12 +75,19 @@ public class SMS {
 		sb.append("\n");
 		
 		sb.append("address->" + this.getAddress());
+		sb.append("\n");
 		sb.append("body->" + this.getBody());
+		sb.append("\n");
 		sb.append("type->" + this.getType());
+		sb.append("\n");
 		sb.append("read->" + this.getRead());
+		sb.append("\n");
 		sb.append("date->" + this.getDate() + "(" + this.getDateStr() + ")");
+		sb.append("\n");
 		sb.append("androidId->" + this.getAndroidId());
+		sb.append("\n");
 		sb.append("isDelete->" + this.isDelete());
+		sb.append("\n");
 		return sb.toString();
 	}
 	

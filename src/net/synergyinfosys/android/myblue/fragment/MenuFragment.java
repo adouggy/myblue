@@ -31,6 +31,7 @@ public class MenuFragment extends ListFragment {
 		adapter.add(new SampleItem("通话记录", R.drawable.call));
 		adapter.add(new SampleItem("短信", R.drawable.sms));
 		adapter.add(new SampleItem("关于", R.drawable.person));
+		adapter.add(new SampleItem("Debug", R.drawable.del));
 		setListAdapter(adapter);
 	}
 	
@@ -59,6 +60,8 @@ public class MenuFragment extends ListFragment {
 		case 6:
 			newContent = new AboutFragment();
 			break;
+		case 7:
+			newContent = new DebugFragment();
 		}
 		if (newContent != null)
 			((HomeSlideActivity)getActivity()).switchContent(newContent);

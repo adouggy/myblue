@@ -12,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
+@Deprecated
 public class LocationDetailActivity extends Activity implements OnClickListener {
 
 	private EditText mEdtName = null;

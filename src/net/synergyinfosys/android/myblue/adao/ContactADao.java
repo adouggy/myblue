@@ -138,21 +138,6 @@ public enum ContactADao {
 	// }
 	// return vcardStr;
 
-	public Bitmap getContactPhotoByNumber(String number) {
-		Uri uriNumber2Contacts = Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI, Uri.encode(number));
-		Cursor cursorCantacts = mContext.getContentResolver().query(uriNumber2Contacts, null, null, null, null);
-		if (cursorCantacts.getCount() > 0) { // 若游标不为0则说明有头像,游标指向第一条记录
-			cursorCantacts.moveToFirst();
-			Long contactID = cursorCantacts.getLong(cursorCantacts.getColumnIndex("contact_id"));
-			Uri uri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactID);
-			InputStream input = ContactsContract.Contacts.openContactPhotoInputStream(mContext.getContentResolver(), uri);
-			Bitmap bmp = BitmapFactory.decodeStream(input);
-			return bmp;
-		} else {
-			return null;
-		}
-	}
-
 	public Bitmap getFacebookPhoto(String phoneNumber) {
 		if( !StringUtil.INSTACE.isNoneBlank(phoneNumber) ){
 			return null;

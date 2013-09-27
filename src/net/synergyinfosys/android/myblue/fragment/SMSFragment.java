@@ -18,7 +18,7 @@ public class SMSFragment extends Fragment  implements ITitle{
 		super.onCreate(savedInstanceState);
 		
 		mHelper = new SMSHelper(getActivity());
-		mHelper.onCreate(R.layout.activity_sms);
+		mHelper.onCreate(R.layout.fragment_sms_main);
 	}
 	
 	@Override

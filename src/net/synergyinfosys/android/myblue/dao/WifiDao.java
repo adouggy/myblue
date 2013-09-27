@@ -76,6 +76,7 @@ public class WifiDao extends AbstractDBDao{
 			wifi.setChecked( cursor.getInt( cursor.getColumnIndex("checked") )==1?true:false );
 			return wifi;
 		}
+		cursor.close();
 		return null;
 	}
 	
@@ -91,6 +92,7 @@ public class WifiDao extends AbstractDBDao{
 			wifi.setChecked( cursor.getInt( cursor.getColumnIndex("checked") )==1?true:false );
 			return wifi;
 		}
+		cursor.close();
 		return null;
 	}
 	
@@ -108,6 +110,7 @@ public class WifiDao extends AbstractDBDao{
 		}
 		Log.i( TAG, list.size() + " results returned" );
 		Log.d( TAG, list.toString() );
+		cursor.close();
 		return list;
 	}
 }

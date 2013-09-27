@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+@Deprecated
 public class EncryptAddActivity extends Activity implements OnClickListener {
 
 	private Button mBtnDone = null;

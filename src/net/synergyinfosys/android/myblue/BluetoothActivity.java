@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+@Deprecated
 public class BluetoothActivity extends Activity implements OnClickListener {
 	public static final String TAG = "BluetoothActivity";
 

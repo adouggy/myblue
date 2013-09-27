@@ -7,7 +7,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TabHost;
 
-@SuppressWarnings("deprecation")
+@Deprecated
 public class HomeTabActivity extends TabActivity {
 
 	@Override

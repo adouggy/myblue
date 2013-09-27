@@ -9,6 +9,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ListView;
 
+@Deprecated
 public class CallRecordActivity extends Activity {
 	public static final String TAG = "CallRecordActivity";
 	private ListView mCallRecordList = null;

@@ -81,6 +81,7 @@ public class ContactDao extends AbstractDBDao{
 			c.setSelected( cursor.getInt( cursor.getColumnIndex("isSelected") )==1?true:false );
 			return c;
 		}
+		cursor.close();
 		return null;
 	}
 	
@@ -99,6 +100,7 @@ public class ContactDao extends AbstractDBDao{
 			c.setSelected( cursor.getInt( cursor.getColumnIndex("isSelected") )==1?true:false );
 			return c;
 		}
+		cursor.close();
 		return null;
 	}
 	
@@ -119,6 +121,7 @@ public class ContactDao extends AbstractDBDao{
 		}
 		Log.i( TAG, list.size() + " results returned" );
 		Log.d( TAG, list.toString() );
+		cursor.close();
 		return list;
 	}
 	
@@ -139,6 +142,7 @@ public class ContactDao extends AbstractDBDao{
 		}
 		Log.i( TAG, list.size() + " results returned" );
 		Log.d( TAG, list.toString() );
+		cursor.close();
 		return list;
 	}
 }

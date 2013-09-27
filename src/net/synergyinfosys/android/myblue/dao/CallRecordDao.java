@@ -99,6 +99,7 @@ public class CallRecordDao extends AbstractDBDao{
 			c.setDelete( cursor.getInt( cursor.getColumnIndex("isDelete") )==1?true:false );
 			return c;
 		}
+		cursor.close();
 		return null;
 	}
 	
@@ -118,6 +119,7 @@ public class CallRecordDao extends AbstractDBDao{
 		}
 		Log.i( TAG, list.size() + " results returned" );
 		Log.d( TAG, list.toString() );
+		cursor.close();
 		return list;
 	}
 }

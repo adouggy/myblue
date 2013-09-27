@@ -73,6 +73,7 @@ public class LocationDao extends AbstractDBDao{
 			loc.setDescription( cursor.getString( cursor.getColumnIndex( "description" ) ) );
 			return loc;
 		}
+		cursor.close();
 		return null;
 	}
 	
@@ -91,6 +92,7 @@ public class LocationDao extends AbstractDBDao{
 		}
 		Log.i( TAG, list.size() + " results returned" );
 		Log.d( TAG, list.toString() );
+		cursor.close();
 		return list;
 	}
 }

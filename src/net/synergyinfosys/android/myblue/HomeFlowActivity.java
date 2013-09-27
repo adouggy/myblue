@@ -11,6 +11,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Window;
 
+@Deprecated
 public class HomeFlowActivity extends Activity {
 	private ViewFlow viewFlow;
 	

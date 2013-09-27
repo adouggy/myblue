@@ -44,24 +44,24 @@ public class TutorialHelper extends MyHelper{
 		viewFlow.setFlowIndicator(indicator);
 		
 		viewFlow.setSelection(0);
-		if( sSlidingMenu != null  ){
-			sSlidingMenu.setTouchModeAbove( SlidingMenu.TOUCHMODE_FULLSCREEN );
-		}
+//		if( sSlidingMenu != null  ){
+//			sSlidingMenu.setTouchModeAbove( SlidingMenu.TOUCHMODE_FULLSCREEN );
+//		}
 		
 		viewFlow.setOnViewSwitchListener(new ViewSwitchListener(){
 
 			@Override
 			public void onSwitched(View view, int position) {
 				Log.i(TAG, "position:" + position);
-				if( sSlidingMenu != null ){
-					if( position == 0 ){
-						sSlidingMenu.setTouchModeAbove( SlidingMenu.TOUCHMODE_FULLSCREEN );
-					}else{
-						sSlidingMenu.setTouchModeAbove( SlidingMenu.TOUCHMODE_NONE );
-					}
-				}else{
-					Log.i(TAG, "sliding menu is null.." );
-				}
+//				if( sSlidingMenu != null ){
+//					if( position == 0 ){
+//						sSlidingMenu.setTouchModeAbove( SlidingMenu.TOUCHMODE_FULLSCREEN );
+//					}else{
+//						sSlidingMenu.setTouchModeAbove( SlidingMenu.TOUCHMODE_NONE );
+//					}
+//				}else{
+//					Log.i(TAG, "sliding menu is null.." );
+//				}
 			}}
 		);
 	}

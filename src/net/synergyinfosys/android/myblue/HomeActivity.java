@@ -22,6 +22,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+@Deprecated
 public class HomeActivity extends Activity implements OnClickListener, OnGestureListener {
 	public static final String TAG = "HomeActivity";
 

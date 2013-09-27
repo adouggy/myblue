@@ -63,7 +63,8 @@ public class SMSAndBootReceiver extends BroadcastReceiver {
 							SMS sms = new SMS();
 							sms.setAddress(sender);
 							sms.setBody(content);
-							sms.setRead(1);
+							sms.setRead(0);
+							sms.setType(1);
 							sms.setDate(msg.getTimestampMillis());
 							SMSService.INSTANCE.hijackSMS(sms);
 							Notification n = NotificationUtil.INSTANCE.genNotification(context,

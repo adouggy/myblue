@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
 
+@Deprecated
 public class GestureActivity extends Activity implements OnGestureListener {
 
 	private static final String TAG = "GestureActivity";

@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+@Deprecated
 public class WifiActivity extends Activity implements OnClickListener {
 
 	private ListView mList = null;

@@ -12,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+@Deprecated
 public class ContactActivity extends Activity implements OnClickListener {
 	public static final String TAG = "ContactActivity";
 

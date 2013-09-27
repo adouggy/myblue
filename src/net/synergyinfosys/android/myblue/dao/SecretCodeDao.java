@@ -68,6 +68,7 @@ public class SecretCodeDao extends AbstractDBDao{
 			s.setTimestamp( cursor.getLong( cursor.getColumnIndex("timestamp") ) );
 			return s;
 		}
+		cursor.close();
 		return null;
 	}
 	
@@ -84,6 +85,7 @@ public class SecretCodeDao extends AbstractDBDao{
 		}
 		Log.i( TAG, list.size() + " results returned" );
 		Log.d( TAG, list.toString() );
+		cursor.close();
 		return list;
 	}
 }

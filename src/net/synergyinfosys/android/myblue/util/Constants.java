@@ -16,9 +16,10 @@ public class Constants {
 			"address varchar(50), " +
 			"body varchar(300), " +
 			"read integer, " +
+			"type integer, " +
 			"date integer," +
 			"androidId integer," +
-			"isDelete integer " +
+			"isDelete integer" +
 			")";
 	
 	public static final String DB_TABLE_CONTACT_NAME = "contact";

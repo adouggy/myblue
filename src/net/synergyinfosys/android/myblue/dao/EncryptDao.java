@@ -71,6 +71,7 @@ public class EncryptDao extends AbstractDBDao{
 			c.setComment( cursor.getString( cursor.getColumnIndex("comment") ) );
 			return c;
 		}
+		cursor.close();
 		return null;
 	}
 	
@@ -88,6 +89,7 @@ public class EncryptDao extends AbstractDBDao{
 		}
 		Log.i( TAG, list.size() + " results returned" );
 		Log.d( TAG, list.toString() );
+		cursor.close();
 		return list;
 	}
 }

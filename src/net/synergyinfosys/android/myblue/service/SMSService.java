@@ -33,17 +33,29 @@ public enum SMSService {
 //		}
 //	}
 	
-	public void hijackSMS( SMS sms){
-		Log.i( TAG, "Hijacking.." + sms );
-		SMSDao.getInstance().insertSMS( sms );
+	/**
+	 * 有新的短信的时候，插入新的，并且把已读的短信也给导入进来
+	 * @param newSms
+	 */
+	public void hijackSMS( SMS newSms){
+		Log.i( TAG, "Hijacking.." + newSms );
+		SMSDao.getInstance().insertSMS( newSms );
+		
+		ArrayList<SMS> list = SMSADao.INSTANCE.getSMS( newSms.getAddress() );
+		for( SMS s : list ){
+			SMSDao.getInstance().insertSMS(s);
+			SMSADao.INSTANCE.deleteSMS( s.getAndroidId() );
+		}
 	}
 	
+	/**
+	 * 把未读的短信恢复到系统，并删除 
+	 */
 	public void resumeSMS(  ){
-		ArrayList<SMS> list = SMSDao.getInstance().getSMSAll();
+		ArrayList<SMS> list = SMSDao.getInstance().getAllUnRead();
 		for (SMS sms : list) {
-			sms.setRead(0);
 			SMSADao.INSTANCE.addSMS(sms);
+			SMSDao.getInstance().removeSMS( sms.getId() );
 		}
-		SMSDao.getInstance().removeSMSAll();
 	}
 }

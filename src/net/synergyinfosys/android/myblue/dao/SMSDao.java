@@ -41,14 +41,15 @@ public class SMSDao extends AbstractDBDao{
 		cv.put("address", sms.getAddress());
 		cv.put("body", sms.getBody());
 		cv.put("read", sms.getRead());
+		cv.put("type", sms.getType());
 		cv.put("date", sms.getDate());
 		cv.put("androidId", sms.getAndroidId());
 		cv.put("isDelete", sms.isDelete());
 		return mDBInstance.insert(Constants.DB_TABLE_SMS_NAME, null, cv);
 	}
 	
-	public ArrayList<SMS> getSMSAll(){
-		Log.i(TAG, "getSMSAll");
+	public ArrayList<SMS> getAll(){
+		Log.i(TAG, "getAll");
 		
 		ArrayList<SMS> list = new ArrayList<SMS>();
 		final String sql = "select * from " + Constants.DB_TABLE_SMS_NAME + " order by date desc";
@@ -60,11 +61,13 @@ public class SMSDao extends AbstractDBDao{
 				sms.setAddress( cursor.getString(cursor.getColumnIndex("address")) );
 				sms.setBody( cursor.getString(cursor.getColumnIndex("body")) );
 				sms.setRead( cursor.getInt(cursor.getColumnIndex("read")) );
+				sms.setType( cursor.getInt(cursor.getColumnIndex("type")) );
 				sms.setDate( cursor.getLong(cursor.getColumnIndex("date")) );
 				sms.setAndroidId( cursor.getLong(cursor.getColumnIndex("androidId")) );
 				sms.setDelete( cursor.getInt(cursor.getColumnIndex("isDelete"))==1?true:false );
 				list.add(sms);
 			}
+			cursor.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -72,6 +75,48 @@ public class SMSDao extends AbstractDBDao{
 		Log.i( TAG, list.size() + " sms returned");
 		Log.i( TAG, list.toString() );
 		return list;
+	}
+	
+	public ArrayList<SMS> getAll(int read){
+		Log.i(TAG, "getAll");
+		
+		ArrayList<SMS> list = new ArrayList<SMS>();
+		final String sql = "select * from " + Constants.DB_TABLE_SMS_NAME + " where read=" + read + " order by date desc";
+		try {
+			Cursor cursor = mDBInstance.rawQuery( sql, null );
+			while( cursor.moveToNext() ){
+				SMS sms = new SMS();
+				sms.setId( cursor.getLong(cursor.getColumnIndex("id")) );
+				sms.setAddress( cursor.getString(cursor.getColumnIndex("address")) );
+				sms.setBody( cursor.getString(cursor.getColumnIndex("body")) );
+				sms.setRead( cursor.getInt(cursor.getColumnIndex("read")) );
+				sms.setDate( cursor.getLong(cursor.getColumnIndex("date")) );
+				sms.setType( cursor.getInt(cursor.getColumnIndex("type")) );
+				sms.setAndroidId( cursor.getLong(cursor.getColumnIndex("androidId")) );
+				sms.setDelete( cursor.getInt(cursor.getColumnIndex("isDelete"))==1?true:false );
+				list.add(sms);
+			}
+			cursor.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		Log.i( TAG, list.size() + " sms returned");
+		Log.i( TAG, list.toString() );
+		
+		return list;
+	}
+	
+	public ArrayList<SMS> getAllRead(){
+		return getAll(1); 
+	}
+	
+	public ArrayList<SMS> getAllUnRead(){
+		return getAll(0);
+	}
+	
+	public int removeSMS( long id ){
+		return mDBInstance.delete(Constants.DB_TABLE_SMS_NAME, "id=?", new String[]{ id+"" });
 	}
 	
 	public void removeSMSAll(){
