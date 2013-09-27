@@ -9,6 +9,9 @@ import net.synergyinfosys.android.myblue.adao.SMSADao;
 import net.synergyinfosys.android.myblue.fragment.AboutFragment;
 import net.synergyinfosys.android.myblue.receiver.BluetoothReceiver;
 import net.synergyinfosys.android.myblue.receiver.SMSAndBootReceiver;
+import net.synergyinfosys.android.myblue.ui.cache.CallRecordCache;
+import net.synergyinfosys.android.myblue.ui.cache.MediaCache;
+import net.synergyinfosys.android.myblue.ui.cache.SMSCache;
 import net.synergyinfosys.android.myblue.util.BluetoothUtil;
 import net.synergyinfosys.android.myblue.util.NotificationUtil;
 import net.synergyinfosys.android.myblue.util.SDUtil;
@@ -139,17 +142,20 @@ public class LongLiveService extends Service implements Runnable {
 	}
 
 	private void initialUtil() {
-		NotificationUtil.INSTANCE.init(this.getApplicationContext());
+		NotificationUtil.INSTANCE.init(mContext);
 		// MDMUtil.INSTANCE.initial(this.getApplicationContext());
 		// LocationUtil.INSTANCE.initial(this.getApplicationContext());
 		// WifiUtil.INSTANCE.initial(this.getApplicationContext());
-		BluetoothUtil.INSTANCE.initial(this.getApplicationContext());
+		BluetoothUtil.INSTANCE.initial(mContext);
 		SDUtil.INSTANCE.initial();
-		CallRecordADao.INSTANCE.initial(this.getApplicationContext());
-		SMSADao.INSTANCE.initial(this.getApplicationContext());
-		ContactADao.INSTANCE.initial(this.getApplicationContext());
+		CallRecordADao.INSTANCE.initial(mContext);
+		SMSADao.INSTANCE.initial(mContext);
+		ContactADao.INSTANCE.initial(mContext);
 		GestureADao.INSTACE.initial();
 		// ServiceManager sm = new ServiceManager(this.getApplicationContext());
 		// sm.startService();
+		SMSCache.getInstance().initialData(mContext);
+		CallRecordCache.getInstance().initialData(mContext);
+		MediaCache.getInstance().initialData(mContext);
 	}
 }

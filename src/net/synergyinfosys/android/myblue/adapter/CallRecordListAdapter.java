@@ -7,15 +7,12 @@ import net.synergyinfosys.android.myblue.bean.CallRecord;
 import net.synergyinfosys.android.myblue.bean.CallStatus;
 import net.synergyinfosys.android.myblue.bean.Contact;
 import net.synergyinfosys.android.myblue.dao.ContactDao;
+import net.synergyinfosys.android.myblue.ui.cache.MediaCache;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,36 +23,10 @@ public class CallRecordListAdapter extends BaseAdapter {
 	private static ArrayList<CallRecord> mCallRecordList = null;
 	private LayoutInflater mInflater = null;
 	
-	private RotateAnimation rotateAnimation_in, rotateAnimation_out, rotateAnimation_miss;
-	
-
 	public CallRecordListAdapter(Context ctx, ArrayList<CallRecord> list) {
 		mInflater = LayoutInflater.from(ctx);
 		mCallRecordList = list;
 		
-		rotateAnimation_in = new RotateAnimation(0, 180,
-		        Animation.RELATIVE_TO_SELF, 0.5f,
-		        Animation.RELATIVE_TO_SELF, 0.5f);
-		rotateAnimation_in.setInterpolator(new LinearInterpolator());
-		rotateAnimation_in.setDuration(500);
-		rotateAnimation_in.setRepeatCount(0);
-		rotateAnimation_in.setFillAfter(true);
-		
-		rotateAnimation_out = new RotateAnimation(0, 360,
-		        Animation.RELATIVE_TO_SELF, 0.5f,
-		        Animation.RELATIVE_TO_SELF, 0.5f);
-		rotateAnimation_out.setInterpolator(new LinearInterpolator());
-		rotateAnimation_out.setDuration(500);
-		rotateAnimation_out.setRepeatCount(0);
-		rotateAnimation_out.setFillAfter(true);
-		
-		rotateAnimation_miss = new RotateAnimation(0, 90,
-		        Animation.RELATIVE_TO_SELF, 0.5f,
-		        Animation.RELATIVE_TO_SELF, 0.5f);
-		rotateAnimation_miss.setInterpolator(new LinearInterpolator());
-		rotateAnimation_miss.setDuration(500);
-		rotateAnimation_miss.setRepeatCount(0);
-		rotateAnimation_miss.setFillAfter(true);
 	}
 
 	public static void setData(ArrayList<CallRecord> list) {
@@ -103,20 +74,26 @@ public class CallRecordListAdapter extends BaseAdapter {
 		CallRecord c = mCallRecordList.get(position);
 		long contactId = c.getContactId();
 		Contact contact = ContactDao.getInstance().getContact(contactId);
+		
+		if( contact == null ){
+			//TODO: no this contact, should do nothing... this is a bad state
+			return convertView;
+		}
+		
 		holder.name.setText( contact.getName() );
 		holder.number.setText( contact.getNumber() );
 		holder.time.setText( c.getRecordTimeStr() );
 		
 		CallStatus status =  c.getStatus();
 		if( status.compareTo( CallStatus.incoming ) ==0 ){
-			holder.status.startAnimation( rotateAnimation_in );
-			Log.i( TAG, "in" );
+			holder.status.setBackgroundResource(R.drawable.arrow);
+			holder.status.startAnimation( MediaCache.getInstance().getAnimationIncoming() );
 		}else if( status.compareTo( CallStatus.outgoing ) ==0 ){
-			holder.status.startAnimation( rotateAnimation_out );
-			Log.i( TAG, "out" );
+			holder.status.setBackgroundResource(R.drawable.arrow);
+			holder.status.startAnimation( MediaCache.getInstance().getAnimationOutgoing() );
 		}else{
-			holder.status.startAnimation( rotateAnimation_miss );
-			Log.i( TAG, "miss" );
+			holder.status.setBackgroundResource(R.drawable.arrow_miss);
+			holder.status.startAnimation(  MediaCache.getInstance().getAnimationIncoming() );
 		}
 
 		return convertView;

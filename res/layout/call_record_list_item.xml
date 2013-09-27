@@ -34,15 +34,6 @@
             android:text="@string/default_description"
             android:textSize="12sp" />
     </LinearLayout>
-    
-    <ImageView
-        android:id="@+id/img_call_record_item_status"
-        android:layout_width="0dp"
-        android:layout_height="fill_parent"
-        android:contentDescription="@string/default_description"
-        android:focusable="true"
-        android:layout_weight="1"
-        android:src="@drawable/arrow" />
 
     <ImageView
         android:id="@+id/img_call_record_item_call"
@@ -52,5 +43,13 @@
         android:focusable="true"
         android:layout_weight="1"
         android:src="@drawable/call" />
+    <ImageView
+        android:id="@+id/img_call_record_item_status"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:contentDescription="@string/default_description"
+        android:focusable="true"
+        android:layout_weight="1"
+        android:background="@drawable/arrow" />
 
 </LinearLayout>

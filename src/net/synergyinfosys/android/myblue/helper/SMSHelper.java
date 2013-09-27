@@ -2,8 +2,6 @@ package net.synergyinfosys.android.myblue.helper;
 
 import net.synergyinfosys.android.myblue.R;
 import net.synergyinfosys.android.myblue.adapter.SMSContactAdapter;
-import net.synergyinfosys.android.myblue.adapter.SMSListAdapter;
-import net.synergyinfosys.android.myblue.dao.SMSDao;
 
 import org.taptwo.android.widget.TitleFlowIndicator;
 import org.taptwo.android.widget.ViewFlow;
@@ -54,7 +52,4 @@ public class SMSHelper extends MyHelper {
 		});
 	}
 
-	public static void refresh() {
-		SMSListAdapter.setData(SMSDao.getInstance().getAll());
-	}
 }

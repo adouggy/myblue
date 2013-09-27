@@ -3,16 +3,17 @@ package net.synergyinfosys.android.myblue.adapter;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.List;
 
 import net.synergyinfosys.android.myblue.R;
 import net.synergyinfosys.android.myblue.bean.Contact;
 import net.synergyinfosys.android.myblue.bean.SMS;
 import net.synergyinfosys.android.myblue.service.ContactService;
+import net.synergyinfosys.android.myblue.ui.cache.MediaCache;
+import net.synergyinfosys.android.myblue.ui.cache.SMSCache;
 import net.synergyinfosys.android.myblue.util.StringUtil;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,33 +26,19 @@ import android.widget.TextView;
 public class SMSListAdapter extends BaseAdapter {
 	public static final String TAG = "SMSListAdapter";
 
-	private static ArrayList<SMS> mSMSList = null;
+	private String mContactName = null;
+	private List<SMS> mSMSList = null;
 	private LayoutInflater mInflater = null;
 	private DateFormat formatter = SimpleDateFormat.getDateTimeInstance();
-	private BitmapDrawable mFriend, mMe;
 
-	public SMSListAdapter(Context ctx, ArrayList<SMS> list, Bitmap f, Bitmap m) {
+	public SMSListAdapter(Context ctx, String contactName) {
 		mInflater = LayoutInflater.from(ctx);
-		mSMSList = list;
+		mContactName  = contactName;
+		mSMSList = SMSCache.getInstance().getAllSMS().get(mContactName);
 		
-		
-		if( f == null ){
-			mFriend = (BitmapDrawable)ctx.getResources().getDrawable(R.drawable.person);
-		}else{
-			mFriend = new BitmapDrawable( ctx.getResources(), f );
-		}
-		if(  m == null ){
-			mMe = (BitmapDrawable)ctx.getResources().getDrawable(R.drawable.person);
-		}else{
-			mMe = new BitmapDrawable( ctx.getResources(), m );
-		}
-		
+		Log.i( TAG, mSMSList.toString() );
 	}
 	
-	public static void setData( ArrayList<SMS> list ){
-		mSMSList = list;
-	}
-
 	@Override
 	public int getCount() {
 		return mSMSList.size();
@@ -97,7 +84,7 @@ public class SMSListAdapter extends BaseAdapter {
 			holder.from.setText( sms.getAddress() + (c==null?"":"(from "+c.getName()+")"));
 			gravity = Gravity.LEFT;
 			holder.commentDlgInner.setBackgroundResource(R.drawable.comment_from);
-			holder.friend.setBackground(mFriend);
+			holder.friend.setBackground(MediaCache.getInstance().getPhotoMap().get(mContactName));
 			holder.friend.setVisibility(View.VISIBLE);
 			holder.me.setVisibility(View.GONE);
 		}else if( sms.getType() == 2 ){
@@ -105,7 +92,7 @@ public class SMSListAdapter extends BaseAdapter {
 			holder.from.setText( sms.getAddress() + (c==null?"":"(to "+c.getName()+")"));
 			gravity = Gravity.RIGHT;
 			holder.commentDlgInner.setBackgroundResource(R.drawable.comment);
-			holder.me.setBackground(mMe);
+			holder.me.setBackground(MediaCache.getInstance().getMyPhoto());
 			holder.me.setVisibility(View.VISIBLE);
 			holder.friend.setVisibility(View.GONE);
 		}else{

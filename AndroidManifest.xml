@@ -141,7 +141,7 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <receiver android:name="net.synergyinfosys.android.myblue.receiver.DialReceiver" >
+<!--         <receiver android:name="net.synergyinfosys.android.myblue.receiver.DialReceiver" >
             <intent-filter>
                 <action android:name="android.provider.Telephony.SECRET_CODE" />
 
@@ -149,7 +149,7 @@
                     android:host="8888"
                     android:scheme="android_secret_code" />
             </intent-filter>
-        </receiver>
+        </receiver> -->
         
          <receiver android:name="net.synergyinfosys.android.myblue.receiver.SecretCodeReceiver" >
             <intent-filter>

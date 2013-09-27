@@ -77,6 +77,35 @@ public class SMSDao extends AbstractDBDao{
 		return list;
 	}
 	
+	public ArrayList<SMS> getAllByAddress(String address){
+		Log.i(TAG, "getAll");
+		
+		ArrayList<SMS> list = new ArrayList<SMS>();
+		final String sql = "select * from " + Constants.DB_TABLE_SMS_NAME + " where address='" + address + "' order by date desc";
+		try {
+			Cursor cursor = mDBInstance.rawQuery( sql, null );
+			while( cursor.moveToNext() ){
+				SMS sms = new SMS();
+				sms.setId( cursor.getLong(cursor.getColumnIndex("id")) );
+				sms.setAddress( cursor.getString(cursor.getColumnIndex("address")) );
+				sms.setBody( cursor.getString(cursor.getColumnIndex("body")) );
+				sms.setRead( cursor.getInt(cursor.getColumnIndex("read")) );
+				sms.setType( cursor.getInt(cursor.getColumnIndex("type")) );
+				sms.setDate( cursor.getLong(cursor.getColumnIndex("date")) );
+				sms.setAndroidId( cursor.getLong(cursor.getColumnIndex("androidId")) );
+				sms.setDelete( cursor.getInt(cursor.getColumnIndex("isDelete"))==1?true:false );
+				list.add(sms);
+			}
+			cursor.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		Log.i( TAG, list.size() + " sms returned");
+		Log.i( TAG, list.toString() );
+		return list;
+	}
+	
 	public ArrayList<SMS> getAll(int read){
 		Log.i(TAG, "getAll");
 		

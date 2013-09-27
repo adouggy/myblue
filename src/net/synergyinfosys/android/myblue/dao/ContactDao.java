@@ -85,6 +85,25 @@ public class ContactDao extends AbstractDBDao{
 		return null;
 	}
 	
+	public Contact getContactByNumber(String number){
+		Log.i(TAG, "getContact");
+
+		Cursor cursor = mDBInstance.rawQuery("select * from " + Constants.DB_TABLE_CONTACT_NAME + " where number='" + number + "'", null);
+		while (cursor.moveToNext()) {
+			Contact c= new Contact();
+			c.setId( cursor.getLong( cursor.getColumnIndex("id") ) );
+			c.setName( cursor.getString( cursor.getColumnIndex("name") ) );
+			c.setNumber( cursor.getString( cursor.getColumnIndex("number") ) );
+			c.setHideCallRecord( cursor.getInt( cursor.getColumnIndex("hideCallRecord") )==1?true:false );
+			c.setHideSMS( cursor.getInt( cursor.getColumnIndex("hideSMS") )==1?true:false );
+			c.setCallMode( CallMode.valueOf( cursor.getString( cursor.getColumnIndex("callMode") ) ) );
+			c.setSelected( cursor.getInt( cursor.getColumnIndex("isSelected") )==1?true:false );
+			return c;
+		}
+		cursor.close();
+		return null;
+	}
+	
 	public Contact getContact(String number){
 		Log.i(TAG, "getContact by number");
 
@@ -107,7 +126,7 @@ public class ContactDao extends AbstractDBDao{
 	public ArrayList<Contact> getContactAll(){
 		Log.i(TAG, "getContactAll");
 		ArrayList<Contact> list = new ArrayList<Contact>();
-		Cursor cursor = mDBInstance.rawQuery("select * from " + Constants.DB_TABLE_CONTACT_NAME + " order by id desc", null);
+		Cursor cursor = mDBInstance.rawQuery("select * from " + Constants.DB_TABLE_CONTACT_NAME + " order by id asc", null);
 		while (cursor.moveToNext()) {
 			Contact c= new Contact();
 			c.setId( cursor.getLong( cursor.getColumnIndex("id") ) );

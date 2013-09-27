@@ -25,12 +25,12 @@ public class MenuFragment extends ListFragment {
 		SampleAdapter adapter = new SampleAdapter(getActivity());
 
 		adapter.add(new SampleItem("教程", R.drawable.tutorial));
-		adapter.add(new SampleItem("联系人", R.drawable.add_contact));
+		adapter.add(new SampleItem("联系人", R.drawable.person));
 		adapter.add(new SampleItem("蓝牙", R.drawable.bluetooth));
 		adapter.add(new SampleItem("Secret Code", R.drawable.pin));
 		adapter.add(new SampleItem("通话记录", R.drawable.call));
 		adapter.add(new SampleItem("短信", R.drawable.sms));
-		adapter.add(new SampleItem("关于", R.drawable.person));
+		adapter.add(new SampleItem("关于", R.drawable.about));
 		adapter.add(new SampleItem("Debug", R.drawable.del));
 		setListAdapter(adapter);
 	}
