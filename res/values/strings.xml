@@ -19,6 +19,7 @@
     <string name="txt_gesture_newname">GestureActivity</string>
     <string name="title_activity_sms">SMSActivity</string>
     <string name="txt_sms_hello">hello</string>
+    <string name="txt_sms_send">开始交谈</string>
     <string name="txt_sms_description">当程序锁定时未读短信显示在这里\n解除锁定时未读短信恢复</string>
     <string name="default_description">image</string>
     <string name="title_activity_contact">Contact</string>

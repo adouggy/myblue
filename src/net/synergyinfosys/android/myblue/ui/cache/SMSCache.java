@@ -16,8 +16,8 @@ public class SMSCache implements IUIDataCache {
 	
 	public static final String TAG = "SMSCache";
 	
-	private List<String> mContactList = null;
-	private HashMap<String, List<SMS>> mSMSMap = null;
+	private ArrayList<String> mContactList = null;
+	private HashMap<String, ArrayList<SMS>> mSMSMap = null;
 	private Context mContext = null;
 
 	private static class SingletonHolder {
@@ -32,7 +32,7 @@ public class SMSCache implements IUIDataCache {
 	public void initialData(Context ctx) {
 		mContext = ctx;
 		mContactList = new ArrayList<String>();
-		mSMSMap = new HashMap<String, List<SMS>>();
+		mSMSMap = new HashMap<String, ArrayList<SMS>>();
 		
 		ArrayList<SMS> smsAllList = SMSDao.getInstance().getAll();
 		
@@ -55,7 +55,7 @@ public class SMSCache implements IUIDataCache {
 		return mContactList;
 	}
 	
-	public Map<String, List<SMS>> getAllSMS(){
+	public Map<String, ArrayList<SMS>> getAllSMS(){
 		return mSMSMap;
 	}
 

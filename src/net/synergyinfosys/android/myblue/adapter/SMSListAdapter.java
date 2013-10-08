@@ -3,6 +3,7 @@ package net.synergyinfosys.android.myblue.adapter;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import net.synergyinfosys.android.myblue.R;
@@ -10,10 +11,8 @@ import net.synergyinfosys.android.myblue.bean.Contact;
 import net.synergyinfosys.android.myblue.bean.SMS;
 import net.synergyinfosys.android.myblue.service.ContactService;
 import net.synergyinfosys.android.myblue.ui.cache.MediaCache;
-import net.synergyinfosys.android.myblue.ui.cache.SMSCache;
 import net.synergyinfosys.android.myblue.util.StringUtil;
 import android.content.Context;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,9 +33,25 @@ public class SMSListAdapter extends BaseAdapter {
 	public SMSListAdapter(Context ctx, String contactName) {
 		mInflater = LayoutInflater.from(ctx);
 		mContactName  = contactName;
-		mSMSList = SMSCache.getInstance().getAllSMS().get(mContactName);
+		mSMSList = new ArrayList<SMS>();
+		//SMSCache.getInstance().getAllSMS().get(mContactName);
 		
-		Log.i( TAG, mSMSList.toString() );
+		SMS s = new SMS();
+		s.setId(111);
+		s.setAddress("13601303722");
+		s.setBody("正在加载中...");
+		s.setDate(System.currentTimeMillis());
+		s.setRead(1);
+		s.setType(1);
+		mSMSList.add(s);
+	}
+	
+	public String getContactName(){
+		return this.mContactName;
+	}
+	
+	public void setData( ArrayList<SMS> list ){
+		this.mSMSList = list;
 	}
 	
 	@Override
@@ -83,7 +98,7 @@ public class SMSListAdapter extends BaseAdapter {
 			//in box
 			holder.from.setText( sms.getAddress() + (c==null?"":"(from "+c.getName()+")"));
 			gravity = Gravity.LEFT;
-			holder.commentDlgInner.setBackgroundResource(R.drawable.comment_from);
+			holder.commentDlgInner.setBackgroundResource(R.drawable.bubble_from);
 			holder.friend.setBackground(MediaCache.getInstance().getPhotoMap().get(mContactName));
 			holder.friend.setVisibility(View.VISIBLE);
 			holder.me.setVisibility(View.GONE);
@@ -91,7 +106,7 @@ public class SMSListAdapter extends BaseAdapter {
 			//out box
 			holder.from.setText( sms.getAddress() + (c==null?"":"(to "+c.getName()+")"));
 			gravity = Gravity.RIGHT;
-			holder.commentDlgInner.setBackgroundResource(R.drawable.comment);
+			holder.commentDlgInner.setBackgroundResource(R.drawable.bubble_to);
 			holder.me.setBackground(MediaCache.getInstance().getMyPhoto());
 			holder.me.setVisibility(View.VISIBLE);
 			holder.friend.setVisibility(View.GONE);

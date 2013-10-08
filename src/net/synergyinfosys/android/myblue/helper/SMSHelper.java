@@ -34,20 +34,20 @@ public class SMSHelper extends MyHelper {
 		TitleFlowIndicator indicator = (TitleFlowIndicator) getView().findViewById(R.id.viewflowindic);
 		SMSContactAdapter adapter = new SMSContactAdapter(mActivity);
 		indicator.setTitleProvider(adapter);
-		
+		// try to switch contact via click, seems hard to achive.
+		// indicator.setOnClickListener(new OnClickListener() {
+
 		viewFlow = (ViewFlow) getView().findViewById(R.id.viewflow);
 		viewFlow.setAdapter(adapter);
 		viewFlow.setFlowIndicator(indicator);
 		viewFlow.setSelection(0);
 		viewFlow.setOnViewSwitchListener(new ViewSwitchListener() {
-
 			@Override
 			public void onSwitched(
 					View view,
 					int position) {
 				Log.i(TAG,
 						"position:" + position);
-
 			}
 		});
 	}

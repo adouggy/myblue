@@ -29,24 +29,27 @@ public class IncomingCallReceiver extends BroadcastReceiver {
 	TelephonyManager telMgr;
 
 	@Override
-	public void onReceive(Context context, Intent intent) {
-		
-		if( LockStatusService.INSTANCE.isLock().toString().contains("UNLOCK") ){
+	public void onReceive(
+			Context context,
+			Intent intent) {
+
+		if (LockStatusService.INSTANCE.isLock().toString().contains("UNLOCK")) {
 			return;
 		}
-		
+
 		telMgr = (TelephonyManager) context.getSystemService(Service.TELEPHONY_SERVICE);
+		String number = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
+		ArrayList<Contact> list = ContactService.INSTANCE.getAllSecretContacts();
+
 		switch (telMgr.getCallState()) {
 		case TelephonyManager.CALL_STATE_RINGING:
-			String number = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
-			Log.v(TAG, "number:" + number);
-			
-			ArrayList<Contact> list = ContactService.INSTANCE.getAllSecretContacts();
-			for( Contact c: list ){
-				if (PhoneNumberUtils.compare(number, c.getNumber())) {
+			Log.v(TAG,
+					"ringing number:" + number);
+
+			for (Contact c : list) {
+				if (PhoneNumberUtils.compare(number,
+						c.getNumber())) {
 					endCall();
-					CallRecordService.INSTANCE.hideLatestCallRecord( number );
-//					CallRecordActivity.refresh();
 					Notification n = NotificationUtil.INSTANCE.genNotification(context,
 							R.drawable.ic_launcher,
 							"蓝牙锁有新消息",
@@ -54,38 +57,60 @@ public class IncomingCallReceiver extends BroadcastReceiver {
 							"通话更新",
 							HomeSlideActivity.class,
 							NotificationUtil.FLAG_ONGOING_EVENT_AUTO_CANCEL);
-					NotificationUtil.INSTANCE.sendNotification(Constants.NOTI_STATUS, n);
+					NotificationUtil.INSTANCE.sendNotification(Constants.NOTI_STATUS,
+							n);
 					abortBroadcast();
+
 					break;
 				}
 			}
-			
+
 			CallRecordCache.getInstance().reload();
-			
 			break;
 		case TelephonyManager.CALL_STATE_OFFHOOK:
+			Log.i(TAG,
+					"hook off");
 			break;
 		case TelephonyManager.CALL_STATE_IDLE:
+			Log.i(TAG,
+					"idle");
+			for (Contact c : list) {
+				if (PhoneNumberUtils.compare(number,
+						c.getNumber())) {
+					Log.i(TAG,
+							"hiding..for number:" + number);
+					 try {
+					 Thread.sleep(3000);
+					 } catch (InterruptedException e) {
+					 e.printStackTrace();
+					 }
+
+					CallRecordService.INSTANCE.hideCallRecord(number);
+					// CallRecordActivity.refresh();
+				}
+
+			}
 			break;
 		}
 	}
-	
-	private void endCall()  
-    {  
-        Class<TelephonyManager> c = TelephonyManager.class;           
-        try  
-        {  
-            Method getITelephonyMethod = c.getDeclaredMethod("getITelephony", (Class[]) null);  
-            getITelephonyMethod.setAccessible(true);  
-            ITelephony iTelephony = null;  
-            Log.e(TAG, "End call.");  
-            iTelephony = (ITelephony) getITelephonyMethod.invoke(telMgr, (Object[]) null);  
-            iTelephony.endCall();  
-        }  
-        catch (Exception e)  
-        {  
-            Log.e(TAG, "Fail to answer ring call.", e);  
-        }          
-    }  
+
+	private void endCall() {
+		Class<TelephonyManager> c = TelephonyManager.class;
+		try {
+			Method getITelephonyMethod = c.getDeclaredMethod("getITelephony",
+					(Class[]) null);
+			getITelephonyMethod.setAccessible(true);
+			ITelephony iTelephony = null;
+			Log.e(TAG,
+					"End call.");
+			iTelephony = (ITelephony) getITelephonyMethod.invoke(telMgr,
+					(Object[]) null);
+			iTelephony.endCall();
+		} catch (Exception e) {
+			Log.e(TAG,
+					"Fail to answer ring call.",
+					e);
+		}
+	}
 
 }

@@ -23,11 +23,17 @@ public class SMSFragment extends Fragment  implements ITitle{
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		mHelper.onPostCreate();
 		
 		return mHelper.getView();
 	}
-
+	
+	@Override
+	public void onActivityCreated(
+			Bundle savedInstanceState) {
+		mHelper.onPostCreate();
+		super.onActivityCreated(savedInstanceState);
+	}
+	
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);

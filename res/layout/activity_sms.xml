@@ -1,19 +1,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".SMSActivity"
-    android:orientation="vertical" >
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:weightSum="8"
+    tools:context=".SMSActivity" >
 
-   <!--  <TextView
+    <!--
+         <TextView
         android:id="@+id/txt_sms_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/txt_sms_description" /> -->
+        android:text="@string/txt_sms_description" />
+    -->
 
     <ListView
         android:id="@+id/list_sms"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:layout_weight="7"
+        android:scrollbarStyle="outsideInset" />
+
+    <Button
+        android:id="@+id/btn_sms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawableLeft="@drawable/sms"
+        android:text="@string/txt_sms_send"
+        android:textColor="#ffabcdef"
+        android:textSize="15sp" />
 
 </LinearLayout>

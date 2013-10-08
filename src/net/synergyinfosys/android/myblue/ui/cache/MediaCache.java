@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
 import net.synergyinfosys.android.myblue.adao.ContactADao;
 import net.synergyinfosys.android.myblue.bean.Contact;
 import net.synergyinfosys.android.myblue.dao.ContactDao;
@@ -33,10 +36,19 @@ public class MediaCache implements IUIDataCache {
 		return SingletonHolder.INSTANCE;
 	}
 
+	private MediaCache() {
+	}
+
 	@Override
 	public void initialData(
 			Context ctx) {
 		mContext = ctx;
+
+		// Create global configuration and initialize ImageLoader with this
+		// configuration
+		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(mContext).build();
+		ImageLoader.getInstance().init(config);
+
 		mContactList = new ArrayList<String>();
 		mPhoto = new HashMap<String, Drawable>();
 

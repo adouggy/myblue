@@ -3,7 +3,6 @@ package net.synergyinfosys.android.myblue;
 import net.synergyinfosys.android.myblue.androidservice.LongLiveService;
 import net.synergyinfosys.android.myblue.fragment.ITitle;
 import net.synergyinfosys.android.myblue.fragment.MenuFragment;
-import net.synergyinfosys.android.myblue.helper.TutorialHelper;
 import net.synergyinfosys.android.myblue.util.WebUtil;
 
 import com.actionbarsherlock.view.Menu;
