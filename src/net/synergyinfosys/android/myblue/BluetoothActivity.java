@@ -66,7 +66,7 @@ public class BluetoothActivity extends Activity implements OnClickListener {
 	}
 
 	public static void addToNearList(BluetoothDevice device) {
-		BluetoothNearListAdapter.addDevice(device);
+		BluetoothNearListAdapter.addDevice(device, "");
 		if (mNearAdapter != null) {
 			mNearAdapter.notifyDataSetChanged();
 		}

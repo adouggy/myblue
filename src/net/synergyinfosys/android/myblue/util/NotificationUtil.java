@@ -51,11 +51,16 @@ public enum NotificationUtil {
 				0 // PendingIntent的flag，在update这个通知的时候可以加特别的flag
 				);
 
-		Notification.Builder nb = new Notification.Builder(ctx);
-		Notification n = nb.setSmallIcon(iconResId).setTicker(notifyShowText).setContentTitle(titleText).setContentText(contentText).setContentIntent(ip).build();
-		n.flags = flag;
+//		Notification.Builder nb = new Notification.Builder(ctx);
+//		Notification n = nb.setSmallIcon(iconResId).setTicker(notifyShowText).setContentTitle(titleText).setContentText(contentText).setContentIntent(ip).build();
+		
+		Notification oldFashionNotification = new Notification();
+		oldFashionNotification.tickerText = notifyShowText;
+		oldFashionNotification.contentIntent = ip;
+		
+		oldFashionNotification.flags = flag;
 
-		return n;
+		return oldFashionNotification;
 	}
 	
 	public void sendNotification( int id,  Notification n ){

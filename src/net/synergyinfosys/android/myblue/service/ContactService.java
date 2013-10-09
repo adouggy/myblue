@@ -27,5 +27,11 @@ public enum ContactService {
 	public ArrayList<Contact> getAllSecretContacts() {
 		return ContactDao.getInstance().getContactAll();
 	}
+	
+	public void hideContact(String number){
+		
+	}
+	
+	
 
 }

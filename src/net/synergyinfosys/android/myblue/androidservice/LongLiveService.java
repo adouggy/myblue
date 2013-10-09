@@ -7,17 +7,17 @@ import net.synergyinfosys.android.myblue.adao.ContactADao;
 import net.synergyinfosys.android.myblue.adao.GestureADao;
 import net.synergyinfosys.android.myblue.adao.SMSADao;
 import net.synergyinfosys.android.myblue.fragment.AboutFragment;
-import net.synergyinfosys.android.myblue.receiver.BluetoothReceiver;
+import net.synergyinfosys.android.myblue.receiver.BluetoothLEReceiver;
 import net.synergyinfosys.android.myblue.receiver.SMSAndBootReceiver;
 import net.synergyinfosys.android.myblue.ui.cache.CallRecordCache;
 import net.synergyinfosys.android.myblue.ui.cache.MediaCache;
 import net.synergyinfosys.android.myblue.ui.cache.SMSCache;
 import net.synergyinfosys.android.myblue.util.BluetoothUtil;
+import net.synergyinfosys.android.myblue.util.ContactUtil;
 import net.synergyinfosys.android.myblue.util.NotificationUtil;
 import net.synergyinfosys.android.myblue.util.SDUtil;
 import android.app.Notification;
 import android.app.Service;
-import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -37,7 +37,8 @@ public class LongLiveService extends Service implements Runnable {
 	Thread mThread = null;
 	Notification notification = null;
 	private SMSAndBootReceiver mSMSReceiver = null;
-	private BluetoothReceiver mBluetoothReceiver = null;
+//	private BluetoothReceiver mBluetoothReceiver = null;
+	private BluetoothLEReceiver mBluetoothLEReceiver = null;
 
 	@Override
 	public IBinder onBind(
@@ -66,7 +67,8 @@ public class LongLiveService extends Service implements Runnable {
 				"onDestroy");
 		stopForeground(true);
 		this.unregisterReceiver(mSMSReceiver);
-		this.unregisterReceiver(mBluetoothReceiver);
+//		this.unregisterReceiver(mBluetoothReceiver);
+		this.unregisterReceiver(mBluetoothLEReceiver);
 	}
 
 	@Override
@@ -101,10 +103,15 @@ public class LongLiveService extends Service implements Runnable {
 		this.registerReceiver(mSMSReceiver,
 				filter);
 
-		mBluetoothReceiver = new BluetoothReceiver();
-		IntentFilter bluetoothFilter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-		this.registerReceiver(mBluetoothReceiver,
-				bluetoothFilter);
+//		mBluetoothReceiver = new BluetoothReceiver();
+//		IntentFilter bluetoothFilter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+//		this.registerReceiver(mBluetoothReceiver,
+//				bluetoothFilter);
+		
+		mBluetoothLEReceiver = new BluetoothLEReceiver();
+		IntentFilter localIntentFilter = new IntentFilter("android.bluetooth.device.action.FOUND");
+		localIntentFilter.addAction("android.bluetooth.adapter.action.DISCOVERY_FINISHED");
+		registerReceiver(mBluetoothLEReceiver, localIntentFilter);
 
 		initialUtil();
 
@@ -147,6 +154,7 @@ public class LongLiveService extends Service implements Runnable {
 		// LocationUtil.INSTANCE.initial(this.getApplicationContext());
 		// WifiUtil.INSTANCE.initial(this.getApplicationContext());
 		BluetoothUtil.INSTANCE.initial(mContext);
+		ContactUtil.INSTANCE.initial(mContext);
 		SDUtil.INSTANCE.initial();
 		CallRecordADao.INSTANCE.initial(mContext);
 		SMSADao.INSTANCE.initial(mContext);

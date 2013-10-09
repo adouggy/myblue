@@ -1,6 +1,7 @@
 package net.synergyinfosys.android.myblue.adapter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import net.synergyinfosys.android.myblue.R;
@@ -22,14 +23,30 @@ public class BluetoothNearListAdapter extends BaseAdapter {
 
 	private static List<BluetoothDevice> mBluetoothList = new ArrayList<BluetoothDevice>();
 	private static LayoutInflater mInflater = null;
+	private static HashMap<String, String> mAddressToExtraInfoMap = new HashMap<String, String>();
 
 	public BluetoothNearListAdapter(Context ctx) {
 		mInflater = LayoutInflater.from(ctx);
 	}
 
-	public static void addDevice(BluetoothDevice device) {
-		mBluetoothList.add( device );
-		BluetoothHelper.setNearListCount( mBluetoothList.size() );
+	public static void addDevice(BluetoothDevice device, String extraInfo) {
+		if( device == null || device.getAddress() == null )
+			return ;
+		
+		mAddressToExtraInfoMap.put(device.getAddress(), extraInfo);
+		
+		boolean alreadyAdd = false;
+		for( BluetoothDevice d : mBluetoothList ){
+			if( d.getAddress().compareTo(device.getAddress()) == 0 ){
+				alreadyAdd = true;
+				break;
+			}
+		}
+		
+		if( !alreadyAdd ){
+			mBluetoothList.add( device );
+			BluetoothHelper.setNearListCount( mBluetoothList.size() );
+		}
 	}
 	
 	public static void clearDevice() {
@@ -67,7 +84,7 @@ public class BluetoothNearListAdapter extends BaseAdapter {
 		}
 
 		final BluetoothDevice b = mBluetoothList.get(position);
-		holder.name.setText(b.getName());
+		holder.name.setText(b.getName() + "(" + mAddressToExtraInfoMap.get(b.getAddress()) + ")");
 		holder.others.setText(b.getAddress());
 		holder.add.setOnClickListener(new OnClickListener() {
 			@Override

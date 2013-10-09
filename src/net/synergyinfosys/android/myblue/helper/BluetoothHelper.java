@@ -9,6 +9,7 @@ import net.synergyinfosys.android.myblue.bean.Bluetooth;
 import net.synergyinfosys.android.myblue.service.BluetoothService;
 import net.synergyinfosys.android.myblue.util.BluetoothUtil;
 import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,7 +22,7 @@ public class BluetoothHelper extends MyHelper implements OnClickListener{
 	
 	private static TextView mTxtWihitelistCount = null;
 	private static TextView mTxtAlllistCount = null;
-	private Button mBtnScan = null;
+	private static Button mBtnScan = null;
 	private ListView mListWhite = null;
 	private ListView mListAll = null;
 	private static BluetoothNearListAdapter mNearAdapter = null;
@@ -82,8 +83,8 @@ public class BluetoothHelper extends MyHelper implements OnClickListener{
 		}
 	}
 
-	public static void addToNearList(BluetoothDevice device) {
-		BluetoothNearListAdapter.addDevice(device);
+	public static void addToNearList(BluetoothDevice device, String extraInfo) {
+		BluetoothNearListAdapter.addDevice(device, extraInfo);
 		if (mNearAdapter != null) {
 			mNearAdapter.notifyDataSetChanged();
 		}
@@ -97,15 +98,50 @@ public class BluetoothHelper extends MyHelper implements OnClickListener{
 			mWhiteAdapter.notifyDataSetChanged();
 		}
 	}
+	
+	private void startScanning(){
+		BluetoothNearListAdapter.clearDevice();
+		setNearListCount( 0 );
+		BluetoothUtil.INSTANCE.startSearch();
+		makeCorrectStatus();
+		showScanning();
+	}
+	
+	private void stopScanning(){
+		BluetoothUtil.INSTANCE.stopSearch();
+		makeCorrectStatus();
+		showStopping();
+	}
+	
+	public static void makeCorrectStatus(){
+		BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+		if ((bluetoothAdapter != null) && (bluetoothAdapter.isDiscovering())){
+			showScanning();
+		}else{
+			showStopping();
+		}
+	}
+	
+	public static void showScanning(){
+		mBtnScan.setText("正在扫描...点击停止");
+	}
+	
+	public static void showStopping(){
+		mBtnScan.setText("扫描附近的蓝牙设备(蓝牙" + (BluetoothUtil.isBLE()?"BLE":"3.0") + ")");
+	}
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btn_bluetooth_scan:
-			BluetoothNearListAdapter.clearDevice();
-			setNearListCount( 0 );
-			BluetoothUtil.INSTANCE.startSearch();
+			BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+			if ((bluetoothAdapter != null) && (bluetoothAdapter.isDiscovering())){
+				stopScanning();
+			}else{
+				startScanning();
+			}
 			break;
 		}		
 	}
+	
 }
