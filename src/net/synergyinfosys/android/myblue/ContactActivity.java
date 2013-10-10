@@ -59,6 +59,7 @@ public class ContactActivity extends Activity implements OnClickListener {
 			ComponentName addContactCN = new ComponentName(mContext, ContactAddActivity.class);
 			addContactIntent.setComponent(addContactCN);
 			startActivity(addContactIntent);
+			 
 			break;
 		}
 	}

@@ -12,11 +12,31 @@ public class Contact implements Parcelable {
 	private boolean hideCallRecord;
 	private CallMode callMode;
 	private boolean isSelected = false;
+	private String lookupKey;
+	private long contactId;
 
 	public boolean isValid() {
-		if (StringUtil.INSTACE.isNoneBlank(name) && StringUtil.INSTACE.isNoneBlank(number))
+		if (StringUtil.isNoneBlank(name) && StringUtil.isNoneBlank(number))
 			return true;
 		return false;
+	}
+	
+	public long getContactId() {
+		return contactId;
+	}
+
+	public void setContactId(
+			long contactId) {
+		this.contactId = contactId;
+	}
+
+	public String getLookupKey() {
+		return lookupKey;
+	}
+
+	public void setLookupKey(
+			String lookupKey) {
+		this.lookupKey = lookupKey;
 	}
 
 	public long getId() {
@@ -65,6 +85,8 @@ public class Contact implements Parcelable {
 	}
 
 	public CallMode getCallMode() {
+		if( callMode == null )
+			return CallMode.normal;
 		return callMode;
 	}
 
@@ -106,6 +128,12 @@ public class Contact implements Parcelable {
 
 		sb.append("isSelected->" + this.isSelected());
 		sb.append("\n");
+		
+		sb.append("lookupKey->" + this.getLookupKey());
+		sb.append("\n");
+		
+		sb.append("contactId->" + this.getContactId());
+		sb.append("\n");
 
 		return sb.toString();
 	}
@@ -121,6 +149,8 @@ public class Contact implements Parcelable {
 			c.setHideCallRecord(in.readByte() == 1);
 			c.setCallMode(CallMode.valueOf(in.readString()));
 			c.setSelected(in.readByte() == 1);
+			c.setLookupKey(in.readString());
+			c.setContactId(in.readLong());
 			return c;
 		}
 
@@ -146,6 +176,8 @@ public class Contact implements Parcelable {
 		dest.writeByte((byte) (this.isHideCallRecord() ? 1 : 0));
 		dest.writeString(this.getCallMode().toString());
 		dest.writeByte((byte) (this.isSelected() ? 1 : 0));
+		dest.writeString(this.getLookupKey());
+		dest.writeLong(this.getContactId());
 	}
 
 }

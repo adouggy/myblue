@@ -4,6 +4,7 @@ import net.synergyinfosys.android.myblue.bean.CallMode;
 import net.synergyinfosys.android.myblue.bean.Contact;
 import net.synergyinfosys.android.myblue.dao.ContactDao;
 import net.synergyinfosys.android.myblue.fragment.ContactFragment;
+import net.synergyinfosys.android.myblue.service.ContactService;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
@@ -117,9 +118,9 @@ public class ContactAddActivity extends Activity implements OnClickListener {
 			}
 			break;
 		case R.id.btn_contact_add_delete:
-			int count = ContactDao.getInstance().removeContact( this.mUpdateContact.getId() );
-			Log.i( TAG, "deleted " + count );
-//			ContactActivity.refreshContact();
+//			int count = ContactDao.getInstance().removeContact( this.mUpdateContact.getId() );
+			ContactService.INSTANCE.restoreContact( this.mUpdateContact );
+			Log.i( TAG, "restore " );
 			ContactFragment.refresh();
 			this.finish();
 			break;

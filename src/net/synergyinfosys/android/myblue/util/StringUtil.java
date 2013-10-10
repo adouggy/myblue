@@ -21,7 +21,7 @@ public enum StringUtil {
 	 * @param len
 	 * @return
 	 */
-	public String shorten(String str, int len) {
+	public static String shorten(String str, int len) {
 		if( str == null )
 			return null;
 		
@@ -36,10 +36,16 @@ public enum StringUtil {
 		return str;
 	}
 	
-	public boolean isNoneBlank(String str){
+	public static boolean isNoneBlank(String str){
 		if( str == null || str.trim().length()==0 )
 			return false;
 		
 		return true;
+	}
+	
+	public static String makeNotNull(String str){
+		if( str == null )
+			return "";
+		return str;
 	}
 }

@@ -33,7 +33,32 @@ public class Constants {
 			"callMode varchar(10)," +
 			"androidId integer," +
 			"isDelete integer," +
-			"isSelected integer" +
+			"isSelected integer," +
+			"lookupKey varchar(50)," +
+			"contactId integer" +
+			")";
+	
+	public static final String DB_TABLE_PHONE_NAME = "phone";
+	public static final String DB_TABLE_PHONE_SQL = 
+			"create table if not exists phone(" +
+			"id integer primary key autoincrement, " +
+			"lookupKey varchar(50)," +
+			"rawContactId integer," +
+			"data1 varchar(100)," +
+			"data2 varchar(100)," +
+			"data3 varchar(100)," +
+			"data4 varchar(100)," +
+			"data5 varchar(100)," +
+			"data6 varchar(100)," +
+			"data7 varchar(100)," +
+			"data8 varchar(100)," +
+			"data9 varchar(100)," +
+			"data10 varchar(100)," +
+			"data11 varchar(100)," +
+			"data12 varchar(100)," +
+			"data13 varchar(100)," +
+			"data14 varchar(100)," +
+			"data15 varchar(100)" +
 			")";
 	
 	public static final String DB_TABLE_CALL_RECORD_NAME = "callrecord";

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import net.synergyinfosys.android.myblue.bean.CallMode;
 import net.synergyinfosys.android.myblue.bean.Contact;
 import net.synergyinfosys.android.myblue.util.Constants;
+import net.synergyinfosys.android.myblue.util.StringUtil;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -40,18 +41,25 @@ public class ContactDao extends AbstractDBDao{
 	public long insertContact( Contact contact ){
 		Log.i(TAG, "insertContact");
 		ContentValues cv = new ContentValues();
-		cv.put("name", contact.getName());
-		cv.put("number", contact.getNumber());
+		cv.put("name", StringUtil.makeNotNull(contact.getName()));
+		cv.put("number", StringUtil.makeNotNull(contact.getNumber()));
 		cv.put("hideSMS", contact.isHideSMS());
 		cv.put("hideCallRecord", contact.isHideCallRecord());
-		cv.put("callMode", contact.getCallMode().toString());
+		cv.put("callMode", StringUtil.makeNotNull(contact.getCallMode().toString()));
 		cv.put("isSelected", contact.isSelected());
+		cv.put("lookupKey", StringUtil.makeNotNull(contact.getLookupKey()));
+		cv.put("contactId", StringUtil.makeNotNull(contact.getContactId() + ""));
 		return mDBInstance.insert(Constants.DB_TABLE_CONTACT_NAME, null, cv);
 	}
 	
 	public int removeContact( long id ){
 		Log.i(TAG, "removeContact");
 		return mDBInstance.delete(Constants.DB_TABLE_CONTACT_NAME, "id=?", new String[]{ id+"" });
+	}
+	
+	public int removeContactByLookupKey( String lookupKey ){
+		Log.i(TAG, "removeContactByLookupKey");
+		return mDBInstance.delete(Constants.DB_TABLE_CONTACT_NAME, "lookupKey=?", new String[]{ lookupKey });
 	}
 	
 	public int updateContact(Contact contact){
@@ -63,6 +71,8 @@ public class ContactDao extends AbstractDBDao{
 		cv.put("hideCallRecord", contact.isHideCallRecord());
 		cv.put("callMode", contact.getCallMode().toString());
 		cv.put("isSelected", contact.isSelected());
+		cv.put("lookupKey", contact.getLookupKey());
+		cv.put("contactId", StringUtil.makeNotNull(contact.getContactId() + ""));
 		return mDBInstance.update(Constants.DB_TABLE_CONTACT_NAME, cv, "id=?", new String[]{ contact.getId()+"" });
 	}
 	
@@ -79,6 +89,8 @@ public class ContactDao extends AbstractDBDao{
 			c.setHideSMS( cursor.getInt( cursor.getColumnIndex("hideSMS") )==1?true:false );
 			c.setCallMode( CallMode.valueOf( cursor.getString( cursor.getColumnIndex("callMode") ) ) );
 			c.setSelected( cursor.getInt( cursor.getColumnIndex("isSelected") )==1?true:false );
+			c.setLookupKey( cursor.getString( cursor.getColumnIndex("lookupKey") ) );
+			c.setContactId( cursor.getLong( cursor.getColumnIndex("contactId") ) );
 			return c;
 		}
 		cursor.close();
@@ -98,6 +110,8 @@ public class ContactDao extends AbstractDBDao{
 			c.setHideSMS( cursor.getInt( cursor.getColumnIndex("hideSMS") )==1?true:false );
 			c.setCallMode( CallMode.valueOf( cursor.getString( cursor.getColumnIndex("callMode") ) ) );
 			c.setSelected( cursor.getInt( cursor.getColumnIndex("isSelected") )==1?true:false );
+			c.setLookupKey( cursor.getString( cursor.getColumnIndex("lookupKey") ) );
+			c.setContactId( cursor.getLong( cursor.getColumnIndex("contactId") ) );
 			return c;
 		}
 		cursor.close();
@@ -117,6 +131,8 @@ public class ContactDao extends AbstractDBDao{
 			c.setHideSMS( cursor.getInt( cursor.getColumnIndex("hideSMS") )==1?true:false );
 			c.setCallMode( CallMode.valueOf( cursor.getString( cursor.getColumnIndex("callMode") ) ) );
 			c.setSelected( cursor.getInt( cursor.getColumnIndex("isSelected") )==1?true:false );
+			c.setLookupKey( cursor.getString( cursor.getColumnIndex("lookupKey") ) );
+			c.setContactId( cursor.getLong( cursor.getColumnIndex("contactId") ) );
 			return c;
 		}
 		cursor.close();
@@ -136,6 +152,8 @@ public class ContactDao extends AbstractDBDao{
 			c.setHideSMS( cursor.getInt( cursor.getColumnIndex("hideSMS") )==1?true:false );
 			c.setCallMode( CallMode.valueOf( cursor.getString( cursor.getColumnIndex("callMode") ) ) );
 			c.setSelected( cursor.getInt( cursor.getColumnIndex("isSelected") )==1?true:false );
+			c.setLookupKey( cursor.getString( cursor.getColumnIndex("lookupKey") ) );
+			c.setContactId( cursor.getLong( cursor.getColumnIndex("contactId") ) );
 			list.add( c );
 		}
 		Log.i( TAG, list.size() + " results returned" );
@@ -157,6 +175,8 @@ public class ContactDao extends AbstractDBDao{
 			c.setHideSMS( cursor.getInt( cursor.getColumnIndex("hideSMS") )==1?true:false );
 			c.setCallMode( CallMode.valueOf( cursor.getString( cursor.getColumnIndex("callMode") ) ) );
 			c.setSelected( cursor.getInt( cursor.getColumnIndex("isSelected") )==1?true:false );
+			c.setLookupKey( cursor.getString( cursor.getColumnIndex("lookupKey") ) );
+			c.setContactId( cursor.getLong( cursor.getColumnIndex("contactId") ) );
 			list.add( c );
 		}
 		Log.i( TAG, list.size() + " results returned" );
