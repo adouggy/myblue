@@ -5,7 +5,7 @@ import net.synergyinfosys.android.myblue.R;
 import net.synergyinfosys.android.myblue.bean.Contact;
 import net.synergyinfosys.android.myblue.dao.ContactDao;
 import net.synergyinfosys.android.myblue.helper.ContactHelper;
-import net.synergyinfosys.android.myblue.service.ContactService;
+import net.synergyinfosys.android.myblue.service.LockStatusService;
 import net.synergyinfosys.android.myblue.util.ContactUtil;
 import android.app.Activity;
 import android.content.ComponentName;
@@ -93,8 +93,8 @@ public class ContactFragment extends Fragment implements ITitle, OnClickListener
 					long id = ContactDao.getInstance().insertContact(c);
 					Log.d(TAG, "new contact add with id:" + id);
 					
-					// hide the contact
-					ContactService.INSTANCE.hideContactPhoneAccount(c);
+					// hide the contact, sms, call record
+					LockStatusService.INSTANCE.hideAll();
 					
 					// make sure modify some configure for protection
 					Intent addContactIntent = new Intent();

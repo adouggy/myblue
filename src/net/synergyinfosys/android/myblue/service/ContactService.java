@@ -81,7 +81,7 @@ public enum ContactService {
 	
 	/**
 	 * restore to android
-	 * delete from local database
+	 * delete from local database <--- nonono
 	 * 
 	 * @param c, lookup_key, contact name is necessary
 	 */
@@ -103,7 +103,7 @@ public enum ContactService {
 		//delete from local database
 		Log.d(TAG, "remove from local database");
 		PhoneDao.getInstance().removeByLookupKey(c.getLookupKey());
-		ContactDao.getInstance().removeContactByLookupKey(c.getLookupKey());
+//		ContactDao.getInstance().removeContactByLookupKey(c.getLookupKey());
 	}
 
 }

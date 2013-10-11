@@ -80,9 +80,13 @@ public class CallRecordListAdapter extends BaseAdapter {
 			return convertView;
 		}
 		
+		String newTag = "";
+		if( c.isNew() ){
+			newTag = " new!";
+		}
 		holder.name.setText( contact.getName() );
 		holder.number.setText( contact.getNumber() );
-		holder.time.setText( c.getRecordTimeStr() );
+		holder.time.setText( c.getRecordTimeStr() + newTag );
 		
 		CallStatus status =  c.getStatus();
 		if( status.compareTo( CallStatus.incoming ) ==0 ){

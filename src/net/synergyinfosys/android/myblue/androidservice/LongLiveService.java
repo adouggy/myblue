@@ -1,14 +1,14 @@
 package net.synergyinfosys.android.myblue.androidservice;
 
-import net.synergyinfosys.android.myblue.HomeSlideActivity;
-import net.synergyinfosys.android.myblue.R;
 import net.synergyinfosys.android.myblue.adao.CallRecordADao;
 import net.synergyinfosys.android.myblue.adao.ContactADao;
 import net.synergyinfosys.android.myblue.adao.GestureADao;
 import net.synergyinfosys.android.myblue.adao.SMSADao;
+import net.synergyinfosys.android.myblue.bean.LockStatus;
 import net.synergyinfosys.android.myblue.fragment.AboutFragment;
 import net.synergyinfosys.android.myblue.receiver.BluetoothLEReceiver;
 import net.synergyinfosys.android.myblue.receiver.SMSAndBootReceiver;
+import net.synergyinfosys.android.myblue.service.LockStatusService;
 import net.synergyinfosys.android.myblue.ui.cache.CallRecordCache;
 import net.synergyinfosys.android.myblue.ui.cache.MediaCache;
 import net.synergyinfosys.android.myblue.ui.cache.SMSCache;
@@ -52,13 +52,10 @@ public class LongLiveService extends Service implements Runnable {
 				"onCreate");
 		mContext = this.getApplicationContext();
 		this.mThread = new Thread(this);
-		notification = NotificationUtil.INSTANCE.genNotification(this.mContext,
-				R.drawable.ic_launcher,
-				"正在启动蓝牙锁",
-				"蓝牙锁正在运行",
-				"来自新能聚信",
-				HomeSlideActivity.class,
-				Notification.FLAG_FOREGROUND_SERVICE);
+		
+		initialUtil();
+		
+		notification = NotificationUtil.INSTANCE.makeMyBlueNotification(true, "启动蓝牙锁", "后台运行..", Notification.FLAG_FOREGROUND_SERVICE);
 	}
 
 	@Override
@@ -129,6 +126,9 @@ public class LongLiveService extends Service implements Runnable {
 		if (AboutFragment.mLockStatusHandler != null) {
 			AboutFragment.mLockStatusHandler.sendEmptyMessage(0);
 		}
+		
+		LockStatus status = LockStatusService.INSTANCE.isLock();
+		LockStatusService.INSTANCE.doSth(status);
 	}
 
 	@Override

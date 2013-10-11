@@ -12,7 +12,7 @@ public enum WebUtil {
 	}
 	
 	public static void goToHomePage(Context context) {
-		Uri uriUrl = Uri.parse("http://www.promenade.me");
+		Uri uriUrl = Uri.parse("http://www.synergyinfo.cn");
 		Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl); 
 		context.startActivity(launchBrowser);
 	}

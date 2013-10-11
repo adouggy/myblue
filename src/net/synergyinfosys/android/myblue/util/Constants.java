@@ -70,7 +70,8 @@ public class Constants {
 			"hideSMS integer, " +
 			"status varchar(50), " +
 			"androidId integer, " +
-			"isDelete integer " +
+			"isDelete integer," +
+			"isNew integer" +
 			")";
 	
 	public static final String DB_TABLE_ENCRYPT_NAME = "encrypt";

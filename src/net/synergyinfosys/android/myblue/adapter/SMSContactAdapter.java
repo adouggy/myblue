@@ -20,7 +20,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class SMSContactAdapter extends BaseAdapter implements TitleProvider, OnClickListener {
-
 	private static final String TAG = "SMSContactAdapter";
 	
 	private LayoutInflater mInflater = null;

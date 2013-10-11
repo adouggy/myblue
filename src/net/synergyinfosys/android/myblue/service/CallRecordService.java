@@ -15,16 +15,17 @@ public enum CallRecordService {
 	
 	CallRecordService(){}
 	
-	public void hideCallRecord(boolean hide, String number){
-		if( hide ){
-			ArrayList<CallRecord> list = CallRecordADao.INSTANCE.getCallRecord(number);
-			CallRecordDao.getInstance().insert(list);
-		}else{
-			CallRecordDao.getInstance().removeAll();
-		}
+	public int getNewCallRecordCount(){
+		return CallRecordDao.getInstance().getNew().size();
 	}
 	
-	public void hideCallRecord(String number){
+	/**
+	 * find all call record by number
+	 * insert each into local database and remove each from android
+	 * 
+	 * @param number
+	 */
+	public void hideCallRecord(String number, boolean isNewIncomingCall){
 		Log.i( TAG, "hideLatestCallRecord:" + number );
 		
 		//get all call record
@@ -32,6 +33,7 @@ public enum CallRecordService {
 		
 		if( list != null ){
 			for( CallRecord c : list ){
+				c.setNew(isNewIncomingCall);
 				long id = CallRecordDao.getInstance().insert( c );
 				int res = CallRecordADao.INSTANCE.removeCallRecord( c.getAndroidId() );
 				
@@ -40,9 +42,14 @@ public enum CallRecordService {
 		}
 	}
 	
+	/**
+	 * get all intercept call record (isNew = 1)
+	 * put all this call record into android
+	 * remove it from local database
+	 */
 	public void resumeCallRecord(){
-		ArrayList<CallRecord> list = CallRecordDao.getInstance().getAll();
+		ArrayList<CallRecord> list = CallRecordDao.getInstance().getNew();
 		CallRecordADao.INSTANCE.resumeCallRecord(list);
-		CallRecordDao.getInstance().removeAll();
+		CallRecordDao.getInstance().removeNew();
 	}
 }

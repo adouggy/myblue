@@ -118,8 +118,13 @@ public class SMSListAdapter extends BaseAdapter {
 			holder.me.setVisibility(View.GONE);			
 		}
 		
-		holder.summary.setText(StringUtil.INSTACE.shorten(sms.getBody(), 40));
-		holder.date.setText(formatter.format(new Date(sms.getDate())));
+		String newTag = "";
+		if( sms.getRead() == 0 ){
+			newTag = " new!";
+		}
+		
+		holder.summary.setText(StringUtil.shorten(sms.getBody(), 40));
+		holder.date.setText(formatter.format(new Date(sms.getDate())) + newTag);
 		
 		holder.commentDlg.setGravity(gravity);
 		holder.commentDlgMiddle.setGravity(gravity);

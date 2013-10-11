@@ -1,11 +1,14 @@
 package net.synergyinfosys.android.myblue.util;
 
+import net.synergyinfosys.android.myblue.HomeSlideActivity;
+import net.synergyinfosys.android.myblue.R;
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
 
 public enum NotificationUtil {
 
@@ -35,9 +38,10 @@ public enum NotificationUtil {
 	public Notification genNotification(
 			Context ctx,
 			int iconResId,
-			String notifyShowText,
+			String showText,
 			String titleText,
 			String contentText,
+			String contentInfo,
 			Class<?> cls,
 			int flag) {
 
@@ -51,21 +55,37 @@ public enum NotificationUtil {
 				0 // PendingIntent的flag，在update这个通知的时候可以加特别的flag
 				);
 
-//		Notification.Builder nb = new Notification.Builder(ctx);
-//		Notification n = nb.setSmallIcon(iconResId).setTicker(notifyShowText).setContentTitle(titleText).setContentText(contentText).setContentIntent(ip).build();
-		
-		Notification oldFashionNotification = new Notification();
-		oldFashionNotification.tickerText = notifyShowText;
-		oldFashionNotification.contentIntent = ip;
-		
-		oldFashionNotification.flags = flag;
+		NotificationCompat.Builder nb = new NotificationCompat.Builder(ctx);
+		nb.setSmallIcon(iconResId).setContentTitle(titleText).setContentText(contentText).setContentIntent(ip);
+		if (showText != null) {
+			nb.setTicker(showText);
+		}
+		nb.setContentInfo(contentInfo);
 
-		return oldFashionNotification;
+		return nb.build();
 	}
-	
-	public void sendNotification( int id,  Notification n ){
-		if( mNotificationManager != null )
-			mNotificationManager.notify(id, n);
+
+	public Notification makeMyBlueNotification(
+			boolean isLock,
+			String showText,
+			String info,
+			int flag) {
+		return NotificationUtil.INSTANCE.genNotification(this.mContext,
+				isLock ? R.drawable.lock_64 : R.drawable.lock_64_un,
+				showText,
+				"蓝牙锁",
+				"来自新能聚信",
+				info,
+				HomeSlideActivity.class,
+				flag);
+	}
+
+	public void sendNotification(
+			int id,
+			Notification n) {
+		if (mNotificationManager != null)
+			mNotificationManager.notify(id,
+					n);
 	}
 
 	/**

@@ -16,6 +16,7 @@ public class CallRecord implements Parcelable {
 	private CallStatus status;
 	private long androidId = -1;
 	private boolean isDelete = false;
+	private boolean isNew = false; //是否是没看见过的通话记录(被拦截的)
 
 	private DateFormat formatter = SimpleDateFormat.getDateTimeInstance();
 	
@@ -23,6 +24,15 @@ public class CallRecord implements Parcelable {
 		return formatter.format(new Date(this.getRecordTime()));
 	}
 	
+	public boolean isNew() {
+		return isNew;
+	}
+
+	public void setNew(
+			boolean isNew) {
+		this.isNew = isNew;
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -86,6 +96,8 @@ public class CallRecord implements Parcelable {
 		sb.append("\n");
 		sb.append("isDelete->" + this.isDelete());
 		sb.append("\n");
+		sb.append("isNew->" + this.isNew());
+		sb.append("\n");
 		return sb.toString();
 	}
 	
@@ -98,6 +110,7 @@ public class CallRecord implements Parcelable {
 			c.setStatus( CallStatus.valueOf( in.readString() ) );
 			c.setAndroidId( in.readLong() );
 			c.setDelete( in.readByte() == 1 );
+			c.setNew( in.readByte() == 1 );
 			return c;
 		}
 
@@ -119,6 +132,7 @@ public class CallRecord implements Parcelable {
 		dest.writeString( this.getStatus().toString() );
 		dest.writeLong( this.getAndroidId() );
 		dest.writeByte((byte) (this.isDelete() ? 1 : 0));
+		dest.writeByte((byte) (this.isNew() ? 1 : 0));
 	}
 
 }

@@ -45,6 +45,7 @@ public class CallRecordDao extends AbstractDBDao{
 		cv.put("status", c.getStatus().toString());
 		cv.put("androidId", c.getAndroidId());
 		cv.put("isDelete", c.isDelete());
+		cv.put("isNew", c.isNew());
 		return mDBInstance.insert(Constants.DB_TABLE_CALL_RECORD_NAME, null, cv);
 	}
 	
@@ -69,6 +70,11 @@ public class CallRecordDao extends AbstractDBDao{
 //		return update( c );
 	}
 	
+	public int removeNew(){
+		Log.i(TAG, "remove");
+		return mDBInstance.delete(Constants.DB_TABLE_CALL_RECORD_NAME, "isNew=?", new String[]{ "1" });
+	}
+	
 	public int removeAll(){
 		Log.i(TAG, "remove");
 		return mDBInstance.delete(Constants.DB_TABLE_CALL_RECORD_NAME, null, null);
@@ -82,6 +88,7 @@ public class CallRecordDao extends AbstractDBDao{
 		cv.put("status", c.getStatus().toString());
 		cv.put("androidId", c.getAndroidId());
 		cv.put("isDelete", c.isDelete());
+		cv.put("isNew", c.isNew());
 		return mDBInstance.update(Constants.DB_TABLE_CALL_RECORD_NAME, cv, "id=?", new String[]{ c.getId()+"" });
 	}
 	
@@ -97,6 +104,7 @@ public class CallRecordDao extends AbstractDBDao{
 			c.setStatus( CallStatus.valueOf(cursor.getString( cursor.getColumnIndex("status") ) ) );
 			c.setAndroidId( cursor.getLong( cursor.getColumnIndex("androidId")) );
 			c.setDelete( cursor.getInt( cursor.getColumnIndex("isDelete") )==1?true:false );
+			c.setNew( cursor.getInt( cursor.getColumnIndex("isNew") )==1?true:false );
 			return c;
 		}
 		cursor.close();
@@ -115,6 +123,28 @@ public class CallRecordDao extends AbstractDBDao{
 			c.setStatus( CallStatus.valueOf(cursor.getString( cursor.getColumnIndex("status") ) ) );
 			c.setAndroidId( cursor.getLong( cursor.getColumnIndex("androidId")) );
 			c.setDelete( cursor.getInt( cursor.getColumnIndex("isDelete") )==1?true:false );
+			c.setNew( cursor.getInt( cursor.getColumnIndex("isNew") )==1?true:false );
+			list.add( c );
+		}
+		Log.i( TAG, list.size() + " results returned" );
+		Log.d( TAG, list.toString() );
+		cursor.close();
+		return list;
+	}
+	
+	public ArrayList<CallRecord> getNew(){
+		Log.i(TAG, "getAll");
+		ArrayList<CallRecord> list = new ArrayList<CallRecord>();
+		Cursor cursor = mDBInstance.rawQuery("select * from " + Constants.DB_TABLE_CALL_RECORD_NAME + " where isNew=1 order by recordTime desc", null);
+		while (cursor.moveToNext()) {
+			CallRecord c= new CallRecord();
+			c.setId( cursor.getLong( cursor.getColumnIndex("id") ) );
+			c.setContactId( cursor.getLong( cursor.getColumnIndex("contactId") ) );
+			c.setRecordTime( cursor.getLong( cursor.getColumnIndex("recordTime") ) );
+			c.setStatus( CallStatus.valueOf(cursor.getString( cursor.getColumnIndex("status") ) ) );
+			c.setAndroidId( cursor.getLong( cursor.getColumnIndex("androidId")) );
+			c.setDelete( cursor.getInt( cursor.getColumnIndex("isDelete") )==1?true:false );
+			c.setNew( cursor.getInt( cursor.getColumnIndex("isNew") )==1?true:false );
 			list.add( c );
 		}
 		Log.i( TAG, list.size() + " results returned" );
