@@ -2,6 +2,7 @@ package net.synergyinfosys.android.myblue.dao;
 
 import java.util.ArrayList;
 
+import net.synergyinfosys.android.myblue.bean.Contact;
 import net.synergyinfosys.android.myblue.bean.SMS;
 import net.synergyinfosys.android.myblue.util.Constants;
 import android.content.ContentValues;
@@ -46,6 +47,35 @@ public class SMSDao extends AbstractDBDao{
 		cv.put("androidId", sms.getAndroidId());
 		cv.put("isDelete", sms.isDelete());
 		return mDBInstance.insert(Constants.DB_TABLE_SMS_NAME, null, cv);
+	}
+	
+	public ArrayList<SMS> getByContact(Contact c){
+		Log.i(TAG, "getAll");
+		
+		ArrayList<SMS> list = new ArrayList<SMS>();
+		final String sql = "select * from " + Constants.DB_TABLE_SMS_NAME + " where address='" + c.getNumber() + "' order by date asc";
+		try {
+			Cursor cursor = mDBInstance.rawQuery( sql, null );
+			while( cursor.moveToNext() ){
+				SMS sms = new SMS();
+				sms.setId( cursor.getLong(cursor.getColumnIndex("id")) );
+				sms.setAddress( cursor.getString(cursor.getColumnIndex("address")) );
+				sms.setBody( cursor.getString(cursor.getColumnIndex("body")) );
+				sms.setRead( cursor.getInt(cursor.getColumnIndex("read")) );
+				sms.setType( cursor.getInt(cursor.getColumnIndex("type")) );
+				sms.setDate( cursor.getLong(cursor.getColumnIndex("date")) );
+				sms.setAndroidId( cursor.getLong(cursor.getColumnIndex("androidId")) );
+				sms.setDelete( cursor.getInt(cursor.getColumnIndex("isDelete"))==1?true:false );
+				list.add(sms);
+			}
+			cursor.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		Log.i( TAG, list.size() + " sms returned");
+		Log.i( TAG, list.toString() );
+		return list;
 	}
 	
 	public ArrayList<SMS> getAll(){

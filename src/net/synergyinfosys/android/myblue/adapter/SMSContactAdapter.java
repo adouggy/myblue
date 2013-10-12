@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 public class SMSContactAdapter extends BaseAdapter implements TitleProvider, OnClickListener {
 	private static final String TAG = "SMSContactAdapter";
-	
+
 	private LayoutInflater mInflater = null;
 	private List<String> mList = null;
 
@@ -32,7 +32,7 @@ public class SMSContactAdapter extends BaseAdapter implements TitleProvider, OnC
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		mList = SMSCache.getInstance().getContactNames();// ContactDao.getInstance().getContactAll();
 	}
-	
+
 	@Override
 	public int getItemViewType(
 			int position) {
@@ -70,51 +70,64 @@ public class SMSContactAdapter extends BaseAdapter implements TitleProvider, OnC
 		ViewHolder holder = null;
 		if (convertView == null) {
 			holder = new ViewHolder();
-			convertView = mInflater.inflate(R.layout.activity_sms_stub, null);
+			convertView = mInflater.inflate(R.layout.activity_sms_stub,
+					null);
 			ViewStub vs = (ViewStub) convertView.findViewById(R.id.mystub);
 			convertView = vs.inflate();
-			
+
 			holder.smsList = (ListView) convertView.findViewById(R.id.list_sms);
 			holder.btn = (Button) convertView.findViewById(R.id.btn_sms);
 			holder.btn.setOnClickListener(this);
-			
+
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
+		}
+
+		if (position < 0) {
+			return convertView;
 		}
 
 		String contact = mList.get(position);
 		SMSListAdapter adapter = new SMSListAdapter(mContext, contact);
 		holder.smsList.setAdapter(adapter);
 		holder.smsList.setDividerHeight(0);
-//		holder.smsList.setSelection(adapter.getCount()-1);
-		
+		// holder.smsList.setSelection(adapter.getCount()-1);
+
 		SMSRetrieveJob job = new SMSRetrieveJob();
 		job.execute(holder.smsList);
-		
+
 		holder.btn.setText("与" + mList.get(position) + "开始交谈");
 		holder.btn.setTag(position);
-		
+
 		return convertView;
 	}
 
 	public String getTitle(
 			int position) {
-		return mList.get(position) + "(" + SMSCache.getInstance().getAllSMS().get(SMSCache.getInstance().getContactNames().get(position)).size() + ")";
+		
+		if( position < 0 )
+			return "nobody";
+		
+		return mList.get(position) + "(" + SMSCache.getInstance().getAllSMS().get(
+				SMSCache.getInstance().getContactNames().get(position)
+				).size() + ")";
 	}
 
 	static final class ViewHolder {
 		ListView smsList;
-		Button btn; 
+		Button btn;
 	}
 
 	@Override
 	public void onClick(
 			View v) {
-		switch( v.getId() ){
+		switch (v.getId()) {
 		case R.id.btn_sms:
 			int position = (Integer) v.getTag();
-			Toast.makeText(mContext, position + " xxx", Toast.LENGTH_SHORT).show();
+			Toast.makeText(mContext,
+					position + " xxx",
+					Toast.LENGTH_SHORT).show();
 			break;
 		}
 	}

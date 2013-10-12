@@ -6,6 +6,7 @@ import android.util.Log;
 
 import net.synergyinfosys.android.myblue.adao.CallRecordADao;
 import net.synergyinfosys.android.myblue.bean.CallRecord;
+import net.synergyinfosys.android.myblue.bean.Contact;
 import net.synergyinfosys.android.myblue.dao.CallRecordDao;
 
 public enum CallRecordService {
@@ -43,13 +44,33 @@ public enum CallRecordService {
 	}
 	
 	/**
-	 * get all intercept call record (isNew = 1)
+	 * get all intercept call record (isNew = 1) or all call record (isNew = 1 or 0)
 	 * put all this call record into android
 	 * remove it from local database
 	 */
-	public void resumeCallRecord(){
-		ArrayList<CallRecord> list = CallRecordDao.getInstance().getNew();
+	public void resumeCallRecord(boolean isNew){
+		ArrayList<CallRecord> list = null;
+		if( isNew )
+			list = CallRecordDao.getInstance().getNew();
+		else
+			list = CallRecordDao.getInstance().getAll();
+		
 		CallRecordADao.INSTANCE.resumeCallRecord(list);
-		CallRecordDao.getInstance().removeNew();
+		
+		if( isNew )
+			CallRecordDao.getInstance().removeNew();
+		else
+			CallRecordDao.getInstance().removeAll();
+	}
+	
+	public void resumeCallRecordPerContact(Contact c){
+		Log.i( TAG, "resumeCallRecordPerContact" );
+		Log.d( TAG, "by contact:" + c.toString() );
+		ArrayList<CallRecord> list = CallRecordDao.getInstance().getByContact(c);
+		Log.d( TAG, "call record count:" + list.size() );
+		
+		CallRecordADao.INSTANCE.resumeCallRecord(list);
+		
+		CallRecordDao.getInstance().removeByContact(c);
 	}
 }

@@ -2,6 +2,7 @@ package net.synergyinfosys.android.myblue.fragment;
 
 import net.synergyinfosys.android.myblue.HomeSlideActivity;
 import net.synergyinfosys.android.myblue.R;
+import net.synergyinfosys.android.myblue.ui.cache.SMSCache;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MenuFragment extends ListFragment {
 
@@ -55,7 +57,11 @@ public class MenuFragment extends ListFragment {
 			newContent = new CallRecordFragment();
 			break;
 		case 5:
-			newContent = new SMSFragment();
+			if( SMSCache.getInstance().getContactNames().size() == 0 ){
+				Toast.makeText(getActivity(), "目前没有联系人", Toast.LENGTH_SHORT).show();
+			}else{
+				newContent = new SMSFragment();
+			}
 			break;
 		case 6:
 			newContent = new AboutFragment();

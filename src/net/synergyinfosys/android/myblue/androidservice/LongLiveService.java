@@ -5,7 +5,6 @@ import net.synergyinfosys.android.myblue.adao.ContactADao;
 import net.synergyinfosys.android.myblue.adao.GestureADao;
 import net.synergyinfosys.android.myblue.adao.SMSADao;
 import net.synergyinfosys.android.myblue.bean.LockStatus;
-import net.synergyinfosys.android.myblue.fragment.AboutFragment;
 import net.synergyinfosys.android.myblue.receiver.BluetoothLEReceiver;
 import net.synergyinfosys.android.myblue.receiver.SMSAndBootReceiver;
 import net.synergyinfosys.android.myblue.service.LockStatusService;
@@ -25,10 +24,10 @@ import android.os.IBinder;
 import android.util.Log;
 
 public class LongLiveService extends Service implements Runnable {
-	static {
-		// looper 啥最烦了，现在这里初始化一下，否则那个handler都不能判断否为null
-		new AboutFragment();
-	}
+//	static {
+//		// looper 啥最烦了，现在这里初始化一下，否则那个handler都不能判断否为null
+//		new AboutFragment();
+//	}
 
 	public static final String TAG = "LongLiveService";
 
@@ -37,7 +36,6 @@ public class LongLiveService extends Service implements Runnable {
 	Thread mThread = null;
 	Notification notification = null;
 	private SMSAndBootReceiver mSMSReceiver = null;
-//	private BluetoothReceiver mBluetoothReceiver = null;
 	private BluetoothLEReceiver mBluetoothLEReceiver = null;
 
 	@Override
@@ -100,11 +98,6 @@ public class LongLiveService extends Service implements Runnable {
 		this.registerReceiver(mSMSReceiver,
 				filter);
 
-//		mBluetoothReceiver = new BluetoothReceiver();
-//		IntentFilter bluetoothFilter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-//		this.registerReceiver(mBluetoothReceiver,
-//				bluetoothFilter);
-		
 		mBluetoothLEReceiver = new BluetoothLEReceiver();
 		IntentFilter localIntentFilter = new IntentFilter("android.bluetooth.device.action.FOUND");
 		localIntentFilter.addAction("android.bluetooth.adapter.action.DISCOVERY_FINISHED");
@@ -123,12 +116,12 @@ public class LongLiveService extends Service implements Runnable {
 		// if( HomeActivity.mLockStatusHandler!=null )
 		// HomeActivity.mLockStatusHandler.sendEmptyMessage(0);
 
-		if (AboutFragment.mLockStatusHandler != null) {
-			AboutFragment.mLockStatusHandler.sendEmptyMessage(0);
-		}
+//		if (AboutFragment.mLockStatusHandler != null) {
+//			AboutFragment.mLockStatusHandler.sendEmptyMessage(0);
+//		}
 		
 		LockStatus status = LockStatusService.INSTANCE.isLock();
-		LockStatusService.INSTANCE.doSth(status);
+		LockStatusService.INSTANCE.checkStatus(status);
 	}
 
 	@Override

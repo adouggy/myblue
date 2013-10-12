@@ -63,7 +63,8 @@ public enum ContactService {
 		Log.d( TAG, c.toString() );
 		
 		//get all phone
-		ArrayList<Phone> list = ContactUtil.INSTANCE.getPhoneAccountGenericData(c.getContactId(), c.getLookupKey());
+		ArrayList<Phone> list = ContactUtil.INSTANCE.getPhoneAccountGenericData(/*c.getContactId(),*/ c.getLookupKey());
+		Log.d( TAG, "got phone account count:" + list.size() );
 		
 		//store in local database
 		for (Phone p : list) {
@@ -81,7 +82,7 @@ public enum ContactService {
 	
 	/**
 	 * restore to android
-	 * delete from local database <--- nonono
+	 * delete from local database
 	 * 
 	 * @param c, lookup_key, contact name is necessary
 	 */
@@ -103,7 +104,6 @@ public enum ContactService {
 		//delete from local database
 		Log.d(TAG, "remove from local database");
 		PhoneDao.getInstance().removeByLookupKey(c.getLookupKey());
-//		ContactDao.getInstance().removeContactByLookupKey(c.getLookupKey());
 	}
 
 }

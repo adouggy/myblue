@@ -4,7 +4,8 @@ import net.synergyinfosys.android.myblue.bean.CallMode;
 import net.synergyinfosys.android.myblue.bean.Contact;
 import net.synergyinfosys.android.myblue.dao.ContactDao;
 import net.synergyinfosys.android.myblue.fragment.ContactFragment;
-import net.synergyinfosys.android.myblue.service.ContactService;
+import net.synergyinfosys.android.myblue.service.LockStatusService;
+import net.synergyinfosys.android.myblue.ui.cache.SMSCache;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
@@ -97,7 +98,7 @@ public class ContactAddActivity extends Activity implements OnClickListener {
 				if( c.isValid() ){
 					long id = ContactDao.getInstance().insertContact(c);
 					Log.i(TAG, "new contact id=" + id);
-//				ContactActivity.refreshContact();
+					ContactFragment.refresh();
 					ContactFragment.refresh();
 				}
 				this.finish();
@@ -112,16 +113,18 @@ public class ContactAddActivity extends Activity implements OnClickListener {
 //				this.setResult(RESULT_OK, this.getIntent().putExtras(bundle));
 				int count = ContactDao.getInstance().updateContact(this.mUpdateContact);
 				Log.i( TAG, "updated " + count );
-//				ContactActivity.refreshContact();
 				ContactFragment.refresh();
 				this.finish();
 			}
 			break;
 		case R.id.btn_contact_add_delete:
-//			int count = ContactDao.getInstance().removeContact( this.mUpdateContact.getId() );
-			ContactService.INSTANCE.restoreContact( this.mUpdateContact );
+			LockStatusService.INSTANCE.restoreContact(mUpdateContact);
+			ContactDao.getInstance().removeContactByLookupKey( this.mUpdateContact.getLookupKey() );
+			
 			Log.i( TAG, "restore " );
 			ContactFragment.refresh();
+			SMSCache.getInstance().reload();
+			
 			this.finish();
 			break;
 		}

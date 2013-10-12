@@ -205,6 +205,13 @@ public enum ContactUtil {
 
 		}
 	}
+	
+	
+	public Contact getContactByLookupKey(String lookupKey){
+		Uri lookupUri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_LOOKUP_URI, lookupKey);
+	    Uri res = ContactsContract.Contacts.lookupContact(mContext.getContentResolver(), lookupUri);
+	    return getContactByUri( res );
+	}
 
 	/**
 	 * 
@@ -215,14 +222,18 @@ public enum ContactUtil {
 	 * @return
 	 */
 	public ArrayList<Phone> getPhoneAccountGenericData(
-			long contactId, String lookupKey) {
+			/*long contactId, */String lookupKey) {
 
 		ContentResolver cr = mContext.getContentResolver();
+		
+		Contact c = getContactByLookupKey( lookupKey );
+		
+		
 		ArrayList<Phone> list = new ArrayList<Phone>();
 		Cursor pCur = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
 				null,
 				ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
-				new String[] { contactId + "" },
+				new String[] { c.getContactId() + "" },
 				null);
 
 		while (pCur.moveToNext()) {

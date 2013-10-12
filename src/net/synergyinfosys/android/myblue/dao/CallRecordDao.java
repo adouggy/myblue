@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import net.synergyinfosys.android.myblue.bean.CallRecord;
 import net.synergyinfosys.android.myblue.bean.CallStatus;
+import net.synergyinfosys.android.myblue.bean.Contact;
 import net.synergyinfosys.android.myblue.util.Constants;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -80,6 +81,11 @@ public class CallRecordDao extends AbstractDBDao{
 		return mDBInstance.delete(Constants.DB_TABLE_CALL_RECORD_NAME, null, null);
 	}
 	
+	public int removeByContact( Contact c ){
+		Log.i(TAG, "remove");
+		return mDBInstance.delete(Constants.DB_TABLE_CALL_RECORD_NAME, "contactId=?", new String[]{c.getId()+""});
+	}
+	
 	public int update(CallRecord c){
 		Log.i(TAG, "update");
 		ContentValues cv = new ContentValues();
@@ -115,6 +121,27 @@ public class CallRecordDao extends AbstractDBDao{
 		Log.i(TAG, "getAll");
 		ArrayList<CallRecord> list = new ArrayList<CallRecord>();
 		Cursor cursor = mDBInstance.rawQuery("select * from " + Constants.DB_TABLE_CALL_RECORD_NAME + " order by recordTime desc", null);
+		while (cursor.moveToNext()) {
+			CallRecord c= new CallRecord();
+			c.setId( cursor.getLong( cursor.getColumnIndex("id") ) );
+			c.setContactId( cursor.getLong( cursor.getColumnIndex("contactId") ) );
+			c.setRecordTime( cursor.getLong( cursor.getColumnIndex("recordTime") ) );
+			c.setStatus( CallStatus.valueOf(cursor.getString( cursor.getColumnIndex("status") ) ) );
+			c.setAndroidId( cursor.getLong( cursor.getColumnIndex("androidId")) );
+			c.setDelete( cursor.getInt( cursor.getColumnIndex("isDelete") )==1?true:false );
+			c.setNew( cursor.getInt( cursor.getColumnIndex("isNew") )==1?true:false );
+			list.add( c );
+		}
+		Log.i( TAG, list.size() + " results returned" );
+		Log.d( TAG, list.toString() );
+		cursor.close();
+		return list;
+	}
+	
+	public ArrayList<CallRecord> getByContact(Contact contact){
+		Log.i(TAG, "getByContact");
+		ArrayList<CallRecord> list = new ArrayList<CallRecord>();
+		Cursor cursor = mDBInstance.rawQuery("select * from " + Constants.DB_TABLE_CALL_RECORD_NAME + " where contactId='" + contact.getId() +"' order by recordTime desc", null);
 		while (cursor.moveToNext()) {
 			CallRecord c= new CallRecord();
 			c.setId( cursor.getLong( cursor.getColumnIndex("id") ) );

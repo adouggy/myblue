@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.util.Log;
 import net.synergyinfosys.android.myblue.adao.SMSADao;
+import net.synergyinfosys.android.myblue.bean.Contact;
 import net.synergyinfosys.android.myblue.bean.SMS;
 import net.synergyinfosys.android.myblue.dao.SMSDao;
 
@@ -56,8 +57,21 @@ public enum SMSService {
 	/**
 	 * 把未读的短信恢复到系统，并删除
 	 */
-	public void resumeSMS() {
-		ArrayList<SMS> list = SMSDao.getInstance().getAllUnRead();
+	public void resumeSMS(boolean isNew) {
+		ArrayList<SMS> list = null;
+		if(isNew){
+			list = SMSDao.getInstance().getAllUnRead();
+		}else{
+			list = SMSDao.getInstance().getAll();
+		}
+		for (SMS sms : list) {
+			SMSADao.INSTANCE.addSMS(sms);
+			SMSDao.getInstance().removeSMS(sms.getId());
+		}
+	}
+	
+	public void resumeSMSPerContact(Contact c) {
+		ArrayList<SMS> list = SMSDao.getInstance().getByContact(c);
 		for (SMS sms : list) {
 			SMSADao.INSTANCE.addSMS(sms);
 			SMSDao.getInstance().removeSMS(sms.getId());
